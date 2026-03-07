@@ -1,0 +1,12 @@
+{
+  "enableAllProjectMcpServers": true,
+  "enabledMcpjsonServers": ["github", "slack", "ios-simulator"],
+  "permissions": {
+    "allow": [
+      "Bash(mkdir:*)",
+      "Bash(npm run:*)",
+      "Bash(dart:*)",
+      "Bash(flutter:*)"
+    ]
+  }
+}
