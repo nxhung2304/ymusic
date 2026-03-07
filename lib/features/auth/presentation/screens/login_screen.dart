@@ -19,6 +19,7 @@ class LoginScreen extends ConsumerWidget {
     ref.listen(authNotifierProvider, (previous, next) {
       next.whenData((user) {
         if (user != null) {
+          debugPrint('🎯 [LoginScreen] Navigating to home');
           context.goNamed(AppRoutes.home);
         }
       });
@@ -29,6 +30,8 @@ class LoginScreen extends ConsumerWidget {
           if (error is AppFailure) {
             message = error.message;
           }
+          debugPrint('⚠️  [LoginScreen] Showing error: $message');
+          debugPrint('Error object: $error');
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(content: Text(message)),
           );
