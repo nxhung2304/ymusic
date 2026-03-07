@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 class AppColors {
   // Primary colors
   static const Color primary = Color(0xFF1DB954); // Spotify green
+  static const Color onPrimary = Color(0xFF000000); // Black text on primary
   static const Color accent = Color(0xFFFF6B35);
 
   // Background colors

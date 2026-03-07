@@ -29,6 +29,11 @@ dependencies:
   # State Management
   flutter_riverpod: ^2.4.0
   riverpod: ^2.4.0
+  riverpod_annotation: ^2.3.0
+
+  # Serialization
+  freezed_annotation: ^2.4.0
+  json_annotation: ^4.8.0
 
   # Local Database
   isar: ^3.0.0
@@ -56,8 +61,10 @@ dev_dependencies:
     sdk: flutter
   flutter_lints: ^5.0.0
 
-  # Build runners (will be added in later phases after dependency stabilization)
+  # Build runners & code generation
   build_runner: ^2.4.0
+  freezed: ^2.5.0
+  json_serializable: ^6.7.0
 
 flutter:
   uses-material-design: true
