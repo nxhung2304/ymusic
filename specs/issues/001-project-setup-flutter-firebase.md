@@ -1,8 +1,9 @@
 # Phase 1: Initialize Flutter Project, Dependencies, and Firebase Config
 
-**Status:** Approved
+**Status:** In Progress
 **Phase:** 1 of 15
 **GitHub Issue:** #1
+**PR:** #3 (Draft)
 
 ## Overview
 
@@ -10,14 +11,15 @@ Initialize the Flutter project with null safety enabled, install all required de
 
 ## Tasks
 
-- [ ] Create Flutter project with null safety enabled
-- [ ] Add all required dependencies (flutter_pubspec)
+- [x] Create Flutter project with null safety enabled
+- [x] Add all required dependencies (flutter_pubspec)
 - [ ] Setup Google Cloud Project → OAuth 2.0 credentials
 - [ ] Setup Firebase project → download google-services.json + GoogleService-Info.plist
-- [ ] Configure Firebase in pubspec.yaml
-- [ ] Setup theme (dark mode default, colors, typography)
-- [ ] Create folder structure per PRD spec
-- [ ] Create constants file (API endpoints, theme colors)
+- [x] Configure Firebase in pubspec.yaml
+- [x] Setup theme (dark mode default, colors, typography)
+- [x] Create folder structure per PRD spec
+- [x] Create constants file (API endpoints, theme colors)
+- [x] Use dotenv for management envs
 
 ## Acceptance Criteria
 
