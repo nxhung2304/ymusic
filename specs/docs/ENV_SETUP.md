@@ -2,6 +2,22 @@
 
 This document explains how to configure environment variables for YMusic using `.env` files.
 
+## ⚠️ SECURITY WARNING - READ THIS FIRST
+
+**CRITICAL:** The `.env` file contains sensitive Firebase API keys and credentials that could compromise your entire app if exposed.
+
+- ✅ `.env` is listed in `.gitignore` - it will NOT be committed
+- ✅ `.env.example` is safe to commit - it contains ONLY structure/documentation
+- ❌ NEVER commit `.env` file to version control
+- ❌ NEVER hardcode API keys in source code
+- ❌ NEVER push credentials to GitHub or public repos
+
+If you accidentally expose credentials:
+1. **Immediately rotate all keys** in Firebase/Google Cloud Console
+2. Revoke old API keys
+3. Generate new ones
+4. Update `.env` with new values
+
 ## Overview
 
 YMusic uses `flutter_dotenv` package to manage sensitive configuration and environment-specific settings. This allows developers to keep secrets out of version control while maintaining flexibility across different environments (development, staging, production).
@@ -114,7 +130,11 @@ cp .env.example .env.test
 2. Create a new project or select existing one
 3. Enable **YouTube Data API v3**
 4. Go to **Credentials** → Create API Key
-5. Copy the key and paste in `.env`:
+5. ⚠️ **IMPORTANT:** Apply API key restrictions:
+   - Restrict to **YouTube Data API v3** only
+   - Set application restrictions (iOS Bundle ID + Android Package Name)
+   - This prevents misuse if key is accidentally exposed
+6. Copy the key and paste in `.env` (NEVER in source code):
    ```env
    YOUTUBE_API_KEY=AIzaSy...
    ```
@@ -126,7 +146,10 @@ cp .env.example .env.test
 3. Go to **Credentials** → Create OAuth 2.0 Client ID
    - Application type: **iOS** and/or **Android**
    - Add authorized redirect URIs
-4. Copy Client ID and paste in `.env`:
+4. ⚠️ **IMPORTANT:** Restrict OAuth usage:
+   - Only allow authentication for your app domain
+   - Monitor usage for suspicious activity
+5. Copy Client ID and paste in `.env`:
    ```env
    GOOGLE_OAUTH_CLIENT_ID=xxx.apps.googleusercontent.com
    ```
