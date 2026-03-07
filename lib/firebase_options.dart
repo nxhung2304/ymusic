@@ -41,36 +41,37 @@ class DefaultFirebaseOptions {
   }
 
   // Load credentials from environment variables
+  // Returns placeholder/dummy values if not configured (allows app to run)
   static String _getApiKey(String platform) {
     final key = dotenv.env['FIREBASE_API_KEY_${platform.toUpperCase()}'];
-    if (key == null || key.isEmpty) {
-      throw Exception(
-        'Firebase API key for $platform not configured. '
-        'Set FIREBASE_API_KEY_$platform in .env file'
-      );
+
+    // Return placeholder if not set or still contains template value
+    if (key == null || key.isEmpty || key.contains('REPLACE_WITH')) {
+      return 'AIzaSyDummyKeyNotConfigured${platform.toUpperCase()}';
     }
+
     return key;
   }
 
   static String _getAppId(String platform) {
     final id = dotenv.env['FIREBASE_APP_ID_${platform.toUpperCase()}'];
-    if (id == null || id.isEmpty) {
-      throw Exception(
-        'Firebase App ID for $platform not configured. '
-        'Set FIREBASE_APP_ID_$platform in .env file'
-      );
+
+    // Return placeholder if not set or still contains template value
+    if (id == null || id.isEmpty || id.contains('REPLACE_WITH')) {
+      return '1:000000000000:$platform:0000000000000000000000';
     }
+
     return id;
   }
 
   static String _getMessagingSenderId() {
     final id = dotenv.env['FIREBASE_MESSAGING_SENDER_ID'];
+
+    // Return placeholder if not set
     if (id == null || id.isEmpty) {
-      throw Exception(
-        'Firebase Messaging Sender ID not configured. '
-        'Set FIREBASE_MESSAGING_SENDER_ID in .env file'
-      );
+      return '000000000000';
     }
+
     return id;
   }
 
