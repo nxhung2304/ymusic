@@ -1,4 +1,3 @@
-import 'dart:io' show Platform;
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
@@ -17,10 +16,10 @@ void main() async {
       return;
     });
 
-    // Initialize Firebase with platform-specific configuration
+    // Initialize Firebase for iOS
     try {
       await Firebase.initializeApp(
-        options: _getFirebaseOptions(),
+        options: DefaultFirebaseOptions.ios,
       );
       debugPrint('✓ Firebase initialized successfully');
     } catch (e) {
@@ -34,16 +33,6 @@ void main() async {
     debugPrint('❌ Fatal error during app initialization: $e');
     // Show error screen
     runApp(ErrorApp(error: e.toString()));
-  }
-}
-
-FirebaseOptions _getFirebaseOptions() {
-  if (Platform.isIOS) {
-    return DefaultFirebaseOptions.ios;
-  } else if (Platform.isAndroid) {
-    return DefaultFirebaseOptions.android;
-  } else {
-    return DefaultFirebaseOptions.web;
   }
 }
 
