@@ -13,8 +13,8 @@ Initialize the Flutter project with null safety enabled, install all required de
 
 - [x] Create Flutter project with null safety enabled
 - [x] Add all required dependencies (flutter_pubspec)
-- [ ] Setup Google Cloud Project → OAuth 2.0 credentials
-- [ ] Setup Firebase project → download google-services.json + GoogleService-Info.plist
+- [x] Setup Google Cloud Project → OAuth 2.0 credentials
+- [x] Setup Firebase project → download google-services.json + GoogleService-Info.plist
 - [x] Configure Firebase in pubspec.yaml
 - [x] Setup theme (dark mode default, colors, typography)
 - [x] Create folder structure per PRD spec
