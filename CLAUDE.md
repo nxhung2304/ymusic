@@ -294,11 +294,3 @@ service cloud.firestore {
   }
 }
 ```
-
----
-
-## 10. Ngoài phạm vi (Out of scope)
-
-- Multi-user / social features
-- Upload nhạc lên cloud
-- Equalizer / audio effects

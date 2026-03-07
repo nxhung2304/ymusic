@@ -2,6 +2,7 @@
 
 **Status:** Approved
 **Phase:** 2 of 15
+**GitHub Issue:** #2
 
 ## Overview
 
