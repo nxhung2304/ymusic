@@ -1,3 +1,4 @@
 # ymusic
 
-A new Flutter project.
+## Specs
+- See more in specs folder
