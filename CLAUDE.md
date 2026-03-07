@@ -1,7 +1,7 @@
 ## 1. Tổng quan
 
 **Tên app:** Ymusic
-**Nền tảng:** Android & iOS (Flutter)  
+**Nền tảng:** iOS (Flutter)  
 **Mục đích:** App nghe nhạc cá nhân, stream audio từ YouTube, không quảng cáo  
 **Người dùng:** Cá nhân, không publish store  
 **Thiết bị:** iPhone + iPad (sync đa thiết bị)
@@ -294,11 +294,3 @@ service cloud.firestore {
   }
 }
 ```
-
----
-
-## 10. Ngoài phạm vi (Out of scope)
-
-- Multi-user / social features
-- Upload nhạc lên cloud
-- Equalizer / audio effects
