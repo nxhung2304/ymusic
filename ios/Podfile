@@ -31,6 +31,11 @@ target 'Runner' do
   use_frameworks!
 
   flutter_install_all_ios_pods File.dirname(File.realpath(__FILE__))
+
+  # Fix GoogleUtilities version conflict between Firebase and google_sign_in
+  # Pin to version compatible with Firebase SDK >= 11.0
+  pod 'GoogleUtilities', '~> 8.0'
+
   target 'RunnerTests' do
     inherit! :search_paths
   end
