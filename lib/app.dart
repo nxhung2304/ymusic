@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'core/theme/app_theme.dart';
 import 'core/constants/app_colors.dart';
+import 'features/auth/presentation/screens/splash_screen.dart';
 
 class MainApp extends StatelessWidget {
   const MainApp({super.key});
@@ -11,7 +12,7 @@ class MainApp extends StatelessWidget {
       title: 'YMusic',
       theme: AppTheme.darkTheme,
       debugShowCheckedModeBanner: false,
-      home: const HomeScreen(),
+      home: const SplashScreen(),
     );
   }
 }

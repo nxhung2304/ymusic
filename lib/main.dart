@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'firebase_options.dart';
 import 'app.dart';
 import 'package:ymusic/core/theme/app_theme.dart';
@@ -30,7 +31,11 @@ void main() async {
       // Continue running app even if Firebase fails
     }
 
-    runApp(const MainApp());
+    runApp(
+      const ProviderScope(
+        child: MainApp(),
+      ),
+    );
   } catch (e) {
     debugPrint('❌ Fatal error during app initialization: $e');
     // Show error screen

@@ -14,10 +14,11 @@ description: Implement a feature from a GitHub Issue. Use when user asks "implem
 ### Slack Notification Strategy
 - Use `mcp__slack__slack_post_message` tool directly (NOT bash, NOT env var checks)
 - Parameters:
-- channel_id: "C0AGTJ0EE6B"
+- channel_id: "C0AGSTWV7GT"
 - text: [message]
+
 - For replies: use `mcp__slack__slack_reply_to_thread`
-- channel_id: "C0AGTJ0EE6B"
+- channel_id: "C0AGSTWV7GT"
 - thread_ts: [ts from initial post]
 - text: [message]
 - DO NOT check for SLACK_API_TOKEN or SLACK_BOT_TOKEN env vars
@@ -63,8 +64,8 @@ Slug từ title: lowercase, space → `-`, bỏ ký tự đặc biệt
 
 ### Step 2: Notify Slack — bắt đầu
 Use `mcp__slack__slack_post_message`:
-- channel: "C0AGTJ0EE6B"
-- text: "🚀 Bắt đầu implement *Issue #[N]: [title]*\nBranch: `feature/hung-#[N]-[slug]`"
+- channel: "C0AGSTWV7GT"
+- text: "🚀 [Ymusic] Bắt đầu implement *Issue #[N]: [title]*\nBranch: `feature/hung-#[N]-[slug]`"
 - Save the returned `ts` value for threading later
 If MCP fails → fallback to slack CLI
 
@@ -141,13 +142,10 @@ THREAD_TS=$(cat .claude/tmp/thread_${ISSUE_NUMBER}.txt)
 gh pr create --draft \
   --title "[title]" \
   --body "## Summary
-[Tóm tắt ngắn gọn những gì đã implement]
+[Tóm tắt ngắn gọn ý chính những gì đã implement]
 
 ## Designs
 - [Tham chiếu file Designs nếu có trong specs/designs dựa vào tệp specs/issues]
-
-## Changes
-[Liệt kê các file/widget đã tạo]
 
 ## Issue
 Closes #42
