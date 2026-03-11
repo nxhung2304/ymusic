@@ -10,7 +10,8 @@ class YMusicApp extends StatelessWidget {
     return MaterialApp(
       title: 'YMusic',
       debugShowCheckedModeBanner: false,
-      theme: AppTheme.dark,
+      theme: AppTheme.light,
+      darkTheme: AppTheme.dark,
       themeMode: ThemeMode.dark,
       home: const Scaffold(
         body: Center(
