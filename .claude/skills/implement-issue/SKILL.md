@@ -113,7 +113,7 @@ Nếu có lỗi → tự fix trước khi commit, không commit code lỗi
 ### 6. Commit
 ```bash
 git add .
-git commit -m "feat: [title] (#42)"
+git commit -m "feat: [title]"
 git push origin feature/issue-42-[slug]
 ```
 
