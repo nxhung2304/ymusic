@@ -56,7 +56,6 @@ ios/**/Flutter/Flutter.framework/
 .env.*.local
 
 # Firebase sensitive config
-ios/Runner/GoogleService-Info.plist
 android/app/google-services.json
 
 # Android Studio will place build artifacts here
