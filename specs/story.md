@@ -12,7 +12,7 @@
 
 ## Phase 1: Authentication & Routing
 **Packages:** google_sign_in, firebase_auth, firebase_core, flutter_riverpod, riverpod_annotation, go_router | dev: build_runner, riverpod_generator
-**1.1** – AuthService (login/logout/currentUser).
+**1.1** – AuthDatasource (login/logout/currentUser).
 **1.2** – Riverpod authProvider + authStateProvider.
 **1.3** – LoginScreen + Google button + error handling.
 **1.4** – SplashScreen (session check → redirect router).
