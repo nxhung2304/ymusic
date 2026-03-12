@@ -141,13 +141,10 @@ THREAD_TS=$(cat .claude/tmp/thread_${ISSUE_NUMBER}.txt)
 gh pr create --draft \
   --title "[title]" \
   --body "## Summary
-[Tóm tắt ngắn gọn những gì đã implement]
+[Tóm tắt ngắn gọn những gì đã làm mà dễ hiểu, người không code cũng đọc hiểu được]
 
 ## Designs
 - [Tham chiếu file Designs nếu có trong specs/designs dựa vào tệp specs/issues]
-
-## Changes
-[Liệt kê các file/widget đã tạo]
 
 ## Issue
 Closes #42
