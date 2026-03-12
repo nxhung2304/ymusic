@@ -1,192 +1,109 @@
 # YMusic Implementation Stories
 
-> Break down into GitHub issues following this order. Each story has dependencies noted.
+> Break down into small GitHub issues (1 story ≈ 1-4h work). Order: Setup → Core → Features → Polish.
+> Dependencies noted. Use Riverpod for state, go_router for navigation, clean layers where possible.
 
----
+## Phase 0: Setup Foundations
+**0.1** – Create GitHub repo + CLAUDE.md (coding guidelines: Riverpod naming, error handling).
+**0.2** – Setup Flutter project + folder structure (lib/core, features/, data/, domain/, presentation/).
+**0.3** – constants.dart + ThemeData dark mode + MaterialApp.
+**0.4** – flutter_dotenv + .env cho API keys (YouTube nếu cần fallback).
+**0.5** – Setup Firebase (Auth, Firestore) + google-services/Info.plist.
 
-## Phase 1: Project Setup
+## Phase 1: Authentication & Routing
+**Packages:** google_sign_in, firebase_auth, firebase_core, flutter_riverpod, riverpod_annotation, go_router | dev: build_runner, riverpod_generator
+**1.1** – AuthService (login/logout/currentUser).
+**1.2** – Riverpod authProvider + authStateProvider.
+**1.3** – LoginScreen + Google button + error handling.
+**1.4** – SplashScreen (session check → redirect router).
+**1.5** – Setup go_router (shell + protected routes).
 
-**1.1** – Tạo Flutter project + cấu hình folder structure
-*(1.2 đã bỏ — dependencies thêm theo từng phase)*
-**1.3** – Tạo `constants.dart` (colors, endpoints, strings)
-**1.4** – Setup ThemeData (dark mode) + MaterialApp
-**1.5** – Config Firebase (google-services.json, Info.plist, `firebase_options.dart`)
-**1.6** – Setup `flutter_dotenv` + file `.env` cho API keys
+## Phase 2: Data Layer (Models + Repos + Local DB)
+**Packages:** cloud_firestore, isar, isar_flutter_libs, dio | dev: isar_generator
+**2.1** – Models: Song, Playlist, UserPreference, History, LikedSong (fromJson/toJson).
+**2.2** – FirestoreService generic CRUD.
+**2.3** – Repositories: PlaylistRepository, LikedSongsRepository, HistoryRepository, UserRepository.
+**2.4** – Isar setup + IsarService (schema mirror models, local CRUD).
+**2.5** – Firestore Security Rules draft.
+**2.6** – Sync conflict resolution: last-write-wins theo `updatedAt` timestamp; union merge cho LikedSongs/Playlist (không xóa bài khi add từ thiết bị khác).
 
-> **Lưu ý:** Không thêm package trước. Mỗi phase tự thêm package cần thiết khi bắt đầu làm.
+## Phase 3: YouTube Integration
+**Packages:** youtube_explode_dart
+**3.1** – YouTubeService: search() → Song list (parse).
+**3.2** – extractAudioUrl() + fallback nếu quota/error.
+**3.3** – Cache search results Isar (TTL 24h).
+**3.4** – Rate limiting + error snackbar global.
 
----
+## Phase 4: Audio Player Core
+**Packages:** just_audio, audio_service, cached_network_image
+**4.1** – AudioPlayerService + just_audio instance.
+**4.2** – play/pause/seek/next/prev + playerStateProvider.
+**4.3** – audio_service background session (handler + task).
+**4.4** – Lock screen controls + notification player UI (MediaNotification).
+**4.5** – iOS background modes + entitlement (`audio` UIBackgroundModes + Xcode capability).
+**4.6** – Retry + error handling stream.
 
-## Phase 2: Authentication
+## Phase 5: Player UI & Mini/Full Transition
+**5.1** – MiniPlayerBar widget + state persistence khi navigate giữa bottom tabs.
+**5.2** – FullPlayerScreen scaffold + tab structure (Player / Lyrics / Queue).
+**5.3** – Player tab: album art, seek slider, playback controls, glassmorphism blur background.
+**5.4** – Lyrics tab: LRC sync highlight (karaoke style) + plain text fallback.
+**5.5** – Queue tab: danh sách queue + drag-to-reorder.
+**5.6** – Animation mini → full (Hero / DraggableScrollableSheet) + swipe-down dismiss.
 
-> **Packages cần thêm:** `google_sign_in`, `firebase_auth`, `firebase_core`, `flutter_riverpod`, `riverpod_annotation`, `go_router` | dev: `build_runner`, `riverpod_generator`
+## Phase 6: Home & Navigation Shell
+**6.1** – AppShell + BottomNav (Home/Search/Library).
+**6.2** – HomeScreen: RecentlyPlayed horizontal scroll + Recommended section.
+**6.3** – SongTile reusable widget + pull-to-refresh.
+**6.4** – Update history khi play (write Firestore + Isar).
 
-**2.1** – Tạo `AuthService` (login/logout/getCurrentUser)
-**2.2** – Tạo Riverpod `authProvider` + `authStateProvider`
-**2.3** – Build `LoginScreen` UI (Google Sign In button)
-**2.4** – Build `SplashScreen` (check session → redirect)
-**2.5** – Xử lý lỗi sign-in (SnackBar, loading state)
+## Phase 7: Search & Queue
+**7.1** – SearchScreen + debounce 500ms + autocomplete suggestions dropdown.
+**7.2** – Results list + play trực tiếp / add to queue.
+**7.3** – QueueProvider + add/remove/reorder/shuffle/repeat modes.
 
----
+## Phase 8: Library & Playlists
+**8.1** – LibraryScreen shell + TabBar (Liked / History / Playlists / Downloads / Podcasts).
+**8.2** – Liked Songs tab: danh sách + unlike action + sync Firestore.
+**8.3** – History tab: danh sách gần đây + clear history action.
+**8.4** – Playlists tab: danh sách playlist + create playlist dialog.
+**8.5** – Downloads tab: danh sách offline từ Isar + delete action.
+**8.6** – Podcasts tab: danh sách podcast đã subscribe + unsubscribe action.
+**8.7** – PlaylistDetailScreen: header (art + title + play all) + song list + add/remove song.
+**8.8** – SettingsScreen: theme toggle, language selector (EN/VI), account info, logout, app version.
 
-## Phase 3: Firestore + Isar
+## Phase 9: Lyrics & Offline Download
+**9.1** – LyricsService (lrclib.net API) + parse LRC format + sync theo playback position.
+**9.2** – Cache lyrics Isar.
+**9.3** – DownloadService: download audio stream → path_provider + progress indicator.
+**9.4** – Play local file nếu offline (kiểm tra Isar trước khi fetch URL).
+**9.5** – Delete download + cleanup file + update Isar.
 
-> **Packages cần thêm:** `cloud_firestore`, `isar`, `isar_flutter_libs`, `dio` | dev: `isar_generator`
+## Phase 10: Video & Podcast
+**10.1** – Video stream extract (youtube_explode_dart) + VideoPlayerScreen UI (chewie).
+**10.2** – Toggle audio ↔ video mode trong player.
+**10.3** – PodcastService: parse RSS (webfeed) → episode list.
+**10.4** – PodcastScreen UI: subscribe by URL + episode list + play episode.
+**10.5** – Lưu subscribed podcasts + playback progress vào Firestore.
 
-**3.1** – Tạo model `Song` (fromJson/toJson)
-**3.2** – Tạo model `Playlist`, `UserPreference`, `History`
-**3.3** – Tạo `FirestoreService` (generic CRUD methods)
-**3.4** – Tạo `PlaylistRepository` (wraps FirestoreService)
-**3.4b** – Tạo `LikedSongsRepository` (add/remove/list liked songs, sync Firestore)
-**3.4c** – Tạo `HistoryRepository` (append/list/clear history, sync Firestore)
-**3.5** – Tạo `UserRepository` (profile, preferences)
-**3.6** – Viết Firestore Security Rules
-**3.7** – Setup Isar schema (mirror các model trên)
-**3.8** – Tạo `IsarService` (open DB, CRUD local)
+## Phase 11: UI States, Polish & iPad
+**11.1** – Empty states UI: EmptySearch, EmptyLibrary, EmptyPlaylist components.
+**11.2** – Error state UI: NetworkError (wifi-off + retry), GenericError components.
+**11.3** – Skeleton loading UI cho Home, Search results, Library lists.
+**11.4** – Lazy load images (cached_network_image placeholder + fade-in).
+**11.5** – Page transitions + shared element animations.
+**11.6** – Internationalization (intl package, en/vi strings cho toàn bộ app).
+**11.7** – Global error handling + logging service.
+**11.8** – iPad responsive: isMobile/isTablet helper + split-view layout (Library sidebar + Player panel).
+**11.9** – iPad adaptive screens: Home (2-col grid), Library (persistent sidebar), Player (art left + controls right).
+**11.10** – Final theme/dark mode consistency pass.
 
----
+## Phase 12: Testing & Performance
+**12.1** – Unit tests: AuthService, AudioPlayerService, YouTubeService, Repositories.
+**12.2** – Widget tests: SongTile, MiniPlayer, LyricsView.
+**12.3** – Performance audit (memory leaks, startup time, image caching).
 
-## Phase 4: YouTube Service
-
-> **Packages cần thêm:** `youtube_explode_dart`
-
-**4.1** – Tạo `YouTubeService.search()` dùng YouTube Data API v3
-**4.2** – Parse response → `SongModel` list
-**4.3** – Tạo `YouTubeService.extractAudioUrl()` dùng `youtube_explode_dart`
-**4.4** – Xử lý quota error + fallback sang `youtube_explode`
-**4.5** – Cache search results vào Isar (TTL 24h)
-
----
-
-## Phase 5: Audio Player
-
-> **Packages cần thêm:** `just_audio`, `audio_service`
-
-**5.1** – Setup `just_audio` player instance + `AudioPlayerService` class
-**5.2** – Implement play/pause/seek/stop
-**5.3** – Implement next/previous
-**5.4** – Integrate `audio_service` cho background playback
-**5.5** – Setup iOS background modes (Info.plist `UIBackgroundModes: audio`, Xcode entitlement)
-**5.6** – Build lock screen / notification controls handler
-**5.7** – Tạo Riverpod `playerStateProvider`
-**5.8** – Retry logic khi stream lỗi
-
----
-
-## Phase 6: Player UI
-
-> **Packages cần thêm:** `cached_network_image`
-
-**6.1** – Tạo `MiniPlayerBar` widget (thumbnail + title + play/pause)
-**6.2** – Tạo `FullPlayerScreen` scaffold + tab bar (Player / Lyrics / Queue)
-**6.3** – Build Player tab: album art, title, artist
-**6.4** – Build seek slider + thời gian
-**6.5** – Hiệu ứng glassmorphism/blur background
-**6.6** – Animation transition mini → full player
-**6.7** – Swipe-to-dismiss full player
-
----
-
-## Phase 7: Home Screen
-
-**7.0** – Build `AppShell` + `BottomNavigationBar` (Home / Search / Library) + setup `AppRouter`
-**7.1** – Tạo `HomeScreen` layout
-**7.2** – Tạo `RecentlyPlayedRepository` (Firestore query)
-**7.3** – Build `SongTile` widget (thumbnail, title, artist)
-**7.4** – Hiển thị danh sách recently played
-**7.5** – Cập nhật history khi play song
-**7.6** – Pull-to-refresh
-
----
-
-## Phase 8: Search Screen
-
-**8.1** – Tạo `SearchScreen` UI + search bar
-**8.2** – Debounce input 500ms
-**8.3** – Hiển thị kết quả search (list `SongTile`)
-**8.4** – Tap kết quả → play + add to queue
-**8.5** – Lưu/xóa search history local
-
----
-
-## Phase 9: Queue & Playback Modes
-
-**9.1** – Tạo `QueueProvider` (Riverpod, in-memory)
-**9.2** – Logic add/remove/reorder queue
-**9.3** – Build Queue tab UI trong FullPlayerScreen (drag-to-reorder)
-**9.4** – Implement shuffle mode (ON/OFF)
-**9.5** – Implement repeat mode (OFF / ONE / ALL)
-**9.6** – Next/previous theo queue rules
-
----
-
-## Phase 10: Library Screen
-
-**10.1** – Tạo `LibraryScreen` với TabBar (Liked / History / Playlists / Downloads)
-**10.2** – Tab Liked Songs (sync Firestore, heart icon)
-**10.3** – Tab History (ordered by `playedAt DESC`)
-**10.4** – Tab Playlists + `PlaylistDetailScreen`
-**10.5** – UI tạo playlist mới
-**10.6** – Dialog thêm song vào playlist
-**10.7** – Tab Downloaded (query Isar)
-
----
-
-## Phase 11: Lyrics
-
-**11.1** – Tạo `LyricsService` (gọi lrclib.net API)
-**11.2** – Parse LRC format → list `{timestamp, text}`
-**11.3** – Build `LyricsView` widget (scroll + highlight dòng hiện tại)
-**11.4** – Sync lyrics với `AudioService` position stream
-**11.5** – Cache lyrics vào Isar, fallback plain text
-
----
-
-## Phase 12: Download Offline
-
-> **Packages cần thêm:** `path_provider`
-
-**12.1** – Tạo `DownloadService` (extract URL + download file)
-**12.2** – Download button + progress indicator trên `SongTile`
-**12.3** – Lưu metadata vào Isar (fileName, size, date)
-**12.4** – Kiểm tra offline trước khi stream
-**12.5** – Play từ local file nếu đã download
-**12.6** – Xóa file + xóa record Isar
-
----
-
-## Phase 13: Video Playback
-
-> **Packages cần thêm:** `video_player`, `chewie`
-
-**13.1** – Tạo `VideoService.extractVideoUrl()` dùng `youtube_explode`
-**13.2** – Tạo `VideoPlayerScreen` dùng `video_player` + `chewie`
-**13.3** – Toggle button Audio ↔ Video
-**13.4** – Fullscreen controls
-**13.5** – Error handling + sync state với queue
-
----
-
-## Phase 14: Podcast
-
-> **Packages cần thêm:** `webfeed`
-
-**14.1** – Tạo `PodcastService` (parse RSS bằng `webfeed`)
-**14.2** – `PodcastScreen` UI (input RSS URL + danh sách subscribe)
-**14.3** – Hiển thị episode list
-**14.4** – Lưu subscription vào Firestore
-**14.5** – Play episode qua `AudioPlayerService`
-**14.6** – Track + resume episode progress
-
----
-
-## Phase 15: Polish & iPad
-
-**15.1** – Responsive layout helper (`isMobile` / `isTablet`)
-**15.2** – iPad split-view layout (Library + Player)
-**15.3** – Loading skeleton widgets
-**15.4** – Page transition animations
-**15.5** – Lazy load ảnh với `CachedNetworkImage`
-**15.6** – Final dark theme audit toàn app
-
----
+## Phase 13: Deployment & Docs
+**13.1** – Build IPA + TestFlight internal testing.
+**13.2** – README + changelog + disclaimer legal.
+**13.3** – CI/CD basic (GitHub Actions: lint + test on PR).

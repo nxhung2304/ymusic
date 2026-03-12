@@ -254,7 +254,115 @@ lib/
 
 ---
 
-## 8. Thứ tự build gợi ý
+## 8. Firestore Schema
+
+Tất cả data của user nằm dưới `/users/{uid}/` để Security Rules đơn giản.
+
+```
+/users/{uid}/
+  ├── liked_songs/{songId}
+  │     videoId, title, artist, thumbnailUrl, duration, addedAt, updatedAt
+  │
+  ├── history/{historyId}
+  │     videoId, title, artist, thumbnailUrl, duration, playedAt, updatedAt
+  │
+  ├── playlists/{playlistId}
+  │     name, description, coverUrl, createdAt, updatedAt
+  │     └── songs/{songId}
+  │           videoId, title, artist, thumbnailUrl, duration, addedAt
+  │
+  ├── subscribed_podcasts/{podcastId}
+  │     feedUrl, title, description, coverUrl, subscribedAt, updatedAt
+  │     └── episode_progress/{episodeId}
+  │           position (seconds), duration, updatedAt
+  │
+  └── preferences/settings
+        theme, language, repeatMode, shuffleEnabled, updatedAt
+```
+
+**Quy tắc:**
+- `songId` = YouTube `videoId` (dùng làm document ID để dedup tự động)
+- `historyId` = `videoId` (overwrite khi nghe lại — giữ entry mới nhất)
+- `playlistId` = Firestore auto-ID
+- Mọi document có `updatedAt: Timestamp` để conflict resolution
+
+---
+
+## 9. Riverpod Naming Conventions
+
+### Provider naming pattern
+
+```dart
+// Service providers (singleton, no state)
+authServiceProvider           // Provider<AuthService>
+youtubeServiceProvider        // Provider<YouTubeService>
+firestoreServiceProvider      // Provider<FirestoreService>
+audioPlayerServiceProvider    // Provider<AudioPlayerService>
+
+// State providers (có state thay đổi)
+authStateProvider             // StreamProvider<User?>  — Firebase auth stream
+playerStateProvider           // StateNotifierProvider<PlayerState>
+queueProvider                 // StateNotifierProvider<QueueState>
+currentSongProvider           // Provider<Song?>  — derived từ playerState
+
+// Data providers (fetch + cache)
+searchResultsProvider         // AsyncNotifierProvider<List<Song>>
+likedSongsProvider            // StreamProvider<List<LikedSong>>  — Firestore stream
+historyProvider               // StreamProvider<List<History>>
+playlistsProvider             // StreamProvider<List<Playlist>>
+playlistDetailProvider        // AsyncNotifierProvider<Playlist>  — có param id
+lyricsProvider                // AsyncNotifierProvider<Lyrics?>
+downloadedSongsProvider       // StreamProvider<List<Song>>  — Isar stream
+```
+
+### StateNotifier pattern
+
+```dart
+// Đặt tên: <Feature>State cho data class, <Feature>Notifier cho notifier
+class PlayerState { ... }
+class PlayerNotifier extends StateNotifier<PlayerState> { ... }
+
+// Provider
+final playerStateProvider = StateNotifierProvider<PlayerNotifier, PlayerState>(
+  (ref) => PlayerNotifier(ref),
+);
+```
+
+### File naming
+- Provider files: `*_provider.dart` trong `presentation/providers/`
+- Service files: `*_service.dart` trong `data/services/`
+- Repository files: `*_repository.dart` trong `data/repositories/`
+
+---
+
+## 10. Navigation (go_router Route Map)
+
+```
+/                         → SplashScreen       (redirect sau khi check auth)
+/login                    → LoginScreen        (public)
+
+/home                     → AppShell (ShellRoute — chứa BottomNav)
+  /home                   → HomeScreen
+  /search                 → SearchScreen
+  /library                → LibraryScreen
+
+/player                   → FullPlayerScreen   (push over shell, không có BottomNav)
+/video/:videoId           → VideoPlayerScreen  (push, full screen)
+/playlist/:playlistId     → PlaylistDetailScreen
+/podcast/:encodedFeedUrl  → PodcastScreen
+/settings                 → SettingsScreen
+```
+
+**Quy tắc routing:**
+- `AppShell` dùng `ShellRoute` để giữ BottomNav persistent và preserve state mỗi tab
+- `MiniPlayer` render trong AppShell scaffold, bên trên BottomNav
+- Routes cần auth: redirect về `/login` nếu `authStateProvider` là null
+- `videoId` và `playlistId` truyền qua path param; `encodedFeedUrl` dùng `Uri.encodeComponent`
+- Deep link pattern: `ymusic://player?videoId=xxx`
+
+---
+
+## 11. Thứ tự build gợi ý
 
 1. **Setup project** — Flutter init, dependencies, Firebase config, theme
 2. **Auth** — Google Sign In + Firebase Auth
@@ -274,7 +382,7 @@ lib/
 
 ---
 
-## 9. Giới hạn & lưu ý
+## 12. Giới hạn & lưu ý
 
 - App chỉ dùng cá nhân, không distribute
 - `youtube_explode_dart` có thể bị break khi YouTube thay đổi API nội bộ — cần update package thường xuyên

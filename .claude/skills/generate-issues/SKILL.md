@@ -48,25 +48,14 @@ In ra summary:
 ```
 
 ---
-
 ## Wireframe mapping
 
-> Có 2 file HTML trong `specs/designs/`:
-> - `primary-screens.html` — 5 màn hình chính (Login, Home, Timesheet list, Leave list, OT list, Payroll)
-> - `forms.html` — các form tạo mới (Timesheet entry, Leave Request form, OT Request form)
+Đọc file `specs/design-mapping.md` trong project hiện tại để lấy mapping keyword → screen.
 
-| Task keyword | File | Màn hình |
-|---|---|---|
-| login | `primary-screens.html` | 01 — Login |
-| home, avatar, bottom nav | `primary-screens.html` | 02 — Home |
-| timesheet list, calendar | `primary-screens.html` | 03 — Timesheet |
-| timesheet form, nhập giờ | `forms.html` | 03a — Nhập Timesheet |
-| leave list, danh sách nghỉ | `primary-screens.html` | 04 — Xin Nghỉ |
-| leave form, tạo đơn nghỉ | `forms.html` | 04a — Tạo Leave Request |
-| OT list, danh sách OT | `primary-screens.html` | 05 — OT Request |
-| OT form, tạo OT | `forms.html` | 05a — Tạo OT Request |
-| payroll, bảng lương | `primary-screens.html` | 06 — Bảng Lương |
-| setup, navigation, theme | không có wireframe | — |
+- Nếu file **tồn tại** → match title/description của task với cột Keywords → điền screen name vào section **Design** của issue file.
+- Nếu file **không tồn tại** → ghi `N/A` vào section Design.
+- Nếu task keyword **không match** bất kỳ dòng nào trong mapping → ghi `N/A`.
+- Mỗi project có `design-mapping.md` riêng — SKILL không hardcode bất kỳ mapping nào.
 
 ---
 
