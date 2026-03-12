@@ -13,15 +13,25 @@ lib/
 └── features/
     └── [feature]/
         ├── data/
-        │   ├── models/       # Freezed models + fromJson
-        │   └── repositories/ # Implementation
+        │   ├── datasources/  # External calls: Firebase, REST API, local DB
+        │   ├── models/       # DTOs — Freezed + fromJson/toJson
+        │   └── repositories/ # Implements domain/repositories interfaces
         ├── domain/
-        │   ├── entities/     # Pure dart classes
-        │   └── repositories/ # Abstract interfaces
+        │   ├── entities/     # Pure Dart business objects (no external deps)
+        │   ├── repositories/ # Abstract interfaces
+        │   └── usecases/     # Business logic (1 class = 1 use case)
         └── presentation/
             ├── providers/    # @riverpod providers
-            └── screens/      # Screens + widgets
+            ├── screens/      # Screens
+            ├── widgets/      # Feature-specific widgets
+            └── strings/      # Localized strings
 ```
+
+### Dependency rule (Clean Architecture)
+- `domain/` không được import từ `data/` hay `presentation/`
+- `data/` phụ thuộc vào `domain/` (implement interfaces)
+- `presentation/` phụ thuộc vào `domain/` (qua providers)
+- `datasources/` throw exceptions → `repositories/` catch và trả `Result<T>`
 
 ## Naming
 
@@ -29,6 +39,10 @@ lib/
 |------|-----------|---------|
 | File | snake_case | `leave_request_screen.dart` |
 | Class | PascalCase | `LeaveRequestScreen` |
+| Datasource | PascalCase + Datasource | `AuthDatasource` |
+| Repository (impl) | PascalCase + RepositoryImpl | `AuthRepositoryImpl` |
+| Repository (interface) | PascalCase + Repository | `AuthRepository` |
+| UseCase | PascalCase + UseCase | `SignInUseCase` |
 | Provider | camelCase + Provider | `leaveRequestProvider` |
 | Notifier | PascalCase + Notifier | `LeaveRequestNotifier` |
 | Private | underscore prefix | `_buildHeader()` |

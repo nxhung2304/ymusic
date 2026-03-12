@@ -11,12 +11,14 @@ Mỗi story là roadmap chi tiết của 1 task — dev review và đổi status
 
 ## Các bước thực hiện
 
-### 1. Đọc source file
+### 1. Đọc source file + project rules
 ```
 Đọc: specs/story.md
+Đọc: specs/rules/ (tất cả file .md trong thư mục này)
 ```
 - Parse từng task theo format: `- [ ] [number]. [title]`
 - Xác định number, title, labels cho mỗi task
+- Đọc toàn bộ rules trong `specs/rules/` để hiểu folder structure, naming convention, patterns thực tế của project — dùng khi điền Implementation Checklist (đường dẫn file, pattern code)
 
 ### 2. Chuẩn bị thư mục
 ```bash
