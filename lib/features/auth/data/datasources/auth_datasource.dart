@@ -10,8 +10,8 @@ class AuthException implements Exception {
   String toString() => 'AuthException: $message';
 }
 
-class AuthService {
-  AuthService({
+class AuthDatasource {
+  AuthDatasource({
     FirebaseAuth? firebaseAuth,
     GoogleSignIn? googleSignIn,
   })  : _firebaseAuth = firebaseAuth ?? FirebaseAuth.instance,
