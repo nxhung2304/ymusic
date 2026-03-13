@@ -279,25 +279,39 @@
                 {
                   "type": "frame",
                   "id": "P1JpH",
-                  "name": "google-signin-btn-placeholder",
+                  "name": "google-signin-btn",
                   "width": "fill_container",
                   "height": 52,
-                  "fill": "#4285F4",
-                  "cornerRadius": 8,
-                  "layout": "vertical",
+                  "fill": "#FFFFFF",
+                  "cornerRadius": 12,
+                  "gap": 12,
                   "justifyContent": "center",
                   "alignItems": "center",
                   "children": [
                     {
+                      "type": "frame",
+                      "id": "Ijqx9",
+                      "name": "google-logo",
+                      "width": 24,
+                      "height": 24,
+                      "fill": {
+                        "type": "image",
+                        "enabled": true,
+                        "url": "./images/generated-1773370094287.png",
+                        "mode": "fill"
+                      },
+                      "layout": "none"
+                    },
+                    {
                       "type": "text",
-                      "id": "AOL76",
-                      "name": "placeholder-text",
-                      "fill": "#FFFFFF",
-                      "content": "[Google Sign In Button]\nOfficial Widget",
-                      "textAlign": "center",
+                      "id": "9fe6r",
+                      "name": "google-btn-text",
+                      "fill": "#1A1A2E",
+                      "content": "Continue with Google",
                       "fontFamily": "Inter",
-                      "fontSize": 12,
-                      "fontWeight": "normal"
+                      "fontSize": 16,
+                      "fontWeight": "600",
+                      "letterSpacing": -0.2
                     }
                   ]
                 }
