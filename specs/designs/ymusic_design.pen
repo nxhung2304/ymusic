@@ -264,40 +264,6 @@
               "alignItems": "center",
               "children": [
                 {
-                  "type": "frame",
-                  "id": "YQY3k",
-                  "name": "google-btn",
-                  "width": "fill_container",
-                  "height": 52,
-                  "fill": "#FFFFFF",
-                  "cornerRadius": 26,
-                  "gap": 10,
-                  "justifyContent": "center",
-                  "alignItems": "center",
-                  "children": [
-                    {
-                      "type": "icon_font",
-                      "id": "u9TCB",
-                      "name": "loginGoogleIcon",
-                      "width": 20,
-                      "height": 20,
-                      "iconFontName": "globe",
-                      "iconFontFamily": "lucide",
-                      "fill": "#4285F4"
-                    },
-                    {
-                      "type": "text",
-                      "id": "nsXy2",
-                      "name": "loginGoogleText",
-                      "fill": "#111111",
-                      "content": "Continue with Google",
-                      "fontFamily": "Inter",
-                      "fontSize": 16,
-                      "fontWeight": "600"
-                    }
-                  ]
-                },
-                {
                   "type": "text",
                   "id": "6tpfJ",
                   "name": "loginTerms",
@@ -309,6 +275,31 @@
                   "fontFamily": "Inter",
                   "fontSize": 11,
                   "fontWeight": "normal"
+                },
+                {
+                  "type": "frame",
+                  "id": "P1JpH",
+                  "name": "google-signin-btn-placeholder",
+                  "width": "fill_container",
+                  "height": 52,
+                  "fill": "#4285F4",
+                  "cornerRadius": 8,
+                  "layout": "vertical",
+                  "justifyContent": "center",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "AOL76",
+                      "name": "placeholder-text",
+                      "fill": "#FFFFFF",
+                      "content": "[Google Sign In Button]\nOfficial Widget",
+                      "textAlign": "center",
+                      "fontFamily": "Inter",
+                      "fontSize": 12,
+                      "fontWeight": "normal"
+                    }
+                  ]
                 }
               ]
             }
@@ -791,6 +782,7 @@
                       "name": "recSong1",
                       "x": 0,
                       "y": 30,
+                      "height": "fit_content",
                       "descendants": {
                         "mu7Ic": {
                           "fill": {
@@ -811,23 +803,30 @@
                                 "position": 1
                               }
                             ]
-                          }
+                          },
+                          "y": 10
                         },
                         "nt3rO": {
-                          "width": "fill_container"
+                          "width": "fill_container",
+                          "height": "fit_content",
+                          "x": 60,
+                          "y": 17
                         },
                         "i4tyP": {
                           "content": "Blinding Lights"
                         },
                         "K9myS": {
-                          "content": "The Weeknd"
+                          "content": "The Weeknd",
+                          "y": 19
                         },
                         "xDDgj": {
                           "content": "3:20",
-                          "x": 332
+                          "x": 332,
+                          "y": 26.5
                         },
                         "SnIpM": {
-                          "x": 370
+                          "x": 370,
+                          "y": 24
                         }
                       }
                     },
@@ -839,6 +838,7 @@
                       "name": "recSong2",
                       "x": 0,
                       "y": 106,
+                      "height": "fit_content",
                       "descendants": {
                         "mu7Ic": {
                           "fill": {
@@ -859,23 +859,30 @@
                                 "position": 1
                               }
                             ]
-                          }
+                          },
+                          "y": 10
                         },
                         "nt3rO": {
-                          "width": "fill_container"
+                          "width": "fill_container",
+                          "height": "fit_content",
+                          "x": 60,
+                          "y": 17
                         },
                         "i4tyP": {
                           "content": "As It Was"
                         },
                         "K9myS": {
-                          "content": "Harry Styles"
+                          "content": "Harry Styles",
+                          "y": 19
                         },
                         "xDDgj": {
                           "content": "2:37",
-                          "x": 333
+                          "x": 333,
+                          "y": 26.5
                         },
                         "SnIpM": {
-                          "x": 370
+                          "x": 370,
+                          "y": 24
                         }
                       }
                     },
@@ -887,6 +894,7 @@
                       "name": "recSong3",
                       "x": 0,
                       "y": 182,
+                      "height": "fit_content",
                       "descendants": {
                         "mu7Ic": {
                           "fill": {
@@ -907,23 +915,30 @@
                                 "position": 1
                               }
                             ]
-                          }
+                          },
+                          "y": 10
                         },
                         "nt3rO": {
-                          "width": "fill_container"
+                          "width": "fill_container",
+                          "height": "fit_content",
+                          "x": 60,
+                          "y": 17
                         },
                         "i4tyP": {
                           "content": "Midnight Rain"
                         },
                         "K9myS": {
-                          "content": "Taylor Swift"
+                          "content": "Taylor Swift",
+                          "y": 19
                         },
                         "xDDgj": {
                           "content": "3:56",
-                          "x": 332
+                          "x": 332,
+                          "y": 26.5
                         },
                         "SnIpM": {
-                          "x": 370
+                          "x": 370,
+                          "y": 24
                         }
                       }
                     },
@@ -935,6 +950,7 @@
                       "name": "recSong4",
                       "x": 0,
                       "y": 258,
+                      "height": "fit_content",
                       "descendants": {
                         "mu7Ic": {
                           "fill": {
@@ -955,23 +971,30 @@
                                 "position": 1
                               }
                             ]
-                          }
+                          },
+                          "y": 10
                         },
                         "nt3rO": {
-                          "width": "fill_container"
+                          "width": "fill_container",
+                          "height": "fit_content",
+                          "x": 60,
+                          "y": 17
                         },
                         "i4tyP": {
                           "content": "Anti-Hero"
                         },
                         "K9myS": {
-                          "content": "Taylor Swift"
+                          "content": "Taylor Swift",
+                          "y": 19
                         },
                         "xDDgj": {
                           "content": "3:20",
-                          "x": 332
+                          "x": 332,
+                          "y": 26.5
                         },
                         "SnIpM": {
-                          "x": 370
+                          "x": 370,
+                          "y": 24
                         }
                       }
                     }
@@ -1020,22 +1043,30 @@
                             "position": 1
                           }
                         ]
-                      }
+                      },
+                      "x": 16,
+                      "y": 10
                     },
                     "TTjNZ": {
-                      "width": "fill_container"
+                      "width": "fill_container",
+                      "height": "fit_content",
+                      "x": 72,
+                      "y": 16.5
                     },
                     "LYAO3": {
                       "content": "Blinding Lights"
                     },
                     "UV4v9": {
-                      "content": "The Weeknd"
+                      "content": "The Weeknd",
+                      "y": 18
                     },
                     "sAnS4": {
-                      "x": 294
+                      "x": 294,
+                      "y": 20
                     },
                     "qFseO": {
-                      "x": 330
+                      "x": 330,
+                      "y": 22
                     }
                   }
                 }
@@ -1049,38 +1080,54 @@
               "name": "homeTabBar",
               "x": 0,
               "y": 749,
+              "height": "fit_content",
               "descendants": {
                 "RKtWU": {
-                  "width": "fill_container"
+                  "width": "fill_container",
+                  "x": 21,
+                  "y": 12
                 },
                 "iY6bA": {
-                  "width": "fill_container"
+                  "width": "fill_container",
+                  "height": "fill_container",
+                  "x": 4,
+                  "y": 4
                 },
                 "fPPdc": {
-                  "x": 46.333333333333336
+                  "x": 46.33333333333333,
+                  "y": 10
                 },
                 "z6Q57": {
-                  "x": 38.833333333333336
+                  "x": 38.83333333333333,
+                  "y": 32
                 },
                 "WaiyA": {
                   "width": "fill_container",
-                  "x": 118.66666666666667
+                  "x": 118.66666666666667,
+                  "height": "fill_container",
+                  "y": 4
                 },
                 "yaEjD": {
-                  "x": 46.333333333333336
+                  "x": 46.33333333333333,
+                  "y": 10
                 },
                 "imvjp": {
-                  "x": 32.83333333333333
+                  "x": 32.833333333333336,
+                  "y": 32
                 },
                 "JMWYG": {
                   "width": "fill_container",
-                  "x": 233.33333333333334
+                  "x": 233.33333333333334,
+                  "height": "fill_container",
+                  "y": 4
                 },
                 "K9B01": {
-                  "x": 46.333333333333336
+                  "x": 46.33333333333333,
+                  "y": 10
                 },
                 "CMygU": {
-                  "x": 32.33333333333333
+                  "x": 32.333333333333336,
+                  "y": 32
                 }
               }
             }
@@ -1264,6 +1311,7 @@
                       "name": "srch1",
                       "x": 0,
                       "y": 0,
+                      "height": "fit_content",
                       "descendants": {
                         "mu7Ic": {
                           "fill": {
@@ -1284,23 +1332,30 @@
                                 "position": 1
                               }
                             ]
-                          }
+                          },
+                          "y": 10
                         },
                         "nt3rO": {
-                          "width": "fill_container"
+                          "width": "fill_container",
+                          "height": "fit_content",
+                          "x": 60,
+                          "y": 17
                         },
                         "i4tyP": {
                           "content": "Blinding Lights"
                         },
                         "K9myS": {
-                          "content": "The Weeknd · 3:20"
+                          "content": "The Weeknd · 3:20",
+                          "y": 19
                         },
                         "xDDgj": {
                           "content": "3:20",
-                          "x": 292
+                          "x": 292,
+                          "y": 26.5
                         },
                         "SnIpM": {
-                          "x": 330
+                          "x": 330,
+                          "y": 24
                         }
                       }
                     },
@@ -1312,6 +1367,7 @@
                       "name": "srch2",
                       "x": 0,
                       "y": 68,
+                      "height": "fit_content",
                       "descendants": {
                         "mu7Ic": {
                           "fill": {
@@ -1332,23 +1388,30 @@
                                 "position": 1
                               }
                             ]
-                          }
+                          },
+                          "y": 10
                         },
                         "nt3rO": {
-                          "width": "fill_container"
+                          "width": "fill_container",
+                          "height": "fit_content",
+                          "x": 60,
+                          "y": 17
                         },
                         "i4tyP": {
                           "content": "As It Was"
                         },
                         "K9myS": {
-                          "content": "Harry Styles · 2:37"
+                          "content": "Harry Styles · 2:37",
+                          "y": 19
                         },
                         "xDDgj": {
                           "content": "2:37",
-                          "x": 293
+                          "x": 293,
+                          "y": 26.5
                         },
                         "SnIpM": {
-                          "x": 330
+                          "x": 330,
+                          "y": 24
                         }
                       }
                     },
@@ -1360,6 +1423,7 @@
                       "name": "srch3",
                       "x": 0,
                       "y": 136,
+                      "height": "fit_content",
                       "descendants": {
                         "mu7Ic": {
                           "fill": {
@@ -1380,23 +1444,30 @@
                                 "position": 1
                               }
                             ]
-                          }
+                          },
+                          "y": 10
                         },
                         "nt3rO": {
-                          "width": "fill_container"
+                          "width": "fill_container",
+                          "height": "fit_content",
+                          "x": 60,
+                          "y": 17
                         },
                         "i4tyP": {
                           "content": "Midnight Rain"
                         },
                         "K9myS": {
-                          "content": "Taylor Swift · 3:56"
+                          "content": "Taylor Swift · 3:56",
+                          "y": 19
                         },
                         "xDDgj": {
                           "content": "3:56",
-                          "x": 292
+                          "x": 292,
+                          "y": 26.5
                         },
                         "SnIpM": {
-                          "x": 330
+                          "x": 330,
+                          "y": 24
                         }
                       }
                     },
@@ -1408,6 +1479,7 @@
                       "name": "srch4",
                       "x": 0,
                       "y": 204,
+                      "height": "fit_content",
                       "descendants": {
                         "mu7Ic": {
                           "fill": {
@@ -1428,23 +1500,30 @@
                                 "position": 1
                               }
                             ]
-                          }
+                          },
+                          "y": 10
                         },
                         "nt3rO": {
-                          "width": "fill_container"
+                          "width": "fill_container",
+                          "height": "fit_content",
+                          "x": 60,
+                          "y": 17
                         },
                         "i4tyP": {
                           "content": "Anti-Hero"
                         },
                         "K9myS": {
-                          "content": "Taylor Swift · 3:20"
+                          "content": "Taylor Swift · 3:20",
+                          "y": 19
                         },
                         "xDDgj": {
                           "content": "3:20",
-                          "x": 292
+                          "x": 292,
+                          "y": 26.5
                         },
                         "SnIpM": {
-                          "x": 330
+                          "x": 330,
+                          "y": 24
                         }
                       }
                     },
@@ -1456,6 +1535,7 @@
                       "name": "srch5",
                       "x": 0,
                       "y": 272,
+                      "height": "fit_content",
                       "descendants": {
                         "mu7Ic": {
                           "fill": {
@@ -1476,23 +1556,30 @@
                                 "position": 1
                               }
                             ]
-                          }
+                          },
+                          "y": 10
                         },
                         "nt3rO": {
-                          "width": "fill_container"
+                          "width": "fill_container",
+                          "height": "fit_content",
+                          "x": 60,
+                          "y": 17
                         },
                         "i4tyP": {
                           "content": "Cruel Summer"
                         },
                         "K9myS": {
-                          "content": "Taylor Swift · 2:58"
+                          "content": "Taylor Swift · 2:58",
+                          "y": 19
                         },
                         "xDDgj": {
                           "content": "2:58",
-                          "x": 292
+                          "x": 292,
+                          "y": 26.5
                         },
                         "SnIpM": {
-                          "x": 330
+                          "x": 330,
+                          "y": 24
                         }
                       }
                     },
@@ -1504,6 +1591,7 @@
                       "name": "srch6",
                       "x": 0,
                       "y": 340,
+                      "height": "fit_content",
                       "descendants": {
                         "mu7Ic": {
                           "fill": {
@@ -1524,23 +1612,30 @@
                                 "position": 1
                               }
                             ]
-                          }
+                          },
+                          "y": 10
                         },
                         "nt3rO": {
-                          "width": "fill_container"
+                          "width": "fill_container",
+                          "height": "fit_content",
+                          "x": 60,
+                          "y": 17
                         },
                         "i4tyP": {
                           "content": "Stay"
                         },
                         "K9myS": {
-                          "content": "Kid LAROI, Justin Bieber · 2:21"
+                          "content": "Kid LAROI, Justin Bieber · 2:21",
+                          "y": 19
                         },
                         "xDDgj": {
                           "content": "2:21",
-                          "x": 295
+                          "x": 295,
+                          "y": 26.5
                         },
                         "SnIpM": {
-                          "x": 330
+                          "x": 330,
+                          "y": 24
                         }
                       }
                     }
@@ -1570,14 +1665,26 @@
                   "x": 12,
                   "y": 0,
                   "descendants": {
+                    "EYQsc": {
+                      "x": 16,
+                      "y": 10
+                    },
                     "TTjNZ": {
-                      "width": "fill_container"
+                      "width": "fill_container",
+                      "height": "fit_content",
+                      "x": 72,
+                      "y": 16.5
+                    },
+                    "UV4v9": {
+                      "y": 18
                     },
                     "sAnS4": {
-                      "x": 294
+                      "x": 294,
+                      "y": 20
                     },
                     "qFseO": {
-                      "x": 330
+                      "x": 330,
+                      "y": 22
                     }
                   }
                 }
@@ -1591,44 +1698,60 @@
               "name": "srchTabBar",
               "x": 0,
               "y": 749,
+              "height": "fit_content",
               "descendants": {
                 "RKtWU": {
-                  "width": "fill_container"
+                  "width": "fill_container",
+                  "x": 21,
+                  "y": 12
                 },
                 "iY6bA": {
                   "fill": "transparent",
-                  "width": "fill_container"
+                  "width": "fill_container",
+                  "height": "fill_container",
+                  "x": 4,
+                  "y": 4
                 },
                 "fPPdc": {
                   "fill": "$text-muted",
-                  "x": 46.333333333333336
+                  "x": 46.33333333333333,
+                  "y": 10
                 },
                 "z6Q57": {
                   "fill": "$text-muted",
-                  "x": 38.833333333333336
+                  "x": 38.83333333333333,
+                  "y": 32
                 },
                 "WaiyA": {
                   "fill": "$accent",
                   "width": "fill_container",
-                  "x": 118.66666666666667
+                  "x": 118.66666666666667,
+                  "height": "fill_container",
+                  "y": 4
                 },
                 "yaEjD": {
                   "fill": "#FFFFFF",
-                  "x": 46.333333333333336
+                  "x": 46.33333333333333,
+                  "y": 10
                 },
                 "imvjp": {
                   "fill": "#FFFFFF",
-                  "x": 32.83333333333333
+                  "x": 32.833333333333336,
+                  "y": 32
                 },
                 "JMWYG": {
                   "width": "fill_container",
-                  "x": 233.33333333333334
+                  "x": 233.33333333333334,
+                  "height": "fill_container",
+                  "y": 4
                 },
                 "K9B01": {
-                  "x": 46.333333333333336
+                  "x": 46.33333333333333,
+                  "y": 10
                 },
                 "CMygU": {
-                  "x": 32.33333333333333
+                  "x": 32.333333333333336,
+                  "y": 32
                 }
               }
             }
@@ -1924,26 +2047,34 @@
                   "name": "libSong1",
                   "x": 0,
                   "y": 8,
+                  "height": "fit_content",
                   "descendants": {
                     "mu7Ic": {
-                      "fill": "#8B5CF630"
+                      "fill": "#8B5CF630",
+                      "y": 10
                     },
                     "nt3rO": {
-                      "width": "fill_container"
+                      "width": "fill_container",
+                      "height": "fit_content",
+                      "x": 60,
+                      "y": 17
                     },
                     "i4tyP": {
                       "content": "Blinding Lights"
                     },
                     "K9myS": {
-                      "content": "The Weeknd"
+                      "content": "The Weeknd",
+                      "y": 19
                     },
                     "xDDgj": {
-                      "x": 332
+                      "x": 332,
+                      "y": 26.5
                     },
                     "SnIpM": {
                       "iconFontName": "heart",
                       "fill": "#EF4444",
-                      "x": 370
+                      "x": 370,
+                      "y": 24
                     }
                   }
                 },
@@ -1955,6 +2086,7 @@
                   "name": "libSong2",
                   "x": 0,
                   "y": 76,
+                  "height": "fit_content",
                   "descendants": {
                     "mu7Ic": {
                       "fill": {
@@ -1975,24 +2107,31 @@
                             "position": 1
                           }
                         ]
-                      }
+                      },
+                      "y": 10
                     },
                     "nt3rO": {
-                      "width": "fill_container"
+                      "width": "fill_container",
+                      "height": "fit_content",
+                      "x": 60,
+                      "y": 17
                     },
                     "i4tyP": {
                       "content": "As It Was"
                     },
                     "K9myS": {
-                      "content": "Harry Styles"
+                      "content": "Harry Styles",
+                      "y": 19
                     },
                     "xDDgj": {
-                      "x": 332
+                      "x": 332,
+                      "y": 26.5
                     },
                     "SnIpM": {
                       "iconFontName": "heart",
                       "fill": "#EF4444",
-                      "x": 370
+                      "x": 370,
+                      "y": 24
                     }
                   }
                 },
@@ -2004,6 +2143,7 @@
                   "name": "libSong3",
                   "x": 0,
                   "y": 144,
+                  "height": "fit_content",
                   "descendants": {
                     "mu7Ic": {
                       "fill": {
@@ -2024,24 +2164,31 @@
                             "position": 1
                           }
                         ]
-                      }
+                      },
+                      "y": 10
                     },
                     "nt3rO": {
-                      "width": "fill_container"
+                      "width": "fill_container",
+                      "height": "fit_content",
+                      "x": 60,
+                      "y": 17
                     },
                     "i4tyP": {
                       "content": "Midnight Rain"
                     },
                     "K9myS": {
-                      "content": "Taylor Swift"
+                      "content": "Taylor Swift",
+                      "y": 19
                     },
                     "xDDgj": {
-                      "x": 332
+                      "x": 332,
+                      "y": 26.5
                     },
                     "SnIpM": {
                       "iconFontName": "heart",
                       "fill": "#EF4444",
-                      "x": 370
+                      "x": 370,
+                      "y": 24
                     }
                   }
                 },
@@ -2053,6 +2200,7 @@
                   "name": "libSong4",
                   "x": 0,
                   "y": 212,
+                  "height": "fit_content",
                   "descendants": {
                     "mu7Ic": {
                       "fill": {
@@ -2073,24 +2221,31 @@
                             "position": 1
                           }
                         ]
-                      }
+                      },
+                      "y": 10
                     },
                     "nt3rO": {
-                      "width": "fill_container"
+                      "width": "fill_container",
+                      "height": "fit_content",
+                      "x": 60,
+                      "y": 17
                     },
                     "i4tyP": {
                       "content": "Levitating"
                     },
                     "K9myS": {
-                      "content": "Dua Lipa"
+                      "content": "Dua Lipa",
+                      "y": 19
                     },
                     "xDDgj": {
-                      "x": 332
+                      "x": 332,
+                      "y": 26.5
                     },
                     "SnIpM": {
                       "iconFontName": "heart",
                       "fill": "#EF4444",
-                      "x": 370
+                      "x": 370,
+                      "y": 24
                     }
                   }
                 },
@@ -2102,6 +2257,7 @@
                   "name": "libSong5",
                   "x": 0,
                   "y": 280,
+                  "height": "fit_content",
                   "descendants": {
                     "mu7Ic": {
                       "fill": {
@@ -2122,24 +2278,31 @@
                             "position": 1
                           }
                         ]
-                      }
+                      },
+                      "y": 10
                     },
                     "nt3rO": {
-                      "width": "fill_container"
+                      "width": "fill_container",
+                      "height": "fit_content",
+                      "x": 60,
+                      "y": 17
                     },
                     "i4tyP": {
                       "content": "Cruel Summer"
                     },
                     "K9myS": {
-                      "content": "Taylor Swift"
+                      "content": "Taylor Swift",
+                      "y": 19
                     },
                     "xDDgj": {
-                      "x": 332
+                      "x": 332,
+                      "y": 26.5
                     },
                     "SnIpM": {
                       "iconFontName": "heart",
                       "fill": "#EF4444",
-                      "x": 370
+                      "x": 370,
+                      "y": 24
                     }
                   }
                 },
@@ -2151,6 +2314,7 @@
                   "name": "libSong6",
                   "x": 0,
                   "y": 348,
+                  "height": "fit_content",
                   "descendants": {
                     "mu7Ic": {
                       "fill": {
@@ -2171,24 +2335,31 @@
                             "position": 1
                           }
                         ]
-                      }
+                      },
+                      "y": 10
                     },
                     "nt3rO": {
-                      "width": "fill_container"
+                      "width": "fill_container",
+                      "height": "fit_content",
+                      "x": 60,
+                      "y": 17
                     },
                     "i4tyP": {
                       "content": "Watermelon Sugar"
                     },
                     "K9myS": {
-                      "content": "Harry Styles"
+                      "content": "Harry Styles",
+                      "y": 19
                     },
                     "xDDgj": {
-                      "x": 332
+                      "x": 332,
+                      "y": 26.5
                     },
                     "SnIpM": {
                       "iconFontName": "heart",
                       "fill": "#EF4444",
-                      "x": 370
+                      "x": 370,
+                      "y": 24
                     }
                   }
                 }
@@ -2216,14 +2387,26 @@
                   "x": 12,
                   "y": 0,
                   "descendants": {
+                    "EYQsc": {
+                      "x": 16,
+                      "y": 10
+                    },
                     "TTjNZ": {
-                      "width": "fill_container"
+                      "width": "fill_container",
+                      "height": "fit_content",
+                      "x": 72,
+                      "y": 16.5
+                    },
+                    "UV4v9": {
+                      "y": 18
                     },
                     "sAnS4": {
-                      "x": 294
+                      "x": 294,
+                      "y": 20
                     },
                     "qFseO": {
-                      "x": 330
+                      "x": 330,
+                      "y": 22
                     }
                   }
                 }
@@ -2237,47 +2420,63 @@
               "name": "libTabBar",
               "x": 0,
               "y": 749,
+              "height": "fit_content",
               "descendants": {
                 "RKtWU": {
-                  "width": "fill_container"
+                  "width": "fill_container",
+                  "x": 21,
+                  "y": 12
                 },
                 "iY6bA": {
                   "fill": "transparent",
-                  "width": "fill_container"
+                  "width": "fill_container",
+                  "height": "fill_container",
+                  "x": 4,
+                  "y": 4
                 },
                 "fPPdc": {
                   "fill": "$text-muted",
-                  "x": 46.333333333333336
+                  "x": 46.33333333333333,
+                  "y": 10
                 },
                 "z6Q57": {
                   "fill": "$text-muted",
-                  "x": 38.833333333333336
+                  "x": 38.83333333333333,
+                  "y": 32
                 },
                 "WaiyA": {
                   "fill": "transparent",
                   "width": "fill_container",
-                  "x": 118.66666666666667
+                  "x": 118.66666666666667,
+                  "height": "fill_container",
+                  "y": 4
                 },
                 "yaEjD": {
                   "fill": "$text-muted",
-                  "x": 46.333333333333336
+                  "x": 46.33333333333333,
+                  "y": 10
                 },
                 "imvjp": {
                   "fill": "$text-muted",
-                  "x": 32.83333333333333
+                  "x": 32.833333333333336,
+                  "y": 32
                 },
                 "JMWYG": {
                   "fill": "$accent",
                   "width": "fill_container",
-                  "x": 233.33333333333334
+                  "x": 233.33333333333334,
+                  "height": "fill_container",
+                  "y": 4
                 },
                 "K9B01": {
                   "fill": "#FFFFFF",
-                  "x": 46.333333333333336
+                  "x": 46.33333333333333,
+                  "y": 10
                 },
                 "CMygU": {
                   "fill": "#FFFFFF",
-                  "x": 32.33333333333333
+                  "x": 32.333333333333336,
+                  "y": 32
                 }
               }
             }
@@ -4597,6 +4796,7 @@
               "name": "hS1",
               "x": 0,
               "y": 29,
+              "height": "fit_content",
               "descendants": {
                 "mu7Ic": {
                   "fill": {
@@ -4617,23 +4817,30 @@
                         "position": 1
                       }
                     ]
-                  }
+                  },
+                  "y": 10
                 },
                 "nt3rO": {
-                  "width": "fill_container"
+                  "width": "fill_container",
+                  "height": "fit_content",
+                  "x": 60,
+                  "y": 17
                 },
                 "i4tyP": {
                   "content": "Blinding Lights"
                 },
                 "K9myS": {
-                  "content": "2 mins ago"
+                  "content": "2 mins ago",
+                  "y": 19
                 },
                 "xDDgj": {
                   "content": "3:20",
-                  "x": 332
+                  "x": 332,
+                  "y": 26.5
                 },
                 "SnIpM": {
-                  "x": 370
+                  "x": 370,
+                  "y": 24
                 }
               }
             },
@@ -4645,6 +4852,7 @@
               "name": "hS2",
               "x": 0,
               "y": 97,
+              "height": "fit_content",
               "descendants": {
                 "mu7Ic": {
                   "fill": {
@@ -4665,23 +4873,30 @@
                         "position": 1
                       }
                     ]
-                  }
+                  },
+                  "y": 10
                 },
                 "nt3rO": {
-                  "width": "fill_container"
+                  "width": "fill_container",
+                  "height": "fit_content",
+                  "x": 60,
+                  "y": 17
                 },
                 "i4tyP": {
                   "content": "As It Was"
                 },
                 "K9myS": {
-                  "content": "15 mins ago"
+                  "content": "15 mins ago",
+                  "y": 19
                 },
                 "xDDgj": {
                   "content": "2:37",
-                  "x": 333
+                  "x": 333,
+                  "y": 26.5
                 },
                 "SnIpM": {
-                  "x": 370
+                  "x": 370,
+                  "y": 24
                 }
               }
             },
@@ -4693,6 +4908,7 @@
               "name": "hS3",
               "x": 0,
               "y": 165,
+              "height": "fit_content",
               "descendants": {
                 "mu7Ic": {
                   "fill": {
@@ -4713,23 +4929,30 @@
                         "position": 1
                       }
                     ]
-                  }
+                  },
+                  "y": 10
                 },
                 "nt3rO": {
-                  "width": "fill_container"
+                  "width": "fill_container",
+                  "height": "fit_content",
+                  "x": 60,
+                  "y": 17
                 },
                 "i4tyP": {
                   "content": "Levitating"
                 },
                 "K9myS": {
-                  "content": "1 hour ago"
+                  "content": "1 hour ago",
+                  "y": 19
                 },
                 "xDDgj": {
                   "content": "3:23",
-                  "x": 332
+                  "x": 332,
+                  "y": 26.5
                 },
                 "SnIpM": {
-                  "x": 370
+                  "x": 370,
+                  "y": 24
                 }
               }
             },
@@ -4766,6 +4989,7 @@
               "name": "hS4",
               "x": 0,
               "y": 268,
+              "height": "fit_content",
               "descendants": {
                 "mu7Ic": {
                   "fill": {
@@ -4786,23 +5010,30 @@
                         "position": 1
                       }
                     ]
-                  }
+                  },
+                  "y": 10
                 },
                 "nt3rO": {
-                  "width": "fill_container"
+                  "width": "fill_container",
+                  "height": "fit_content",
+                  "x": 60,
+                  "y": 17
                 },
                 "i4tyP": {
                   "content": "Anti-Hero"
                 },
                 "K9myS": {
-                  "content": "Yesterday"
+                  "content": "Yesterday",
+                  "y": 19
                 },
                 "xDDgj": {
                   "content": "3:20",
-                  "x": 332
+                  "x": 332,
+                  "y": 26.5
                 },
                 "SnIpM": {
-                  "x": 370
+                  "x": 370,
+                  "y": 24
                 }
               }
             },
@@ -4814,6 +5045,7 @@
               "name": "hS5",
               "x": 0,
               "y": 336,
+              "height": "fit_content",
               "descendants": {
                 "mu7Ic": {
                   "fill": {
@@ -4834,23 +5066,30 @@
                         "position": 1
                       }
                     ]
-                  }
+                  },
+                  "y": 10
                 },
                 "nt3rO": {
-                  "width": "fill_container"
+                  "width": "fill_container",
+                  "height": "fit_content",
+                  "x": 60,
+                  "y": 17
                 },
                 "i4tyP": {
                   "content": "Cruel Summer"
                 },
                 "K9myS": {
-                  "content": "Yesterday"
+                  "content": "Yesterday",
+                  "y": 19
                 },
                 "xDDgj": {
                   "content": "2:58",
-                  "x": 332
+                  "x": 332,
+                  "y": 26.5
                 },
                 "SnIpM": {
-                  "x": 370
+                  "x": 370,
+                  "y": 24
                 }
               }
             }
@@ -4878,14 +5117,26 @@
               "x": 12,
               "y": 0,
               "descendants": {
+                "EYQsc": {
+                  "x": 16,
+                  "y": 10
+                },
                 "TTjNZ": {
-                  "width": "fill_container"
+                  "width": "fill_container",
+                  "height": "fit_content",
+                  "x": 72,
+                  "y": 16.5
+                },
+                "UV4v9": {
+                  "y": 18
                 },
                 "sAnS4": {
-                  "x": 294
+                  "x": 294,
+                  "y": 20
                 },
                 "qFseO": {
-                  "x": 330
+                  "x": 330,
+                  "y": 22
                 }
               }
             }
@@ -4899,47 +5150,63 @@
           "name": "hTabBar",
           "x": 0,
           "y": 749,
+          "height": "fit_content",
           "descendants": {
             "RKtWU": {
-              "width": "fill_container"
+              "width": "fill_container",
+              "x": 21,
+              "y": 12
             },
             "iY6bA": {
               "fill": "transparent",
-              "width": "fill_container"
+              "width": "fill_container",
+              "height": "fill_container",
+              "x": 4,
+              "y": 4
             },
             "fPPdc": {
               "fill": "$text-muted",
-              "x": 46.33333333333333
+              "x": 46.333333333333336,
+              "y": 10
             },
             "z6Q57": {
               "fill": "$text-muted",
-              "x": 38.83333333333333
+              "x": 38.833333333333336,
+              "y": 32
             },
             "WaiyA": {
               "fill": "transparent",
               "width": "fill_container",
-              "x": 118.66666666666667
+              "x": 118.66666666666667,
+              "height": "fill_container",
+              "y": 4
             },
             "yaEjD": {
               "fill": "$text-muted",
-              "x": 46.33333333333333
+              "x": 46.333333333333336,
+              "y": 10
             },
             "imvjp": {
               "fill": "$text-muted",
-              "x": 32.83333333333333
+              "x": 32.833333333333336,
+              "y": 32
             },
             "JMWYG": {
               "fill": "$accent",
               "width": "fill_container",
-              "x": 233.33333333333334
+              "x": 233.33333333333334,
+              "height": "fill_container",
+              "y": 4
             },
             "K9B01": {
               "fill": "#FFFFFF",
-              "x": 46.33333333333333
+              "x": 46.333333333333336,
+              "y": 10
             },
             "CMygU": {
               "fill": "#FFFFFF",
-              "x": 32.33333333333333
+              "x": 32.333333333333336,
+              "y": 32
             }
           }
         }
@@ -5471,14 +5738,26 @@
               "x": 12,
               "y": 0,
               "descendants": {
+                "EYQsc": {
+                  "x": 16,
+                  "y": 10
+                },
                 "TTjNZ": {
-                  "width": "fill_container"
+                  "width": "fill_container",
+                  "height": "fit_content",
+                  "x": 72,
+                  "y": 16.5
+                },
+                "UV4v9": {
+                  "y": 18
                 },
                 "sAnS4": {
-                  "x": 294
+                  "x": 294,
+                  "y": 20
                 },
                 "qFseO": {
-                  "x": 330
+                  "x": 330,
+                  "y": 22
                 }
               }
             }
@@ -5492,47 +5771,63 @@
           "name": "plTabBar",
           "x": 0,
           "y": 749,
+          "height": "fit_content",
           "descendants": {
             "RKtWU": {
-              "width": "fill_container"
+              "width": "fill_container",
+              "x": 21,
+              "y": 12
             },
             "iY6bA": {
               "fill": "transparent",
-              "width": "fill_container"
+              "width": "fill_container",
+              "height": "fill_container",
+              "x": 4,
+              "y": 4
             },
             "fPPdc": {
               "fill": "$text-muted",
-              "x": 46.333333333333336
+              "x": 46.33333333333333,
+              "y": 10
             },
             "z6Q57": {
               "fill": "$text-muted",
-              "x": 38.833333333333336
+              "x": 38.83333333333333,
+              "y": 32
             },
             "WaiyA": {
               "fill": "transparent",
               "width": "fill_container",
-              "x": 118.66666666666667
+              "x": 118.66666666666667,
+              "height": "fill_container",
+              "y": 4
             },
             "yaEjD": {
               "fill": "$text-muted",
-              "x": 46.333333333333336
+              "x": 46.33333333333333,
+              "y": 10
             },
             "imvjp": {
               "fill": "$text-muted",
-              "x": 32.83333333333333
+              "x": 32.833333333333336,
+              "y": 32
             },
             "JMWYG": {
               "fill": "$accent",
               "width": "fill_container",
-              "x": 233.33333333333334
+              "x": 233.33333333333334,
+              "height": "fill_container",
+              "y": 4
             },
             "K9B01": {
               "fill": "#FFFFFF",
-              "x": 46.333333333333336
+              "x": 46.33333333333333,
+              "y": 10
             },
             "CMygU": {
               "fill": "#FFFFFF",
-              "x": 32.33333333333333
+              "x": 32.333333333333336,
+              "y": 32
             }
           }
         }
@@ -5887,6 +6182,7 @@
               "name": "dlSong1",
               "x": 0,
               "y": 0,
+              "height": "fit_content",
               "descendants": {
                 "mu7Ic": {
                   "fill": {
@@ -5907,24 +6203,31 @@
                         "position": 1
                       }
                     ]
-                  }
+                  },
+                  "y": 10
                 },
                 "nt3rO": {
-                  "width": "fill_container"
+                  "width": "fill_container",
+                  "height": "fit_content",
+                  "x": 60,
+                  "y": 17
                 },
                 "i4tyP": {
                   "content": "Blinding Lights"
                 },
                 "K9myS": {
-                  "content": "The Weeknd · 4.2 MB"
+                  "content": "The Weeknd · 4.2 MB",
+                  "y": 19
                 },
                 "xDDgj": {
-                  "x": 332
+                  "x": 332,
+                  "y": 26.5
                 },
                 "SnIpM": {
                   "iconFontName": "circle-check",
                   "fill": "$success",
-                  "x": 370
+                  "x": 370,
+                  "y": 24
                 }
               }
             },
@@ -5936,6 +6239,7 @@
               "name": "dlSong2",
               "x": 0,
               "y": 68,
+              "height": "fit_content",
               "descendants": {
                 "mu7Ic": {
                   "fill": {
@@ -5956,24 +6260,31 @@
                         "position": 1
                       }
                     ]
-                  }
+                  },
+                  "y": 10
                 },
                 "nt3rO": {
-                  "width": "fill_container"
+                  "width": "fill_container",
+                  "height": "fit_content",
+                  "x": 60,
+                  "y": 17
                 },
                 "i4tyP": {
                   "content": "As It Was"
                 },
                 "K9myS": {
-                  "content": "Harry Styles · 3.1 MB"
+                  "content": "Harry Styles · 3.1 MB",
+                  "y": 19
                 },
                 "xDDgj": {
-                  "x": 332
+                  "x": 332,
+                  "y": 26.5
                 },
                 "SnIpM": {
                   "iconFontName": "circle-check",
                   "fill": "$success",
-                  "x": 370
+                  "x": 370,
+                  "y": 24
                 }
               }
             },
@@ -5985,6 +6296,7 @@
               "name": "dlSong3",
               "x": 0,
               "y": 136,
+              "height": "fit_content",
               "descendants": {
                 "mu7Ic": {
                   "fill": {
@@ -6005,24 +6317,31 @@
                         "position": 1
                       }
                     ]
-                  }
+                  },
+                  "y": 10
                 },
                 "nt3rO": {
-                  "width": "fill_container"
+                  "width": "fill_container",
+                  "height": "fit_content",
+                  "x": 60,
+                  "y": 17
                 },
                 "i4tyP": {
                   "content": "Midnight Rain"
                 },
                 "K9myS": {
-                  "content": "Taylor Swift · 5.0 MB"
+                  "content": "Taylor Swift · 5.0 MB",
+                  "y": 19
                 },
                 "xDDgj": {
-                  "x": 332
+                  "x": 332,
+                  "y": 26.5
                 },
                 "SnIpM": {
                   "iconFontName": "circle-check",
                   "fill": "$success",
-                  "x": 370
+                  "x": 370,
+                  "y": 24
                 }
               }
             },
@@ -6034,6 +6353,7 @@
               "name": "dlSong4",
               "x": 0,
               "y": 204,
+              "height": "fit_content",
               "descendants": {
                 "mu7Ic": {
                   "fill": {
@@ -6054,24 +6374,31 @@
                         "position": 1
                       }
                     ]
-                  }
+                  },
+                  "y": 10
                 },
                 "nt3rO": {
-                  "width": "fill_container"
+                  "width": "fill_container",
+                  "height": "fit_content",
+                  "x": 60,
+                  "y": 17
                 },
                 "i4tyP": {
                   "content": "Levitating"
                 },
                 "K9myS": {
-                  "content": "Dua Lipa · 4.5 MB"
+                  "content": "Dua Lipa · 4.5 MB",
+                  "y": 19
                 },
                 "xDDgj": {
-                  "x": 332
+                  "x": 332,
+                  "y": 26.5
                 },
                 "SnIpM": {
                   "iconFontName": "circle-check",
                   "fill": "$success",
-                  "x": 370
+                  "x": 370,
+                  "y": 24
                 }
               }
             },
@@ -6083,6 +6410,7 @@
               "name": "dlSong5",
               "x": 0,
               "y": 272,
+              "height": "fit_content",
               "descendants": {
                 "mu7Ic": {
                   "fill": {
@@ -6103,24 +6431,31 @@
                         "position": 1
                       }
                     ]
-                  }
+                  },
+                  "y": 10
                 },
                 "nt3rO": {
-                  "width": "fill_container"
+                  "width": "fill_container",
+                  "height": "fit_content",
+                  "x": 60,
+                  "y": 17
                 },
                 "i4tyP": {
                   "content": "Cruel Summer"
                 },
                 "K9myS": {
-                  "content": "Taylor Swift · 3.8 MB"
+                  "content": "Taylor Swift · 3.8 MB",
+                  "y": 19
                 },
                 "xDDgj": {
-                  "x": 332
+                  "x": 332,
+                  "y": 26.5
                 },
                 "SnIpM": {
                   "iconFontName": "circle-check",
                   "fill": "$success",
-                  "x": 370
+                  "x": 370,
+                  "y": 24
                 }
               }
             }
@@ -6148,14 +6483,26 @@
               "x": 12,
               "y": 0,
               "descendants": {
+                "EYQsc": {
+                  "x": 16,
+                  "y": 10
+                },
                 "TTjNZ": {
-                  "width": "fill_container"
+                  "width": "fill_container",
+                  "height": "fit_content",
+                  "x": 72,
+                  "y": 16.5
+                },
+                "UV4v9": {
+                  "y": 18
                 },
                 "sAnS4": {
-                  "x": 294
+                  "x": 294,
+                  "y": 20
                 },
                 "qFseO": {
-                  "x": 330
+                  "x": 330,
+                  "y": 22
                 }
               }
             }
@@ -6169,47 +6516,63 @@
           "name": "dlTabBar",
           "x": 0,
           "y": 749,
+          "height": "fit_content",
           "descendants": {
             "RKtWU": {
-              "width": "fill_container"
+              "width": "fill_container",
+              "x": 21,
+              "y": 12
             },
             "iY6bA": {
               "fill": "transparent",
-              "width": "fill_container"
+              "width": "fill_container",
+              "height": "fill_container",
+              "x": 4,
+              "y": 4
             },
             "fPPdc": {
               "fill": "$text-muted",
-              "x": 46.33333333333333
+              "x": 46.333333333333336,
+              "y": 10
             },
             "z6Q57": {
               "fill": "$text-muted",
-              "x": 38.83333333333333
+              "x": 38.833333333333336,
+              "y": 32
             },
             "WaiyA": {
               "fill": "transparent",
               "width": "fill_container",
-              "x": 118.66666666666667
+              "x": 118.66666666666667,
+              "height": "fill_container",
+              "y": 4
             },
             "yaEjD": {
               "fill": "$text-muted",
-              "x": 46.33333333333333
+              "x": 46.333333333333336,
+              "y": 10
             },
             "imvjp": {
               "fill": "$text-muted",
-              "x": 32.83333333333333
+              "x": 32.833333333333336,
+              "y": 32
             },
             "JMWYG": {
               "fill": "$accent",
               "width": "fill_container",
-              "x": 233.33333333333334
+              "x": 233.33333333333334,
+              "height": "fill_container",
+              "y": 4
             },
             "K9B01": {
               "fill": "#FFFFFF",
-              "x": 46.33333333333333
+              "x": 46.333333333333336,
+              "y": 10
             },
             "CMygU": {
               "fill": "#FFFFFF",
-              "x": 32.33333333333333
+              "x": 32.333333333333336,
+              "y": 32
             }
           }
         }
@@ -6748,14 +7111,26 @@
               "x": 12,
               "y": 0,
               "descendants": {
+                "EYQsc": {
+                  "x": 16,
+                  "y": 10
+                },
                 "TTjNZ": {
-                  "width": "fill_container"
+                  "width": "fill_container",
+                  "height": "fit_content",
+                  "x": 72,
+                  "y": 16.5
+                },
+                "UV4v9": {
+                  "y": 18
                 },
                 "sAnS4": {
-                  "x": 294
+                  "x": 294,
+                  "y": 20
                 },
                 "qFseO": {
-                  "x": 330
+                  "x": 330,
+                  "y": 22
                 }
               }
             }
@@ -6769,47 +7144,63 @@
           "name": "pcTabBar",
           "x": 0,
           "y": 749,
+          "height": "fit_content",
           "descendants": {
             "RKtWU": {
-              "width": "fill_container"
+              "width": "fill_container",
+              "x": 21,
+              "y": 12
             },
             "iY6bA": {
               "fill": "transparent",
-              "width": "fill_container"
+              "width": "fill_container",
+              "height": "fill_container",
+              "x": 4,
+              "y": 4
             },
             "fPPdc": {
               "fill": "$text-muted",
-              "x": 46.33333333333333
+              "x": 46.333333333333336,
+              "y": 10
             },
             "z6Q57": {
               "fill": "$text-muted",
-              "x": 38.83333333333333
+              "x": 38.833333333333336,
+              "y": 32
             },
             "WaiyA": {
               "fill": "transparent",
               "width": "fill_container",
-              "x": 118.66666666666667
+              "x": 118.66666666666667,
+              "height": "fill_container",
+              "y": 4
             },
             "yaEjD": {
               "fill": "$text-muted",
-              "x": 46.33333333333333
+              "x": 46.333333333333336,
+              "y": 10
             },
             "imvjp": {
               "fill": "$text-muted",
-              "x": 32.83333333333333
+              "x": 32.833333333333336,
+              "y": 32
             },
             "JMWYG": {
               "fill": "$accent",
               "width": "fill_container",
-              "x": 233.33333333333334
+              "x": 233.33333333333334,
+              "height": "fill_container",
+              "y": 4
             },
             "K9B01": {
               "fill": "#FFFFFF",
-              "x": 46.33333333333333
+              "x": 46.333333333333336,
+              "y": 10
             },
             "CMygU": {
               "fill": "#FFFFFF",
-              "x": 32.33333333333333
+              "x": 32.333333333333336,
+              "y": 32
             }
           }
         }
@@ -7090,6 +7481,7 @@
                   "name": "pdS1",
                   "x": 0,
                   "y": 0,
+                  "height": "fit_content",
                   "descendants": {
                     "mu7Ic": {
                       "fill": {
@@ -7110,23 +7502,30 @@
                             "position": 1
                           }
                         ]
-                      }
+                      },
+                      "y": 10
                     },
                     "nt3rO": {
-                      "width": "fill_container"
+                      "width": "fill_container",
+                      "height": "fit_content",
+                      "x": 60,
+                      "y": 17
                     },
                     "i4tyP": {
                       "content": "Blinding Lights"
                     },
                     "K9myS": {
-                      "content": "The Weeknd"
+                      "content": "The Weeknd",
+                      "y": 19
                     },
                     "xDDgj": {
                       "content": "3:20",
-                      "x": 332
+                      "x": 332,
+                      "y": 26.5
                     },
                     "SnIpM": {
-                      "x": 370
+                      "x": 370,
+                      "y": 24
                     }
                   }
                 },
@@ -7138,6 +7537,7 @@
                   "name": "pdS2",
                   "x": 0,
                   "y": 68,
+                  "height": "fit_content",
                   "descendants": {
                     "mu7Ic": {
                       "fill": {
@@ -7158,23 +7558,30 @@
                             "position": 1
                           }
                         ]
-                      }
+                      },
+                      "y": 10
                     },
                     "nt3rO": {
-                      "width": "fill_container"
+                      "width": "fill_container",
+                      "height": "fit_content",
+                      "x": 60,
+                      "y": 17
                     },
                     "i4tyP": {
                       "content": "As It Was"
                     },
                     "K9myS": {
-                      "content": "Harry Styles"
+                      "content": "Harry Styles",
+                      "y": 19
                     },
                     "xDDgj": {
                       "content": "2:37",
-                      "x": 333
+                      "x": 333,
+                      "y": 26.5
                     },
                     "SnIpM": {
-                      "x": 370
+                      "x": 370,
+                      "y": 24
                     }
                   }
                 },
@@ -7186,6 +7593,7 @@
                   "name": "pdS3",
                   "x": 0,
                   "y": 136,
+                  "height": "fit_content",
                   "descendants": {
                     "mu7Ic": {
                       "fill": {
@@ -7206,23 +7614,30 @@
                             "position": 1
                           }
                         ]
-                      }
+                      },
+                      "y": 10
                     },
                     "nt3rO": {
-                      "width": "fill_container"
+                      "width": "fill_container",
+                      "height": "fit_content",
+                      "x": 60,
+                      "y": 17
                     },
                     "i4tyP": {
                       "content": "Midnight Rain"
                     },
                     "K9myS": {
-                      "content": "Taylor Swift"
+                      "content": "Taylor Swift",
+                      "y": 19
                     },
                     "xDDgj": {
                       "content": "3:56",
-                      "x": 332
+                      "x": 332,
+                      "y": 26.5
                     },
                     "SnIpM": {
-                      "x": 370
+                      "x": 370,
+                      "y": 24
                     }
                   }
                 },
@@ -7234,6 +7649,7 @@
                   "name": "pdS4",
                   "x": 0,
                   "y": 204,
+                  "height": "fit_content",
                   "descendants": {
                     "mu7Ic": {
                       "fill": {
@@ -7254,23 +7670,30 @@
                             "position": 1
                           }
                         ]
-                      }
+                      },
+                      "y": 10
                     },
                     "nt3rO": {
-                      "width": "fill_container"
+                      "width": "fill_container",
+                      "height": "fit_content",
+                      "x": 60,
+                      "y": 17
                     },
                     "i4tyP": {
                       "content": "Levitating"
                     },
                     "K9myS": {
-                      "content": "Dua Lipa"
+                      "content": "Dua Lipa",
+                      "y": 19
                     },
                     "xDDgj": {
                       "content": "3:23",
-                      "x": 332
+                      "x": 332,
+                      "y": 26.5
                     },
                     "SnIpM": {
-                      "x": 370
+                      "x": 370,
+                      "y": 24
                     }
                   }
                 }
@@ -7690,14 +8113,26 @@
                   "x": 12,
                   "y": 117,
                   "descendants": {
+                    "EYQsc": {
+                      "x": 16,
+                      "y": 10
+                    },
                     "TTjNZ": {
-                      "width": "fill_container"
+                      "width": "fill_container",
+                      "height": "fit_content",
+                      "x": 72,
+                      "y": 16.5
+                    },
+                    "UV4v9": {
+                      "y": 18
                     },
                     "sAnS4": {
-                      "x": 294
+                      "x": 294,
+                      "y": 20
                     },
                     "qFseO": {
-                      "x": 330
+                      "x": 330,
+                      "y": 22
                     }
                   }
                 }
@@ -7711,47 +8146,63 @@
               "name": "podTabBar",
               "x": 0,
               "y": 749,
+              "height": "fit_content",
               "descendants": {
                 "RKtWU": {
-                  "width": "fill_container"
+                  "width": "fill_container",
+                  "x": 21,
+                  "y": 12
                 },
                 "iY6bA": {
                   "fill": "transparent",
-                  "width": "fill_container"
+                  "width": "fill_container",
+                  "height": "fill_container",
+                  "x": 4,
+                  "y": 4
                 },
                 "fPPdc": {
                   "fill": "$text-muted",
-                  "x": 46.33333333333333
+                  "x": 46.333333333333336,
+                  "y": 10
                 },
                 "z6Q57": {
                   "fill": "$text-muted",
-                  "x": 38.83333333333333
+                  "x": 38.833333333333336,
+                  "y": 32
                 },
                 "WaiyA": {
                   "fill": "transparent",
                   "width": "fill_container",
-                  "x": 118.66666666666667
+                  "x": 118.66666666666667,
+                  "height": "fill_container",
+                  "y": 4
                 },
                 "yaEjD": {
                   "fill": "$text-muted",
-                  "x": 46.33333333333333
+                  "x": 46.333333333333336,
+                  "y": 10
                 },
                 "imvjp": {
                   "fill": "$text-muted",
-                  "x": 32.83333333333333
+                  "x": 32.833333333333336,
+                  "y": 32
                 },
                 "JMWYG": {
                   "fill": "$accent",
                   "width": "fill_container",
-                  "x": 233.33333333333334
+                  "x": 233.33333333333334,
+                  "height": "fill_container",
+                  "y": 4
                 },
                 "K9B01": {
                   "fill": "#FFFFFF",
-                  "x": 46.33333333333333
+                  "x": 46.333333333333336,
+                  "y": 10
                 },
                 "CMygU": {
                   "fill": "#FFFFFF",
-                  "x": 32.33333333333333
+                  "x": 32.333333333333336,
+                  "y": 32
                 }
               }
             }
@@ -9348,7 +9799,8 @@
                   "content": "Check your connection and try again",
                   "textAlign": "center",
                   "fontFamily": "Inter",
-                  "fontSize": 15
+                  "fontSize": 15,
+                  "fontWeight": "normal"
                 }
               ]
             },
@@ -9496,7 +9948,8 @@
                       "fill": "$text-secondary",
                       "content": "🕐  Recent",
                       "fontFamily": "Inter",
-                      "fontSize": 15
+                      "fontSize": 15,
+                      "fontWeight": "normal"
                     }
                   ]
                 },
@@ -9518,7 +9971,8 @@
                       "fill": "$text-secondary",
                       "content": "≡  Playlists",
                       "fontFamily": "Inter",
-                      "fontSize": 15
+                      "fontSize": 15,
+                      "fontWeight": "normal"
                     }
                   ]
                 },
@@ -9540,7 +9994,8 @@
                       "fill": "$text-secondary",
                       "content": "↓  Downloads",
                       "fontFamily": "Inter",
-                      "fontSize": 15
+                      "fontSize": 15,
+                      "fontWeight": "normal"
                     }
                   ]
                 }

@@ -73,6 +73,7 @@ If MCP fails → fallback to slack CLI
 - `specs/rules/coding.md`
 - `specs/rules/flutter.md`
 - `specs/rules/design.md`
+- `specs/rules/clean-code.md`
 
 ### 3.5. Cross-check colors against HTML design
 Before writing any code, if the spec references colors or design tokens:
