@@ -57,6 +57,16 @@
 				<string>com.googleusercontent.apps.835917125087-f61t9fpd001pj1em5ua4fjidnsbpn4d3</string>
 			</array>
 		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLName</key>
+			<string>ymusic</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>ymusic</string>
+			</array>
+		</dict>
 	</array>
 </dict>
 </plist>
