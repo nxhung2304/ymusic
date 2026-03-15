@@ -37,4 +37,13 @@ class AppColors {
   static const Color dividerLight = Color(0xFFDDDDDD);
   static const Color iconLight = Color(0xFF0F0F0F);
   static const Color iconMutedLight = Color(0xFF888888);
+
+  // Auth — Login Screen
+  static const Color loginGradientPrimary = Color(0xFF2D1B69);
+  static const Color loginGradientSecondary = Color(0xFF0F0A1E);
+  static const Color loginGradientTertiary = Color(0xFF0A0A0A);
+  static const Color loginGlowPurple = Color(0xFF7C3AED);
+  static const Color loginIconLight = Color(0xFFCE93FF);
+  static const Color loginTextSecondary = Color(0xFFB3B3B3);
+  static const Color googleBlue = Color(0xFF4285F4);
 }
