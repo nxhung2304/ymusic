@@ -28,10 +28,16 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
     setState(() => _isLoading = true);
 
     try {
+      debugPrint('[LoginScreen] Clicked to _handleGoogleSignIn button');
       final authDatasource = ref.read(authDatasourceProvider);
-      await authDatasource.signInWithGoogle();
+      final user = await authDatasource.signInWithGoogle();
+
+      debugPrint("[LoginScreen] user = $user");
       // Navigation handled by go_router via authStateProvider
-    } catch (e) {
+    } catch (e, stackTrace) {
+      debugPrint('[LoginScreen] Google Sign In error: $e');
+      debugPrint('[LoginScreen] StackTrace: $stackTrace');
+
       if (!mounted) return;
 
       if (e.toString().contains('Sign in cancelled')) {
