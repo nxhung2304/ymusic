@@ -46,4 +46,13 @@ class AppColors {
   static const Color loginIconLight = Color(0xFFCE93FF);
   static const Color loginTextSecondary = Color(0xFFB3B3B3);
   static const Color googleBlue = Color(0xFF4285F4);
+
+  // Auth — Splash Screen
+  static const Color splashGradientTop = Color(0xFF3B1F6A);
+  static const Color splashGradientMid = Color(0xFF1A0A2E);
+  static const Color splashIconColor = Color(0xFFA78BFA);
+  static const Color splashGlowColor = Color(0x408B5CF6);
+  static const Color splashDotColor = Color(0xFF8B5CF6);
+  static const Color splashDotGlowColor = Color(0xAA8B5CF6);
+  static const Color splashTaglineColor = Color(0xFFADADB0);
 }
