@@ -1,15 +1,26 @@
 import 'dart:async';
+import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ymusic/core/constants/app_colors.dart';
-import 'package:ymusic/core/constants/app_spacing.dart';
-import 'package:ymusic/core/constants/app_typography.dart';
 import 'package:ymusic/features/auth/presentation/providers/auth_provider.dart';
 import 'package:ymusic/features/auth/presentation/screens/login_screen.dart';
 import 'package:ymusic/features/auth/presentation/strings/auth_strings.dart';
 
 const _kSplashTimeoutSeconds = 5;
+const _kFadeAnimationDurationMs = 800;
+const _kTransitionDurationMs = 400;
+const _kMinSplashDisplayMs = 2000;
+
+const _kIconSize = 72.0;
+const _kGlowSize = 200.0;
+const _kGlowBlurSigma = 40.0;
+const _kDotSize = 6.0;
+const _kAppNameFontSize = 42.0;
+const _kAppNameLetterSpacing = -1.0;
+const _kTaglineFontSize = 16.0;
+const _kElementSpacing = 16.0;
 
 class SplashScreen extends ConsumerStatefulWidget {
   const SplashScreen({super.key});
@@ -22,7 +33,6 @@ class _SplashScreenState extends ConsumerState<SplashScreen>
     with SingleTickerProviderStateMixin {
   late final AnimationController _animationController;
   late final Animation<double> _fadeAnimation;
-  StreamSubscription<dynamic>? _authSubscription;
   Timer? _timeoutTimer;
 
   @override
@@ -35,7 +45,7 @@ class _SplashScreenState extends ConsumerState<SplashScreen>
   void _setupAnimation() {
     _animationController = AnimationController(
       vsync: this,
-      duration: const Duration(milliseconds: 800),
+      duration: const Duration(milliseconds: _kFadeAnimationDurationMs),
     );
 
     _fadeAnimation = CurvedAnimation(
@@ -52,18 +62,14 @@ class _SplashScreenState extends ConsumerState<SplashScreen>
       () => _navigateToLogin(),
     );
 
-    final authStream = ref.read(authStateProvider.future);
-
-    authStream.then((user) {
+    Future.wait([
+      ref.read(authStateProvider.future),
+      Future.delayed(const Duration(milliseconds: _kMinSplashDisplayMs)),
+    ]).then((_) {
       if (!mounted) return;
       _cancelTimeout();
-
-      if (user != null) {
-        // TODO(1.5): Replace with go_router navigation to /home when router is set up
-        _navigateToLogin();
-      } else {
-        _navigateToLogin();
-      }
+      // TODO(1.5): Replace with go_router navigation to /home when router is set up
+      _navigateToLogin();
     }).catchError((_) {
       if (!mounted) return;
       _cancelTimeout();
@@ -85,7 +91,7 @@ class _SplashScreenState extends ConsumerState<SplashScreen>
         transitionsBuilder: (context, animation, secondaryAnimation, child) {
           return FadeTransition(opacity: animation, child: child);
         },
-        transitionDuration: const Duration(milliseconds: 400),
+        transitionDuration: const Duration(milliseconds: _kTransitionDurationMs),
       ),
     );
   }
@@ -93,7 +99,6 @@ class _SplashScreenState extends ConsumerState<SplashScreen>
   @override
   void dispose() {
     _cancelTimeout();
-    _authSubscription?.cancel();
     _animationController.dispose();
     super.dispose();
   }
@@ -107,23 +112,51 @@ class _SplashScreenState extends ConsumerState<SplashScreen>
   }
 
   Widget _buildBody() {
+    return Stack(
+      children: [
+        _buildBackground(),
+        _buildGlow(),
+        Center(
+          child: FadeTransition(
+            opacity: _fadeAnimation,
+            child: _buildBranding(),
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildBackground() {
     return Container(
       decoration: const BoxDecoration(
-        gradient: LinearGradient(
-          begin: Alignment.topCenter,
-          end: Alignment.bottomCenter,
+        gradient: RadialGradient(
+          center: Alignment(0, -0.2),
+          radius: 1.0,
           colors: [
-            AppColors.loginGradientPrimary,
-            AppColors.loginGradientSecondary,
-            AppColors.loginGradientTertiary,
+            AppColors.splashGradientTop,
+            AppColors.splashGradientMid,
+            AppColors.background,
           ],
           stops: [0.0, 0.5, 1.0],
         ),
       ),
-      child: Center(
-        child: FadeTransition(
-          opacity: _fadeAnimation,
-          child: _buildBranding(),
+    );
+  }
+
+  Widget _buildGlow() {
+    return Center(
+      child: ImageFiltered(
+        imageFilter: ImageFilter.blur(
+          sigmaX: _kGlowBlurSigma,
+          sigmaY: _kGlowBlurSigma,
+        ),
+        child: Container(
+          width: _kGlowSize,
+          height: _kGlowSize,
+          decoration: const BoxDecoration(
+            shape: BoxShape.circle,
+            color: AppColors.splashGlowColor,
+          ),
         ),
       ),
     );
@@ -133,45 +166,32 @@ class _SplashScreenState extends ConsumerState<SplashScreen>
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
-        _buildLogo(),
-        const SizedBox(height: AppSpacing.md),
+        _buildIcon(),
+        const SizedBox(height: _kElementSpacing),
         _buildAppName(),
-        const SizedBox(height: AppSpacing.sm),
+        const SizedBox(height: _kElementSpacing),
         _buildTagline(),
+        const SizedBox(height: _kElementSpacing),
+        _buildDot(),
       ],
     );
   }
 
-  Widget _buildLogo() {
-    return Container(
-      width: 80,
-      height: 80,
-      decoration: BoxDecoration(
-        color: AppColors.primary,
-        borderRadius: BorderRadius.circular(20),
-        boxShadow: [
-          BoxShadow(
-            color: AppColors.primary.withValues(alpha: 0.4),
-            blurRadius: 24,
-            spreadRadius: 4,
-          ),
-        ],
-      ),
-      child: const Icon(
-        Icons.music_note_rounded,
-        color: AppColors.onPrimary,
-        size: 44,
-      ),
+  Widget _buildIcon() {
+    return const Icon(
+      Icons.music_note_rounded,
+      color: AppColors.splashIconColor,
+      size: _kIconSize,
     );
   }
 
   Widget _buildAppName() {
-    return Text(
+    return const Text(
       AuthStrings.appName,
-      style: AppTypography.h1.copyWith(
-        fontSize: 36,
-        fontWeight: FontWeight.w800,
-        letterSpacing: 2,
+      style: TextStyle(
+        fontSize: _kAppNameFontSize,
+        fontWeight: FontWeight.w700,
+        letterSpacing: _kAppNameLetterSpacing,
         color: AppColors.text,
       ),
     );
@@ -179,11 +199,28 @@ class _SplashScreenState extends ConsumerState<SplashScreen>
 
   Widget _buildTagline() {
     return const Text(
-      AuthStrings.appTagline,
+      AuthStrings.splashDesc,
       style: TextStyle(
-        fontSize: 14,
-        color: AppColors.loginTextSecondary,
-        letterSpacing: 0.5,
+        fontSize: _kTaglineFontSize,
+        color: AppColors.splashTaglineColor,
+      ),
+    );
+  }
+
+  Widget _buildDot() {
+    return Container(
+      width: _kDotSize,
+      height: _kDotSize,
+      decoration: const BoxDecoration(
+        shape: BoxShape.circle,
+        color: AppColors.splashDotColor,
+        boxShadow: [
+          BoxShadow(
+            color: AppColors.splashDotGlowColor,
+            blurRadius: 8,
+            spreadRadius: 4,
+          ),
+        ],
       ),
     );
   }
