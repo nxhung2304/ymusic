@@ -23,6 +23,10 @@ class AppColors {
   static const Color icon = Color(0xFFFFFFFF);
   static const Color iconMuted = Color(0xFF717171);
 
+  // Navigation
+  static const Color navBar = Color(0xFF111111);
+  static const Color navIconInactive = Color(0xFF6B7280);
+
   // Light — Backgrounds
   static const Color backgroundLight = Color(0xFFF5F5F5);
   static const Color surfaceLight = Color(0xFFFFFFFF);

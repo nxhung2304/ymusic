@@ -6,7 +6,7 @@ part of 'auth_provider.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$authDatasourceHash() => r'4d3fb5a3ec3b4ccf5c3ee8e15c5421d51db9615b';
+String _$authDatasourceHash() => r'09f60a34c8065f843a2b55389fe4b0fe7e58f4c5';
 
 /// Provides a singleton instance of [AuthDatasource]
 ///
@@ -26,7 +26,7 @@ final authDatasourceProvider = AutoDisposeProvider<AuthDatasource>.internal(
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 typedef AuthDatasourceRef = AutoDisposeProviderRef<AuthDatasource>;
-String _$authStateHash() => r'c453418ae685467cc406f5e92142f623e14d854c';
+String _$authStateHash() => r'314bbaf62f6f686bb1706d73fc25d11337c46a3a';
 
 /// Provides a stream of auth state changes
 /// Emits [User?] whenever authentication state changes (login/logout)
@@ -45,7 +45,7 @@ final authStateProvider = AutoDisposeStreamProvider<User?>.internal(
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 typedef AuthStateRef = AutoDisposeStreamProviderRef<User?>;
-String _$currentUserHash() => r'ab87a355dd423d79a81ba656f9396a458ad8ed84';
+String _$currentUserHash() => r'88ba1c74bce80a9739366dfefce2731e2f582f55';
 
 /// Provides the current authenticated user
 /// Returns null if user is not logged in, otherwise returns the [User] object

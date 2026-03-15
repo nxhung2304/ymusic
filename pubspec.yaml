@@ -45,6 +45,9 @@ dependencies:
   flutter_riverpod: ^2.5.1
   riverpod_annotation: ^2.3.5
 
+  # Navigation
+  go_router: ^14.0.0
+
   # SVG
   flutter_svg: ^2.0.0
 
