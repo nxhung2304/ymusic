@@ -130,31 +130,6 @@ Ngôn ngữ: hỗ trợ tiếng Anh / tiếng Việt
 - [ ] Hiệu ứng blur / glassmorphism cho player
 - [ ] **Adaptive layout cho iPad:** Split-view (Library sidebar persistent + Player panel) để tận dụng screen size lớn
 
----
-
-## 5. Routing Map
-
-```
-Routes theo go_router:
-/                          → SplashScreen (check auth, redirect)
-/login                     → LoginScreen (public)
-/home (ShellRoute)         → AppShell (BottomNav persistent)
-  ├── /home               → HomeScreen (tab 0)
-  ├── /search             → SearchScreen (tab 1)
-  └── /library            → LibraryScreen (tab 2)
-/player                    → FullPlayerScreen (push over shell)
-/video/:videoId            → VideoPlayerScreen (push)
-/playlist/:playlistId      → PlaylistDetailScreen (push)
-/podcast/:encodedFeedUrl   → PodcastDetailScreen (push)
-/settings                  → SettingsScreen (push)
-
-Deep Link Routes:
-ymusic://player?videoId=xxx        → /player?videoId=xxx
-ymusic://podcast/:encodedFeedUrl   → /podcast/:encodedFeedUrl
-```
-
----
-
 ## 5.5 Error Handling Strategy
 
 Tất cả services phải wrap logic trong try-catch và trả về kết quả rõ ràng:
@@ -201,57 +176,6 @@ User nhấn Download
   → Lưu metadata vào Isar
   → Hiển thị trong Library > Downloaded
 ```
-
----
-
-## 7. Cấu trúc thư mục (gợi ý)
-
-```
-lib/
-├── main.dart
-├── app.dart
-├── core/
-│   ├── constants/
-│   ├── router/
-│   ├── theme/
-│   └── utils/
-├── features/
-│   ├── auth/
-│   │   ├── data/
-│   │   ├── domain/
-│   │   └── presentation/
-│   ├── search/
-│   ├── player/
-│   ├── library/
-│   └── ...
-├── shared/
-│   ├── widgets/
-│   ├── models/
-│   └── services/
-└── config/
-    └── firebase/
-```
-
----
-
-## 8. Thứ tự build gợi ý
-
-1. **Setup project** — Flutter init, dependencies, Firebase config, theme
-2. **Auth** — Google Sign In + Firebase Auth
-3. **Firestore Service** — CRUD cơ bản cho playlist, liked, history
-4. **YouTube Service** — tìm kiếm + lấy audio URL
-5. **Audio Player** — just_audio + audio_service cơ bản
-6. **UI Player** — mini player + full player
-7. **Search Screen**
-8. **Queue & Repeat / Shuffle**
-9. **Library** — liked, history, playlist (sync Firestore)
-10. **Lyrics** — fetch + hiển thị sync
-11. **Download offline** — tải + phát local
-12. **Video playback**
-13. **Podcast**
-14. **iPad adaptive layout** — split-view UI, responsive components
-15. **Deep Link setup** — ymusic:// scheme, URL validation
-16. **Polish** — animation, dark mode, UX
 
 ---
 

@@ -1,4 +1,7 @@
-# ymusic - Vibe Coding with Claude Code + Pencil.dev (2026 Edition)
+# ymusic - Coworker with Claude Code
+
+- Tự code: business logic, state management, data sync, stream handling
+- Claude: UI scaffolding, boilerplate, package integration code
 
 ## 0. Tool Stack & MCP Setup (bắt buộc 1 lần)
 - **Core**: Claude Code (main agent) + Pencil.dev (design canvas in codebase)
@@ -23,6 +26,14 @@ claude mcp add coolify npx @masonator/coolify-mcp
 - Vẽ architecture (React Native/Flutter + backend nếu cần).
 - Prompt Claude: “Plan mode: Break this PRD into tasks + tech stack”.
 - Grok đánh giá thực tiễn: “Tìm trên web xem stack này có overkill cho solo dev không?”.
+### 2.1 Vấn đề gặp phải
+"horizontal slice" — xây toàn bộ data layer trước, rồi mới làm feature
+- Rủi ro
+  - Models sai sớm, sửa muộn — blast radius lớn
+  - Không có feedback loop
+  - Over-engineering
+- Cách giải quyết
+  - Chuyển qua Vertical Slice - build theo feature slice hoàn chỉnh
 
 ## 3. Design (Pencil.dev)
 - Chuẩn bị: Cho Claude đọc PRD + Story → hỏi cách prompt tối ưu cho Pencil.
@@ -34,7 +45,7 @@ claude mcp add coolify npx @masonator/coolify-mcp
 Use Pencil MCP to create specs/designs/<app-name>.pen.
 
 Design system: [màu nền, accent, font, spacing...]
-Platform: iOS 
+Platform: iOS
 
 Screens to design:
 - <Tên Screen 1>: [mô tả ngắn]
