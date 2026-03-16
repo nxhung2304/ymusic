@@ -1,28 +1,28 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'app_router.dart';
+part of 'firestore_service.dart';
 
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$routerHash() => r'755452bff449aa1ce0b0a35448727152b788958e';
+String _$firestoreServiceHash() => r'0ef4accaaf33544dfe918e6b1b52288ede148d38';
 
-/// Router provider using Riverpod
-///
-/// Copied from [router].
-@ProviderFor(router)
-final routerProvider = AutoDisposeProvider<GoRouter>.internal(
-  router,
-  name: r'routerProvider',
+/// See also [firestoreService].
+@ProviderFor(firestoreService)
+final firestoreServiceProvider = AutoDisposeProvider<FirestoreService>.internal(
+  firestoreService,
+  name: r'firestoreServiceProvider',
   debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product') ? null : _$routerHash,
+      const bool.fromEnvironment('dart.vm.product')
+          ? null
+          : _$firestoreServiceHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
 
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
-typedef RouterRef = AutoDisposeProviderRef<GoRouter>;
+typedef FirestoreServiceRef = AutoDisposeProviderRef<FirestoreService>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

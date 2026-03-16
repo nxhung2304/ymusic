@@ -5,6 +5,12 @@
 > Riverpod cho state, go_router cho navigation, clean layers (data/domain/presentation).
 >
 > **Chú thích:** `[🤖]` = Claude Code | `[👤]` = User | `[👤+🤖]` = cả hai *(ghi rõ phần ai làm)*
+>
+> **Testing Convention:**
+> - Mọi service/repository do `[🤖]` implement PHẢI có unit test đi kèm trong cùng PR.
+> - Dùng `fake_cloud_firestore` cho Firestore tests — không mock, không cần emulator.
+> - Test file đặt tại `test/` mirror theo `lib/`: ví dụ `lib/core/services/x.dart` → `test/core/services/x_test.dart`.
+> - Minimum coverage: happy path + edge case (empty/null) + exception path cho mỗi public method.
 
 ---
 
@@ -32,7 +38,7 @@ Packages: google_sign_in, firebase_auth, firebase_core, flutter_riverpod, riverp
 > Chỉ setup skeleton — không tạo models hay repos cụ thể ở đây.
 
 Packages: cloud_firestore, isar, isar_flutter_libs, dio | dev: isar_generator
-- [ ] 2.1 – FirestoreService: set/get/delete/collection helpers. `[🤖]`
+- [x] 2.1 – FirestoreService: set/get/delete/collection helpers + unit tests (16 cases). `[🤖]`
 - [ ] 2.2 – IsarService: khởi tạo instance, open DB, registerSchemas pattern (schema đăng ký dần theo feature). `[🤖]`
 - [ ] 2.3 – Firestore Security Rules: `/users/{uid}/**` read/write chỉ cho authenticated owner. `[👤+🤖]` *(🤖 viết rules file | 👤 deploy lên Firebase Console)*
 - [ ] 2.4 – Global error handling: AppException types + dio interceptor (retry 3 lần, exponential backoff) + error snackbar provider. `[🤖]`
