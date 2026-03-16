@@ -1,0 +1,93 @@
+{
+  "@@locale": "en",
+
+  "appName": "YMusic",
+  "@appName": {
+    "description": "The name of the application"
+  },
+
+  "actionSearch": "Search",
+  "@actionSearch": {
+    "description": "Search action label"
+  },
+
+  "actionCancel": "Cancel",
+  "@actionCancel": {
+    "description": "Cancel action label"
+  },
+
+  "actionConfirm": "Confirm",
+  "@actionConfirm": {
+    "description": "Confirm action label"
+  },
+
+  "actionRetry": "Retry",
+  "@actionRetry": {
+    "description": "Retry action label"
+  },
+
+  "actionDelete": "Delete",
+  "@actionDelete": {
+    "description": "Delete action label"
+  },
+
+  "actionSave": "Save",
+  "@actionSave": {
+    "description": "Save action label"
+  },
+
+  "actionClose": "Close",
+  "@actionClose": {
+    "description": "Close action label"
+  },
+
+  "actionPlay": "Play",
+  "@actionPlay": {
+    "description": "Play action label"
+  },
+
+  "actionPause": "Pause",
+  "@actionPause": {
+    "description": "Pause action label"
+  },
+
+  "errorNetwork": "Network error. Please check your connection.",
+  "@errorNetwork": {
+    "description": "Network error message"
+  },
+
+  "errorUnknown": "An unknown error occurred. Please try again.",
+  "@errorUnknown": {
+    "description": "Unknown error message"
+  },
+
+  "errorUnauthorized": "You are not authorized. Please sign in again.",
+  "@errorUnauthorized": {
+    "description": "Unauthorized error message"
+  },
+
+  "errorNotFound": "The requested resource was not found.",
+  "@errorNotFound": {
+    "description": "Not found error message"
+  },
+
+  "errorTimeout": "The request timed out. Please try again.",
+  "@errorTimeout": {
+    "description": "Timeout error message"
+  },
+
+  "labelLoading": "Loading...",
+  "@labelLoading": {
+    "description": "Loading state label"
+  },
+
+  "labelNoResults": "No results found.",
+  "@labelNoResults": {
+    "description": "Empty results label"
+  },
+
+  "labelNoInternet": "No internet connection.",
+  "@labelNoInternet": {
+    "description": "No internet label"
+  }
+}

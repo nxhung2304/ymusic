@@ -1,0 +1,39 @@
+{
+  "@@locale": "vi",
+
+  "appName": "YMusic",
+
+  "actionSearch": "Tìm kiếm",
+
+  "actionCancel": "Hủy",
+
+  "actionConfirm": "Xác nhận",
+
+  "actionRetry": "Thử lại",
+
+  "actionDelete": "Xóa",
+
+  "actionSave": "Lưu",
+
+  "actionClose": "Đóng",
+
+  "actionPlay": "Phát",
+
+  "actionPause": "Tạm dừng",
+
+  "errorNetwork": "Lỗi mạng. Vui lòng kiểm tra kết nối của bạn.",
+
+  "errorUnknown": "Đã xảy ra lỗi không xác định. Vui lòng thử lại.",
+
+  "errorUnauthorized": "Bạn không có quyền truy cập. Vui lòng đăng nhập lại.",
+
+  "errorNotFound": "Không tìm thấy tài nguyên yêu cầu.",
+
+  "errorTimeout": "Yêu cầu đã hết thời gian. Vui lòng thử lại.",
+
+  "labelLoading": "Đang tải...",
+
+  "labelNoResults": "Không tìm thấy kết quả.",
+
+  "labelNoInternet": "Không có kết nối internet."
+}
