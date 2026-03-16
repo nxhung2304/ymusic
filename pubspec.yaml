@@ -48,6 +48,11 @@ dependencies:
   # Navigation
   go_router: ^14.0.0
 
+  # Local database
+  isar: ^3.1.0+1
+  isar_flutter_libs: ^3.1.0+1
+  path_provider: ^2.1.5
+
   # SVG
   flutter_svg: ^2.0.0
 
@@ -66,6 +71,8 @@ dev_dependencies:
   # Code generation
   build_runner: ^2.4.12
   riverpod_generator: ^2.4.1
+  # isar_generator: incompatible with riverpod_generator (analyzer version conflict).
+  # Add when isar_generator publishes support for analyzer ^6.x, or when migrating to Isar 4.x.
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
