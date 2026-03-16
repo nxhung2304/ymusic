@@ -14,7 +14,7 @@ claude mcp add coolify npx @masonator/coolify-mcp
 ```
 
 ## 1. PRD (Product Requirements Document)
-- Mô tả ý tưởng chi tiết: mục tiêu app, user persona (người Việt yêu nhạc), nền tảng (iOS/Android/Web), features chính, success metrics.
+- Mô tả ý tưởng chi tiết: mục tiêu app, user persona (người Việt yêu nhạc), nền tảng (iOS), features chính, success metrics.
 - Prompt Claude: `/create-prd` hoặc dùng plugin prd-generator.
 - Grok review: “Đánh giá thực tiễn PRD này với web_search về YouTube Music competitor 2026”.
 
@@ -34,7 +34,7 @@ claude mcp add coolify npx @masonator/coolify-mcp
 Use Pencil MCP to create specs/designs/<app-name>.pen.
 
 Design system: [màu nền, accent, font, spacing...]
-Platform: [iOS / Android / Web]
+Platform: iOS 
 
 Screens to design:
 - <Tên Screen 1>: [mô tả ngắn]

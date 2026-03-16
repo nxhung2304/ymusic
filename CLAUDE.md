@@ -93,5 +93,5 @@ Tất cả data của user nằm dưới `/users/{uid}/` để Security Rules đ
 
 ## 5. Interactice
 - Slack:
-  - Slack Channel ID: C0AGTJ0EE6B
-  - User id: U01RC2ZPYJW
+  - Slack Channel ID: C0AGSTWV7GT
+  - User id: U03GUNLSE4X

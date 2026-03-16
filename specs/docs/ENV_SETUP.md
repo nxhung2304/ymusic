@@ -132,7 +132,7 @@ cp .env.example .env.test
 4. Go to **Credentials** → Create API Key
 5. ⚠️ **IMPORTANT:** Apply API key restrictions:
    - Restrict to **YouTube Data API v3** only
-   - Set application restrictions (iOS Bundle ID + Android Package Name)
+   - Set application restrictions (iOS Bundle ID)
    - This prevents misuse if key is accidentally exposed
 6. Copy the key and paste in `.env` (NEVER in source code):
    ```env
@@ -144,7 +144,7 @@ cp .env.example .env.test
 1. In Google Cloud Console, go to **OAuth consent screen**
 2. Configure consent screen (add required fields)
 3. Go to **Credentials** → Create OAuth 2.0 Client ID
-   - Application type: **iOS** and/or **Android**
+   - Application type: **iOS**
    - Add authorized redirect URIs
 4. ⚠️ **IMPORTANT:** Restrict OAuth usage:
    - Only allow authentication for your app domain
