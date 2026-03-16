@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ymusic – Design Overview</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { background: #0A0A0A; min-height: 100vh; font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Helvetica Neue', sans-serif; color: #FFFFFF; }
+
+    .header { padding: 48px 40px 32px; border-bottom: 1px solid rgba(255,255,255,0.08); display: flex; align-items: center; gap: 16px; }
+    .logo-icon { width: 44px; height: 44px; background: linear-gradient(135deg, #5B21B6, #7C3AED); border-radius: 12px; display: flex; align-items: center; justify-content: center; }
+    .header-text h1 { font-size: 28px; font-weight: 700; letter-spacing: -0.5px; }
+    .header-text p { font-size: 14px; color: #6B7280; margin-top: 2px; }
+
+    /* Row groups */
+    .row-section { padding: 32px 40px 0; }
+    .row-label { font-size: 11px; font-weight: 700; color: #6B7280; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 20px; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 10px; }
+
+    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 20px; margin-bottom: 8px; }
+    /* iPad card spans wider */
+    .grid.ipad-row { grid-template-columns: 1fr; }
+
+    .screen-card { background: #141414; border: 1px solid rgba(255,255,255,0.07); border-radius: 18px; overflow: hidden; transition: transform 0.2s, border-color 0.2s; text-decoration: none; display: block; }
+    .screen-card:hover { transform: translateY(-4px); border-color: rgba(124, 58, 237, 0.5); }
+
+    .preview { width: 100%; height: 200px; background: #0D0D0D; position: relative; overflow: hidden; display: flex; align-items: flex-start; justify-content: center; }
+    .preview iframe { width: 390px; height: 844px; border: none; transform-origin: top center; transform: scale(0.282); pointer-events: none; margin-top: 0; }
+
+    /* iPad preview – wider */
+    .preview.ipad-preview { height: 200px; }
+    .preview.ipad-preview iframe { width: 1024px; height: 768px; transform: scale(0.22); transform-origin: top center; }
+
+    .card-info { padding: 12px 16px; border-top: 1px solid rgba(255,255,255,0.06); display: flex; align-items: center; justify-content: space-between; }
+    .card-meta { display: flex; flex-direction: column; }
+    .card-name { font-size: 14px; font-weight: 600; color: #FFFFFF; }
+    .card-file { font-size: 11px; color: #6B7280; margin-top: 2px; }
+    .card-tag { font-size: 10px; font-weight: 600; padding: 3px 9px; border-radius: 20px; text-transform: uppercase; letter-spacing: 0.5px; white-space: nowrap; }
+    .tag-auth { color: #8B5CF6; background: rgba(124,58,237,0.15); }
+    .tag-main { color: #3B82F6; background: rgba(59,130,246,0.15); }
+    .tag-player { color: #A78BFA; background: rgba(167,139,250,0.12); }
+    .tag-library { color: #34D399; background: rgba(52,211,153,0.12); }
+    .tag-content { color: #F59E0B; background: rgba(245,158,11,0.12); }
+    .tag-state { color: #9CA3AF; background: rgba(156,163,175,0.12); }
+    .tag-ipad { color: #60A5FA; background: rgba(96,165,250,0.12); }
+
+    .bottom-spacer { height: 48px; }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <div class="logo-icon">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+        <path d="M9 18V8l12-2v10" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        <circle cx="6" cy="18" r="3" stroke="white" stroke-width="2"/>
+        <circle cx="18" cy="16" r="3" stroke="white" stroke-width="2"/>
+      </svg>
+    </div>
+    <div class="header-text">
+      <h1>Ymusic Design</h1>
+      <p>22 screens · iOS + iPad app design</p>
+    </div>
+  </div>
+
+  <!-- ROW 1: Auth + Main -->
+  <div class="row-section">
+    <div class="row-label">Row 1 — Auth + Main Screens</div>
+    <div class="grid">
+      <a class="screen-card" href="splash.html" target="_blank">
+        <div class="preview"><iframe src="splash.html" scrolling="no" tabindex="-1"></iframe></div>
+        <div class="card-info"><div class="card-meta"><span class="card-name">Splash Screen</span><span class="card-file">splash.html ↗</span></div><span class="card-tag tag-auth">Auth</span></div>
+      </a>
+      <a class="screen-card" href="login.html" target="_blank">
+        <div class="preview"><iframe src="login.html" scrolling="no" tabindex="-1"></iframe></div>
+        <div class="card-info"><div class="card-meta"><span class="card-name">Login Screen</span><span class="card-file">login.html ↗</span></div><span class="card-tag tag-auth">Auth</span></div>
+      </a>
+      <a class="screen-card" href="home.html" target="_blank">
+        <div class="preview"><iframe src="home.html" scrolling="no" tabindex="-1"></iframe></div>
+        <div class="card-info"><div class="card-meta"><span class="card-name">Home Screen</span><span class="card-file">home.html ↗</span></div><span class="card-tag tag-main">Main</span></div>
+      </a>
+      <a class="screen-card" href="search.html" target="_blank">
+        <div class="preview"><iframe src="search.html" scrolling="no" tabindex="-1"></iframe></div>
+        <div class="card-info"><div class="card-meta"><span class="card-name">Search Screen</span><span class="card-file">search.html ↗</span></div><span class="card-tag tag-main">Main</span></div>
+      </a>
+      <a class="screen-card" href="library.html" target="_blank">
+        <div class="preview"><iframe src="library.html" scrolling="no" tabindex="-1"></iframe></div>
+        <div class="card-info"><div class="card-meta"><span class="card-name">Library (Liked)</span><span class="card-file">library.html ↗</span></div><span class="card-tag tag-main">Main</span></div>
+      </a>
+      <a class="screen-card" href="full-player.html" target="_blank">
+        <div class="preview"><iframe src="full-player.html" scrolling="no" tabindex="-1"></iframe></div>
+        <div class="card-info"><div class="card-meta"><span class="card-name">Full Player</span><span class="card-file">full-player.html ↗</span></div><span class="card-tag tag-player">Player</span></div>
+      </a>
+    </div>
+  </div>
+
+  <!-- ROW 2: Player Sub-views + Library Tabs -->
+  <div class="row-section">
+    <div class="row-label">Row 2 — Player Sub-views + Library Tabs</div>
+    <div class="grid">
+      <a class="screen-card" href="player-lyrics.html" target="_blank">
+        <div class="preview"><iframe src="player-lyrics.html" scrolling="no" tabindex="-1"></iframe></div>
+        <div class="card-info"><div class="card-meta"><span class="card-name">Player – Lyrics</span><span class="card-file">player-lyrics.html ↗</span></div><span class="card-tag tag-player">Player</span></div>
+      </a>
+      <a class="screen-card" href="player-queue.html" target="_blank">
+        <div class="preview"><iframe src="player-queue.html" scrolling="no" tabindex="-1"></iframe></div>
+        <div class="card-info"><div class="card-meta"><span class="card-name">Player – Queue</span><span class="card-file">player-queue.html ↗</span></div><span class="card-tag tag-player">Player</span></div>
+      </a>
+      <a class="screen-card" href="library-history.html" target="_blank">
+        <div class="preview"><iframe src="library-history.html" scrolling="no" tabindex="-1"></iframe></div>
+        <div class="card-info"><div class="card-meta"><span class="card-name">Library – History</span><span class="card-file">library-history.html ↗</span></div><span class="card-tag tag-library">Library</span></div>
+      </a>
+      <a class="screen-card" href="library-playlists.html" target="_blank">
+        <div class="preview"><iframe src="library-playlists.html" scrolling="no" tabindex="-1"></iframe></div>
+        <div class="card-info"><div class="card-meta"><span class="card-name">Library – Playlists</span><span class="card-file">library-playlists.html ↗</span></div><span class="card-tag tag-library">Library</span></div>
+      </a>
+      <a class="screen-card" href="library-downloads.html" target="_blank">
+        <div class="preview"><iframe src="library-downloads.html" scrolling="no" tabindex="-1"></iframe></div>
+        <div class="card-info"><div class="card-meta"><span class="card-name">Library – Downloads</span><span class="card-file">library-downloads.html ↗</span></div><span class="card-tag tag-library">Library</span></div>
+      </a>
+      <a class="screen-card" href="library-podcasts.html" target="_blank">
+        <div class="preview"><iframe src="library-podcasts.html" scrolling="no" tabindex="-1"></iframe></div>
+        <div class="card-info"><div class="card-meta"><span class="card-name">Library – Podcasts</span><span class="card-file">library-podcasts.html ↗</span></div><span class="card-tag tag-library">Library</span></div>
+      </a>
+    </div>
+  </div>
+
+  <!-- ROW 3: Content Screens -->
+  <div class="row-section">
+    <div class="row-label">Row 3 — Content Screens</div>
+    <div class="grid">
+      <a class="screen-card" href="playlist-detail.html" target="_blank">
+        <div class="preview"><iframe src="playlist-detail.html" scrolling="no" tabindex="-1"></iframe></div>
+        <div class="card-info"><div class="card-meta"><span class="card-name">Playlist Detail</span><span class="card-file">playlist-detail.html ↗</span></div><span class="card-tag tag-content">Content</span></div>
+      </a>
+      <a class="screen-card" href="podcast-screen.html" target="_blank">
+        <div class="preview"><iframe src="podcast-screen.html" scrolling="no" tabindex="-1"></iframe></div>
+        <div class="card-info"><div class="card-meta"><span class="card-name">Podcast Screen</span><span class="card-file">podcast-screen.html ↗</span></div><span class="card-tag tag-content">Content</span></div>
+      </a>
+      <a class="screen-card" href="video-player.html" target="_blank">
+        <div class="preview"><iframe src="video-player.html" scrolling="no" tabindex="-1"></iframe></div>
+        <div class="card-info"><div class="card-meta"><span class="card-name">Video Player</span><span class="card-file">video-player.html ↗</span></div><span class="card-tag tag-content">Content</span></div>
+      </a>
+      <a class="screen-card" href="settings.html" target="_blank">
+        <div class="preview"><iframe src="settings.html" scrolling="no" tabindex="-1"></iframe></div>
+        <div class="card-info"><div class="card-meta"><span class="card-name">Settings</span><span class="card-file">settings.html ↗</span></div><span class="card-tag tag-content">Content</span></div>
+      </a>
+    </div>
+  </div>
+
+  <!-- ROW 4: UI States -->
+  <div class="row-section">
+    <div class="row-label">Row 4 — UI States</div>
+    <div class="grid">
+      <a class="screen-card" href="state-loading.html" target="_blank">
+        <div class="preview"><iframe src="state-loading.html" scrolling="no" tabindex="-1"></iframe></div>
+        <div class="card-info"><div class="card-meta"><span class="card-name">Loading Skeleton</span><span class="card-file">state-loading.html ↗</span></div><span class="card-tag tag-state">State</span></div>
+      </a>
+      <a class="screen-card" href="state-empty-search.html" target="_blank">
+        <div class="preview"><iframe src="state-empty-search.html" scrolling="no" tabindex="-1"></iframe></div>
+        <div class="card-info"><div class="card-meta"><span class="card-name">Empty Search</span><span class="card-file">state-empty-search.html ↗</span></div><span class="card-tag tag-state">State</span></div>
+      </a>
+      <a class="screen-card" href="state-empty-library.html" target="_blank">
+        <div class="preview"><iframe src="state-empty-library.html" scrolling="no" tabindex="-1"></iframe></div>
+        <div class="card-info"><div class="card-meta"><span class="card-name">Empty Library</span><span class="card-file">state-empty-library.html ↗</span></div><span class="card-tag tag-state">State</span></div>
+      </a>
+      <a class="screen-card" href="state-network-error.html" target="_blank">
+        <div class="preview"><iframe src="state-network-error.html" scrolling="no" tabindex="-1"></iframe></div>
+        <div class="card-info"><div class="card-meta"><span class="card-name">Network Error</span><span class="card-file">state-network-error.html ↗</span></div><span class="card-tag tag-state">State</span></div>
+      </a>
+    </div>
+  </div>
+
+  <!-- ROW 5: iPad -->
+  <div class="row-section">
+    <div class="row-label">Row 5 — iPad Adaptive Layout</div>
+    <div class="grid ipad-row">
+      <a class="screen-card" href="ipad-split-view.html" target="_blank">
+        <div class="preview ipad-preview"><iframe src="ipad-split-view.html" scrolling="no" tabindex="-1"></iframe></div>
+        <div class="card-info"><div class="card-meta"><span class="card-name">iPad – Split View</span><span class="card-file">ipad-split-view.html ↗</span></div><span class="card-tag tag-ipad">iPad</span></div>
+      </a>
+    </div>
+  </div>
+
+  <div class="bottom-spacer"></div>
+</body>
+</html>

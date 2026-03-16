@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=390, initial-scale=1.0" />
+  <title>Ymusic – Empty Library</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { background: #000; display: flex; justify-content: center; align-items: center; min-height: 100vh; font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Helvetica Neue', sans-serif; }
+    .phone { width: 390px; height: 844px; background: #0D0D0D; border-radius: 44px; overflow: hidden; display: flex; flex-direction: column; box-shadow: 0 40px 120px rgba(0,0,0,0.8); }
+    .status-bar { height: 44px; padding: 14px 24px 0; display: flex; align-items: center; justify-content: space-between; flex-shrink: 0; }
+    .status-time { font-size: 15px; font-weight: 600; color: #FFFFFF; }
+    .status-icons { display: flex; align-items: center; gap: 6px; }
+    .page-header { padding: 12px 20px 8px; flex-shrink: 0; }
+    .page-title { font-size: 28px; font-weight: 700; color: #FFFFFF; letter-spacing: -0.5px; }
+    .filter-tabs { padding: 0 20px 4px; display: flex; gap: 8px; flex-shrink: 0; }
+    .filter-tab { height: 32px; padding: 0 16px; border-radius: 20px; background: #1C1C1E; border: none; font-size: 13px; font-weight: 600; color: #9CA3AF; cursor: pointer; font-family: inherit; }
+    .filter-tab.active { background: #7C3AED; color: #FFFFFF; }
+    /* Empty state */
+    .empty-area { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; padding: 0 40px; }
+    .empty-icon { width: 64px; height: 64px; display: flex; align-items: center; justify-content: center; }
+    .empty-title { font-size: 18px; font-weight: 700; color: #FFFFFF; text-align: center; }
+    .empty-subtitle { font-size: 14px; color: #6B7280; text-align: center; line-height: 1.5; }
+    .explore-btn { margin-top: 8px; height: 44px; padding: 0 28px; border-radius: 24px; background: #7C3AED; border: none; color: #FFFFFF; font-size: 15px; font-weight: 600; cursor: pointer; font-family: inherit; }
+  </style>
+</head>
+<body>
+  <div class="phone" data-widget="Scaffold">
+    <div class="status-bar" data-widget="SafeArea">
+      <span class="status-time">9:41</span>
+      <div class="status-icons">
+        <svg width="16" height="12" viewBox="0 0 16 12" fill="white"><path d="M8 9.5a1.5 1.5 0 100 3 1.5 1.5 0 000-3zM1.5 4.5a9 9 0 0113 0l-1.5 1.5a7 7 0 00-10 0L1.5 4.5zM4.5 7.5a5 5 0 017 0l-1.5 1.5a3 3 0 00-4 0L4.5 7.5zM.5 1.5A12 12 0 0115.5 1.5L14 3A10 10 0 002 3L.5 1.5z"/></svg>
+        <svg width="20" height="12" viewBox="0 0 20 12" fill="none"><rect x="0.5" y="0.5" width="16" height="11" rx="2.5" stroke="white" stroke-opacity="0.35"/><rect x="2" y="2" width="11" height="8" rx="1.5" fill="white"/><path d="M17.5 4v4a1.5 1.5 0 000-4z" fill="white" fill-opacity="0.4"/></svg>
+      </div>
+    </div>
+    <div class="page-header"><h1 class="page-title" data-widget="Text" data-style="headlineLarge">Library</h1></div>
+    <div class="filter-tabs" data-widget="SingleChildScrollView" data-scroll="horizontal">
+      <button class="filter-tab active" data-widget="FilterChip" data-on-tap="switchLibraryTab">Liked</button>
+    </div>
+    <div class="empty-area" data-widget="EmptyStateWidget">
+      <div class="empty-icon">
+        <svg width="52" height="48" viewBox="0 0 52 48" fill="none">
+          <path d="M26 44S4 31 4 15A11 11 0 0126 9.5 11 11 0 0148 15c0 16-22 29-22 29z" stroke="#4B5563" stroke-width="3" fill="none"/>
+        </svg>
+      </div>
+      <div class="empty-title">No liked songs yet</div>
+      <div class="empty-subtitle">Songs you heart will appear here</div>
+      <button class="explore-btn" data-widget="ElevatedButton" data-on-tap="navigateToSearch" onclick="location.href='search.html'">Explore Music</button>
+    </div>
+  </div>
+</body>
+</html>

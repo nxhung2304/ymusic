@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=390, initial-scale=1.0" />
+  <title>Ymusic – Empty Search</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { background: #000; display: flex; justify-content: center; align-items: center; min-height: 100vh; font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Helvetica Neue', sans-serif; }
+    .phone { width: 390px; height: 844px; background: #0D0D0D; border-radius: 44px; overflow: hidden; display: flex; flex-direction: column; box-shadow: 0 40px 120px rgba(0,0,0,0.8); }
+    .status-bar { height: 44px; padding: 14px 24px 0; display: flex; align-items: center; justify-content: space-between; flex-shrink: 0; }
+    .status-time { font-size: 15px; font-weight: 600; color: #FFFFFF; }
+    .status-icons { display: flex; align-items: center; gap: 6px; }
+    .search-bar-wrap { padding: 12px 20px; flex-shrink: 0; }
+    .search-bar { background: #1C1C1E; border-radius: 12px; height: 44px; display: flex; align-items: center; gap: 10px; padding: 0 14px; border: 1px solid rgba(255,255,255,0.06); }
+    .search-input { flex: 1; background: none; border: none; outline: none; font-size: 15px; color: #FFFFFF; font-family: inherit; }
+    .clear-btn { width: 18px; height: 18px; background: #4B5563; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; flex-shrink: 0; }
+    /* Empty state */
+    .empty-area { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; padding: 0 40px; }
+    .empty-icon { width: 64px; height: 64px; display: flex; align-items: center; justify-content: center; opacity: 0.4; }
+    .empty-title { font-size: 18px; font-weight: 700; color: #FFFFFF; text-align: center; }
+    .empty-subtitle { font-size: 14px; color: #6B7280; text-align: center; line-height: 1.5; }
+  </style>
+</head>
+<body>
+  <div class="phone" data-widget="Scaffold">
+    <div class="status-bar" data-widget="SafeArea">
+      <span class="status-time">9:41</span>
+      <div class="status-icons">
+        <svg width="16" height="12" viewBox="0 0 16 12" fill="white"><path d="M8 9.5a1.5 1.5 0 100 3 1.5 1.5 0 000-3zM1.5 4.5a9 9 0 0113 0l-1.5 1.5a7 7 0 00-10 0L1.5 4.5zM4.5 7.5a5 5 0 017 0l-1.5 1.5a3 3 0 00-4 0L4.5 7.5zM.5 1.5A12 12 0 0115.5 1.5L14 3A10 10 0 002 3L.5 1.5z"/></svg>
+        <svg width="20" height="12" viewBox="0 0 20 12" fill="none"><rect x="0.5" y="0.5" width="16" height="11" rx="2.5" stroke="white" stroke-opacity="0.35"/><rect x="2" y="2" width="11" height="8" rx="1.5" fill="white"/><path d="M17.5 4v4a1.5 1.5 0 000-4z" fill="white" fill-opacity="0.4"/></svg>
+      </div>
+    </div>
+    <div class="search-bar-wrap" data-widget="Padding">
+      <div class="search-bar" data-widget="SearchBar" data-provider="searchProvider">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="7" cy="7" r="5" stroke="#6B7280" stroke-width="1.5"/><path d="M11 11l3 3" stroke="#6B7280" stroke-width="1.5" stroke-linecap="round"/></svg>
+        <input class="search-input" type="text" value="jazz piano" readonly />
+        <div class="clear-btn">
+          <svg width="8" height="8" viewBox="0 0 8 8" fill="none"><path d="M1 1l6 6M7 1L1 7" stroke="white" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </div>
+      </div>
+    </div>
+    <div class="empty-area" data-widget="EmptyStateWidget" data-state="empty">
+      <div class="empty-icon">
+        <svg width="64" height="64" viewBox="0 0 64 64" fill="none">
+          <circle cx="28" cy="28" r="20" stroke="#9CA3AF" stroke-width="3"/>
+          <path d="M44 44l14 14" stroke="#9CA3AF" stroke-width="3" stroke-linecap="round"/>
+          <path d="M20 28h16M28 20v16" stroke="#9CA3AF" stroke-width="2.5" stroke-linecap="round"/>
+          <circle cx="28" cy="28" r="20" stroke="#9CA3AF" stroke-width="3"/>
+          <line x1="20" y1="20" x2="36" y2="36" stroke="#9CA3AF" stroke-width="2.5" stroke-linecap="round"/>
+          <line x1="36" y1="20" x2="20" y2="36" stroke="#9CA3AF" stroke-width="2.5" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <div class="empty-title">No results for "jazz piano"</div>
+      <div class="empty-subtitle">Try different keywords or check for typos</div>
+    </div>
+  </div>
+</body>
+</html>

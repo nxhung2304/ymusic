@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=390, initial-scale=1.0" />
+  <title>Ymusic – Network Error</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { background: #000; display: flex; justify-content: center; align-items: center; min-height: 100vh; font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Helvetica Neue', sans-serif; }
+    .phone { width: 390px; height: 844px; background: #0D0D0D; border-radius: 44px; overflow: hidden; display: flex; flex-direction: column; box-shadow: 0 40px 120px rgba(0,0,0,0.8); }
+    .status-bar { height: 44px; padding: 14px 24px 0; display: flex; align-items: center; justify-content: space-between; flex-shrink: 0; }
+    .status-time { font-size: 15px; font-weight: 600; color: #FFFFFF; }
+    .spacer-top { flex: 1; }
+    .error-body { padding: 0 48px; display: flex; flex-direction: column; align-items: center; gap: 12px; }
+    .error-icon { width: 80px; height: 80px; border-radius: 50%; background: #1C1C1E; display: flex; align-items: center; justify-content: center; margin-bottom: 8px; }
+    .error-title { font-size: 20px; font-weight: 700; color: #FFFFFF; text-align: center; }
+    .error-subtitle { font-size: 14px; color: #6B7280; text-align: center; line-height: 1.5; }
+    .retry-btn { margin-top: 8px; height: 48px; padding: 0 40px; border-radius: 24px; background: #7C3AED; border: none; color: #FFFFFF; font-size: 16px; font-weight: 600; cursor: pointer; font-family: inherit; }
+    .spacer-bottom { flex: 1; }
+  </style>
+</head>
+<body>
+  <div class="phone" data-widget="Scaffold">
+    <div class="status-bar" data-widget="SafeArea">
+      <span class="status-time">9:41</span>
+    </div>
+    <div class="spacer-top"></div>
+    <div class="error-body" data-widget="EmptyStateWidget" data-state="error">
+      <div class="error-icon">
+        <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
+          <path d="M6 14a20 20 0 0128 0" stroke="#4B5563" stroke-width="2.5" stroke-linecap="round"/>
+          <path d="M11 19a13 13 0 0118 0" stroke="#4B5563" stroke-width="2.5" stroke-linecap="round"/>
+          <path d="M16 24a6 6 0 018 0" stroke="#4B5563" stroke-width="2.5" stroke-linecap="round"/>
+          <circle cx="20" cy="30" r="2.5" fill="#4B5563"/>
+          <line x1="8" y1="8" x2="32" y2="32" stroke="#4B5563" stroke-width="2.5" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <div class="error-title">No Internet Connection</div>
+      <div class="error-subtitle">Check your connection and try again</div>
+      <button class="retry-btn" data-widget="ElevatedButton" data-on-tap="retryConnection" onclick="history.back()">Try Again</button>
+    </div>
+    <div class="spacer-bottom"></div>
+  </div>
+</body>
+</html>

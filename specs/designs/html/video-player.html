@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=390, initial-scale=1.0" />
+  <title>Ymusic – Video Player</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { background: #000; display: flex; justify-content: center; align-items: center; min-height: 100vh; font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Helvetica Neue', sans-serif; }
+    .phone { width: 390px; height: 844px; background: #000000; border-radius: 44px; overflow: hidden; display: flex; flex-direction: column; box-shadow: 0 40px 120px rgba(0,0,0,0.8); }
+    .status-bar { height: 44px; padding: 14px 24px 0; display: flex; align-items: center; justify-content: space-between; flex-shrink: 0; }
+    .status-time { font-size: 15px; font-weight: 600; color: #FFFFFF; }
+    .status-icons { display: flex; align-items: center; gap: 6px; }
+    .top-nav { padding: 4px 16px 0; display: flex; align-items: center; justify-content: space-between; flex-shrink: 0; }
+    .nav-btn { width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; cursor: pointer; }
+    /* Video area */
+    .video-area {
+      width: 390px;
+      height: 220px;
+      background: #000;
+      flex-shrink: 0;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .video-glow {
+      position: absolute;
+      width: 120px;
+      height: 120px;
+      background: radial-gradient(circle, rgba(80,20,140,0.5) 0%, transparent 70%);
+      border-radius: 50%;
+    }
+    .pause-circle {
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.12);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      z-index: 1;
+    }
+    /* Progress bar */
+    .video-progress { height: 3px; background: rgba(255,255,255,0.1); flex-shrink: 0; position: relative; }
+    .video-progress-fill { height: 100%; width: 44%; background: linear-gradient(90deg, #7C3AED, #A855F7); }
+    /* Controls row */
+    .controls-row {
+      padding: 8px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-shrink: 0;
+    }
+    .time-label { font-size: 12px; color: #6B7280; }
+    .audio-badge {
+      background: rgba(124, 58, 237, 0.2);
+      border: 1px solid rgba(124, 58, 237, 0.4);
+      border-radius: 12px;
+      padding: 3px 10px;
+      font-size: 11px;
+      color: #A78BFA;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+    /* Song info */
+    .song-info { padding: 16px 20px 0; flex-shrink: 0; }
+    .song-title { font-size: 20px; font-weight: 700; color: #FFFFFF; }
+    .song-artist { font-size: 14px; color: #9CA3AF; margin-top: 4px; }
+    /* Spacer */
+    .spacer { flex: 1; }
+  </style>
+</head>
+<body>
+  <div class="phone" data-widget="Scaffold">
+    <div class="status-bar" data-widget="SafeArea">
+      <span class="status-time">9:41</span>
+      <div class="status-icons">
+        <svg width="16" height="12" viewBox="0 0 16 12" fill="white"><path d="M8 9.5a1.5 1.5 0 100 3 1.5 1.5 0 000-3zM1.5 4.5a9 9 0 0113 0l-1.5 1.5a7 7 0 00-10 0L1.5 4.5zM4.5 7.5a5 5 0 017 0l-1.5 1.5a3 3 0 00-4 0L4.5 7.5zM.5 1.5A12 12 0 0115.5 1.5L14 3A10 10 0 002 3L.5 1.5z"/></svg>
+        <svg width="20" height="12" viewBox="0 0 20 12" fill="none"><rect x="0.5" y="0.5" width="16" height="11" rx="2.5" stroke="white" stroke-opacity="0.35"/><rect x="2" y="2" width="11" height="8" rx="1.5" fill="white"/><path d="M17.5 4v4a1.5 1.5 0 000-4z" fill="white" fill-opacity="0.4"/></svg>
+      </div>
+    </div>
+    <div class="top-nav" data-widget="Row">
+      <div class="nav-btn" data-widget="IconButton" data-icon="keyboard_arrow_down" data-on-tap="pop" onclick="history.back()" style="cursor:pointer;"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M13 4L7 10l6 6" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div class="nav-btn"><svg width="20" height="4" viewBox="0 0 20 4" fill="white"><circle cx="2" cy="2" r="2"/><circle cx="10" cy="2" r="2"/><circle cx="18" cy="2" r="2"/></svg></div>
+    </div>
+
+    <!-- Video area -->
+    <div class="video-area" data-widget="AspectRatio" data-ratio="16:9">
+      <div class="video-glow"></div>
+      <div class="pause-circle">
+        <svg width="20" height="24" viewBox="0 0 20 24" fill="white">
+          <rect x="2" y="2" width="6" height="20" rx="2"/>
+          <rect x="12" y="2" width="6" height="20" rx="2"/>
+        </svg>
+      </div>
+    </div>
+
+    <!-- Progress bar -->
+    <div class="video-progress" data-widget="LinearProgressIndicator" data-provider="videoPlayerProvider"><div class="video-progress-fill"></div></div>
+
+    <!-- Controls -->
+    <div class="controls-row" data-widget="Row">
+      <span class="time-label">1:42</span>
+      <div class="audio-badge" data-widget="Chip">
+        <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 4h2l3-3v10L4 8H2V4z" fill="#A78BFA"/><path d="M8 3a3 3 0 010 6" stroke="#A78BFA" stroke-width="1.2" stroke-linecap="round" fill="none"/></svg>
+        Audio only
+      </div>
+      <span class="time-label">3:20</span>
+    </div>
+
+    <!-- Song info -->
+    <div class="song-info" data-widget="Column">
+      <div class="song-title" data-widget="Text" data-style="headlineSmall">Blinding Lights</div>
+      <div class="song-artist" data-widget="Text" data-style="bodyMedium">The Weeknd</div>
+    </div>
+
+    <div class="spacer"></div>
+  </div>
+</body>
+</html>

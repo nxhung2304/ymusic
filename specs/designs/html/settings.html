@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=390, initial-scale=1.0" />
+  <title>Ymusic – Settings</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { background: #000; display: flex; justify-content: center; align-items: center; min-height: 100vh; font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Helvetica Neue', sans-serif; }
+    .phone { width: 390px; height: 844px; background: #0D0D0D; border-radius: 44px; overflow: hidden; display: flex; flex-direction: column; box-shadow: 0 40px 120px rgba(0,0,0,0.8); }
+    .status-bar { height: 44px; padding: 14px 24px 0; display: flex; align-items: center; justify-content: space-between; flex-shrink: 0; }
+    .status-time { font-size: 15px; font-weight: 600; color: #FFFFFF; }
+    .status-icons { display: flex; align-items: center; gap: 6px; }
+    .page-header { padding: 12px 20px 16px; flex-shrink: 0; }
+    .page-title { font-size: 28px; font-weight: 700; color: #FFFFFF; letter-spacing: -0.5px; }
+    /* Account card */
+    .account-card { margin: 0 20px; background: #1C1C1E; border-radius: 16px; padding: 16px; display: flex; align-items: center; gap: 12px; flex-shrink: 0; }
+    .account-avatar { width: 44px; height: 44px; border-radius: 50%; background: linear-gradient(135deg, #7C3AED, #5B21B6); flex-shrink: 0; }
+    .account-info { flex: 1; min-width: 0; }
+    .account-name { font-size: 15px; font-weight: 600; color: #FFFFFF; }
+    .account-email { font-size: 12px; color: #6B7280; margin-top: 2px; }
+    .signout-btn { padding: 6px 14px; border-radius: 20px; border: 1.5px solid rgba(239,68,68,0.5); background: transparent; color: #EF4444; font-size: 13px; font-weight: 600; cursor: pointer; font-family: inherit; flex-shrink: 0; }
+    /* Settings sections */
+    .scroll-area { flex: 1; overflow-y: auto; scrollbar-width: none; padding: 20px; }
+    .scroll-area::-webkit-scrollbar { display: none; }
+    .section-label { font-size: 11px; font-weight: 600; color: #6B7280; letter-spacing: 0.8px; text-transform: uppercase; margin-bottom: 8px; margin-top: 20px; }
+    .section-label:first-child { margin-top: 0; }
+    .settings-card { background: #1C1C1E; border-radius: 16px; overflow: hidden; }
+    .setting-row { padding: 14px 16px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid rgba(255,255,255,0.05); }
+    .setting-row:last-child { border-bottom: none; }
+    .setting-left { display: flex; align-items: center; gap: 12px; }
+    .setting-icon { width: 28px; height: 28px; border-radius: 8px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .setting-icon.music { background: rgba(124, 58, 237, 0.2); }
+    .setting-icon.wave { background: rgba(59, 130, 246, 0.2); }
+    .setting-icon.download { background: rgba(16, 185, 129, 0.2); }
+    .setting-icon.trash { background: rgba(239, 68, 68, 0.2); }
+    .setting-name { font-size: 15px; color: #FFFFFF; }
+    .setting-name.danger { color: #EF4444; }
+    .setting-value { font-size: 14px; color: #6B7280; }
+    /* Toggle */
+    .toggle { width: 44px; height: 26px; border-radius: 13px; background: #7C3AED; position: relative; cursor: pointer; flex-shrink: 0; }
+    .toggle-knob { width: 22px; height: 22px; border-radius: 50%; background: #FFFFFF; position: absolute; top: 2px; right: 2px; box-shadow: 0 2px 4px rgba(0,0,0,0.3); }
+  </style>
+</head>
+<body>
+  <div class="phone" data-widget="Scaffold">
+    <div class="status-bar" data-widget="SafeArea">
+      <span class="status-time">9:41</span>
+      <div class="status-icons">
+        <svg width="16" height="12" viewBox="0 0 16 12" fill="white"><path d="M8 9.5a1.5 1.5 0 100 3 1.5 1.5 0 000-3zM1.5 4.5a9 9 0 0113 0l-1.5 1.5a7 7 0 00-10 0L1.5 4.5zM4.5 7.5a5 5 0 017 0l-1.5 1.5a3 3 0 00-4 0L4.5 7.5zM.5 1.5A12 12 0 0115.5 1.5L14 3A10 10 0 002 3L.5 1.5z"/></svg>
+        <svg width="20" height="12" viewBox="0 0 20 12" fill="none"><rect x="0.5" y="0.5" width="16" height="11" rx="2.5" stroke="white" stroke-opacity="0.35"/><rect x="2" y="2" width="11" height="8" rx="1.5" fill="white"/><path d="M17.5 4v4a1.5 1.5 0 000-4z" fill="white" fill-opacity="0.4"/></svg>
+      </div>
+    </div>
+    <div class="page-header"><h1 class="page-title" data-widget="Text" data-style="headlineLarge">Settings</h1></div>
+
+    <!-- Account card -->
+    <div class="account-card" data-widget="Card">
+      <div class="account-avatar" data-widget="CircleAvatar" data-provider="authProvider"></div>
+      <div class="account-info">
+        <div class="account-name" data-widget="Text" data-style="titleMedium">Music Lover</div>
+        <div class="account-email" data-widget="Text" data-style="bodySmall">music@gmail.com</div>
+      </div>
+      <button class="signout-btn" data-widget="OutlinedButton" data-on-tap="signOut" data-provider="authProvider">Sign out</button>
+    </div>
+
+    <!-- Scroll area -->
+    <div class="scroll-area" data-widget="ListView" data-scroll="vertical">
+      <!-- Playback section -->
+      <div class="section-label">Playback</div>
+      <div class="settings-card" data-widget="Card">
+        <div class="setting-row" data-widget="ListTile">
+          <div class="setting-left">
+            <div class="setting-icon music" data-widget="Container" data-slot="leading">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M5 11V4l8-1.5v7" stroke="#A78BFA" stroke-width="1.3" stroke-linecap="round"/><circle cx="3" cy="11" r="2" stroke="#A78BFA" stroke-width="1.3"/><circle cx="11" cy="9.5" r="2" stroke="#A78BFA" stroke-width="1.3"/></svg>
+            </div>
+            <span class="setting-name" data-widget="Text" data-style="bodyLarge" data-slot="title">Audio Quality</span>
+          </div>
+          <span class="setting-value" data-widget="Text" data-style="bodyMedium" data-slot="trailing">High</span>
+        </div>
+        <div class="setting-row" data-widget="ListTile">
+          <div class="setting-left">
+            <div class="setting-icon wave" data-widget="Container" data-slot="leading">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h2l2-4 2 8 2-6 2 4h2" stroke="#60A5FA" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <span class="setting-name" data-widget="Text" data-style="bodyLarge" data-slot="title">Normalize Volume</span>
+          </div>
+          <div class="toggle" data-widget="Switch" data-slot="trailing" data-provider="settingsProvider"><div class="toggle-knob"></div></div>
+        </div>
+      </div>
+
+      <!-- Storage section -->
+      <div class="section-label">Storage</div>
+      <div class="settings-card" data-widget="Card">
+        <div class="setting-row" data-widget="ListTile">
+          <div class="setting-left">
+            <div class="setting-icon download" data-widget="Container" data-slot="leading">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 1v8M4 6l3 3 3-3" stroke="#34D399" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/><path d="M1 10v1a2 2 0 002 2h8a2 2 0 002-2v-1" stroke="#34D399" stroke-width="1.3" stroke-linecap="round"/></svg>
+            </div>
+            <span class="setting-name" data-widget="Text" data-style="bodyLarge" data-slot="title">Download Quality</span>
+          </div>
+          <span class="setting-value" data-widget="Text" data-style="bodyMedium" data-slot="trailing">Best</span>
+        </div>
+        <div class="setting-row" data-widget="ListTile">
+          <div class="setting-left">
+            <div class="setting-icon trash" data-widget="Container" data-slot="leading">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 4h10M5 4V2.5a.5.5 0 01.5-.5h3a.5.5 0 01.5.5V4M6 6v4M8 6v4M3.5 4l.5 8h6l.5-8" stroke="#F87171" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <span class="setting-name danger" data-widget="Text" data-style="bodyLarge" data-slot="title">Clear Cache</span>
+          </div>
+          <span class="setting-value" data-widget="Text" data-style="bodyMedium" data-slot="trailing">243 MB</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

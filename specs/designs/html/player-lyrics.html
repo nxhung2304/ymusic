@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=390, initial-scale=1.0" />
+  <title>Ymusic – Player Lyrics</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background: #000;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Helvetica Neue', sans-serif;
+    }
+    .phone {
+      width: 390px;
+      height: 844px;
+      background: #08000F;
+      border-radius: 44px;
+      overflow: hidden;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 40px 120px rgba(0,0,0,0.8);
+    }
+    .phone::before {
+      content: '';
+      position: absolute;
+      top: -40px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 340px;
+      height: 300px;
+      background: radial-gradient(ellipse, rgba(60, 20, 120, 0.3) 0%, transparent 65%);
+      pointer-events: none;
+    }
+    .status-bar {
+      height: 44px;
+      padding: 14px 24px 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-shrink: 0;
+    }
+    .status-time { font-size: 15px; font-weight: 600; color: #FFFFFF; }
+    .status-icons { display: flex; align-items: center; gap: 6px; }
+
+    .top-nav {
+      padding: 8px 20px 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-shrink: 0;
+    }
+    .nav-btn { width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; cursor: pointer; }
+    .nav-title { font-size: 15px; font-weight: 600; color: #FFFFFF; }
+
+    /* Mini song bar */
+    .mini-song-bar {
+      margin: 16px 20px 0;
+      background: rgba(255,255,255,0.06);
+      border-radius: 12px;
+      padding: 10px 12px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-shrink: 0;
+    }
+    .mini-thumb {
+      width: 36px;
+      height: 36px;
+      border-radius: 6px;
+      background: linear-gradient(135deg, #3B1FA8, #7C3AED);
+      flex-shrink: 0;
+    }
+    .mini-info { flex: 1; min-width: 0; }
+    .mini-title { font-size: 13px; font-weight: 600; color: #FFFFFF; }
+    .mini-artist { font-size: 11px; color: #9CA3AF; margin-top: 2px; }
+    .mini-time { font-size: 12px; color: #6B7280; flex-shrink: 0; }
+
+    /* Lyrics scroll */
+    .lyrics-area {
+      flex: 1;
+      overflow-y: auto;
+      padding: 24px 28px 16px;
+      scrollbar-width: none;
+    }
+    .lyrics-area::-webkit-scrollbar { display: none; }
+
+    .lyric-line {
+      font-size: 15px;
+      color: rgba(255,255,255,0.35);
+      line-height: 1.8;
+      margin-bottom: 4px;
+    }
+    .lyric-line.active {
+      font-size: 18px;
+      font-weight: 700;
+      color: #FFFFFF;
+      line-height: 1.6;
+    }
+    .lyric-gap { height: 16px; }
+
+    /* Player tabs */
+    .player-tabs {
+      padding: 12px 24px 0;
+      display: flex;
+      gap: 24px;
+      flex-shrink: 0;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+    .player-tab {
+      font-size: 14px;
+      font-weight: 600;
+      color: #6B7280;
+      padding-bottom: 12px;
+      cursor: pointer;
+      position: relative;
+    }
+    .player-tab.active { color: #FFFFFF; }
+    .player-tab.active::after {
+      content: '';
+      position: absolute;
+      bottom: -1px;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: #FFFFFF;
+      border-radius: 1px;
+    }
+
+    /* Bottom safe area */
+    .safe-area { height: 32px; flex-shrink: 0; }
+  </style>
+</head>
+<body>
+  <div class="phone" data-widget="Scaffold">
+    <div class="status-bar" data-widget="SafeArea">
+      <span class="status-time">9:41</span>
+      <div class="status-icons">
+        <svg width="16" height="12" viewBox="0 0 16 12" fill="white"><path d="M8 9.5a1.5 1.5 0 100 3 1.5 1.5 0 000-3zM1.5 4.5a9 9 0 0113 0l-1.5 1.5a7 7 0 00-10 0L1.5 4.5zM4.5 7.5a5 5 0 017 0l-1.5 1.5a3 3 0 00-4 0L4.5 7.5zM.5 1.5A12 12 0 0115.5 1.5L14 3A10 10 0 002 3L.5 1.5z"/></svg>
+        <svg width="20" height="12" viewBox="0 0 20 12" fill="none"><rect x="0.5" y="0.5" width="16" height="11" rx="2.5" stroke="white" stroke-opacity="0.35"/><rect x="2" y="2" width="11" height="8" rx="1.5" fill="white"/><path d="M17.5 4v4a1.5 1.5 0 000-4z" fill="white" fill-opacity="0.4"/></svg>
+      </div>
+    </div>
+
+    <div class="top-nav" data-widget="Row">
+      <div class="nav-btn" data-widget="IconButton" data-icon="keyboard_arrow_down" data-on-tap="pop" onclick="location.href='full-player.html'" style="cursor:pointer;">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+      <span class="nav-title" data-widget="Text" data-style="titleMedium">Lyrics</span>
+      <div class="nav-btn">
+        <svg width="20" height="4" viewBox="0 0 20 4" fill="white"><circle cx="2" cy="2" r="2"/><circle cx="10" cy="2" r="2"/><circle cx="18" cy="2" r="2"/></svg>
+      </div>
+    </div>
+
+    <!-- Mini song bar -->
+    <div class="mini-song-bar" data-widget="Container" data-provider="playerProvider">
+      <div class="mini-thumb" data-widget="CachedNetworkImage" data-slot="leading"></div>
+      <div class="mini-info" data-widget="Column" data-slot="content">
+        <div class="mini-title" data-widget="Text" data-style="titleSmall">Blinding Lights</div>
+        <div class="mini-artist" data-widget="Text" data-style="bodySmall">The Weeknd</div>
+      </div>
+      <span class="mini-time">1:42</span>
+    </div>
+
+    <!-- Lyrics -->
+    <div class="lyrics-area" data-widget="ListView" data-scroll="vertical" data-provider="lyricsProvider">
+      <p class="lyric-line" data-widget="Text" data-style="bodyLarge">I been on my empty promises</p>
+      <p class="lyric-line" data-widget="Text" data-style="bodyLarge">Been on my own</p>
+      <p class="lyric-line" data-widget="Text" data-style="bodyLarge">I'm trying to find my way back home</p>
+      <div class="lyric-gap"></div>
+      <p class="lyric-line active" data-widget="Text" data-style="titleMedium" data-state="active">I said, ooh, I'm blinded by the lights</p>
+      <p class="lyric-line active" data-widget="Text" data-style="titleMedium" data-state="active">No, I can't sleep until I feel your touch</p>
+      <div class="lyric-gap"></div>
+      <p class="lyric-line" data-widget="Text" data-style="bodyLarge">I said, ooh, I'm drowning in the night</p>
+      <p class="lyric-line" data-widget="Text" data-style="bodyLarge">Oh, when I'm like this, you're the one I trust</p>
+      <div class="lyric-gap"></div>
+      <p class="lyric-line" data-widget="Text" data-style="bodyLarge">Hey, hey, hey</p>
+      <p class="lyric-line" data-widget="Text" data-style="bodyLarge">I'm running out of time</p>
+    </div>
+
+    <!-- Player tabs -->
+    <div class="player-tabs" data-widget="TabBar" data-tabs="Player,Lyrics,Queue">
+      <div class="player-tab" data-widget="Tab" onclick="location.href='full-player.html'" style="cursor:pointer;">Player</div>
+      <div class="player-tab active" data-widget="Tab">Lyrics</div>
+      <div class="player-tab" data-widget="Tab" onclick="location.href='player-queue.html'" style="cursor:pointer;">Queue</div>
+    </div>
+
+    <div class="safe-area"></div>
+  </div>
+</body>
+</html>

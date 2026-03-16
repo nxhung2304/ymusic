@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=390, initial-scale=1.0" />
+  <title>Ymusic – Full Player Screen</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: #000;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Helvetica Neue', sans-serif;
+    }
+
+    .phone {
+      width: 390px;
+      height: 844px;
+      background: #0A000F;
+      border-radius: 44px;
+      overflow: hidden;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 40px 120px rgba(0,0,0,0.8);
+    }
+
+    /* Subtle purple glow background */
+    .phone::before {
+      content: '';
+      position: absolute;
+      top: -80px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 400px;
+      height: 500px;
+      background: radial-gradient(ellipse, rgba(80, 20, 140, 0.35) 0%, transparent 65%);
+      pointer-events: none;
+    }
+
+    /* Status bar */
+    .status-bar {
+      height: 44px;
+      padding: 14px 24px 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-shrink: 0;
+      position: relative;
+      z-index: 1;
+    }
+
+    .status-time {
+      font-size: 15px;
+      font-weight: 600;
+      color: #FFFFFF;
+    }
+
+    .status-icons {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* Top nav */
+    .top-nav {
+      padding: 8px 20px 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-shrink: 0;
+      position: relative;
+      z-index: 1;
+    }
+
+    .nav-btn {
+      width: 36px;
+      height: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+    }
+
+    .nav-title {
+      font-size: 15px;
+      font-weight: 600;
+      color: #FFFFFF;
+      letter-spacing: 0.1px;
+    }
+
+    /* Album art */
+    .album-art-wrap {
+      padding: 20px 28px 0;
+      flex-shrink: 0;
+      position: relative;
+      z-index: 1;
+    }
+
+    .album-art {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      border-radius: 16px;
+      background: linear-gradient(135deg, #1A0B2E 0%, #2D1B45 30%, #4A1070 55%, #6B2199 75%, #8B3CC4 90%, #A855F7 100%);
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 20px 60px rgba(100, 20, 180, 0.5);
+    }
+
+    /* Album art decorative lines */
+    .album-art::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: repeating-linear-gradient(
+        -30deg,
+        transparent 0px,
+        transparent 12px,
+        rgba(160, 80, 240, 0.15) 12px,
+        rgba(160, 80, 240, 0.15) 14px
+      );
+    }
+
+    .album-art::after {
+      content: 'ECHOES IN THE VOID';
+      position: absolute;
+      bottom: 20px;
+      left: 0;
+      right: 0;
+      text-align: center;
+      font-size: 11px;
+      font-weight: 700;
+      color: rgba(255,255,255,0.7);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    /* Song info */
+    .song-info {
+      padding: 20px 24px 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-shrink: 0;
+      position: relative;
+      z-index: 1;
+    }
+
+    .song-text { flex: 1; }
+
+    .song-title {
+      font-size: 22px;
+      font-weight: 700;
+      color: #FFFFFF;
+      letter-spacing: -0.3px;
+    }
+
+    .song-artist {
+      font-size: 15px;
+      color: #9CA3AF;
+      margin-top: 4px;
+    }
+
+    .heart-btn {
+      width: 36px;
+      height: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+    }
+
+    /* Progress */
+    .progress-section {
+      padding: 16px 24px 0;
+      flex-shrink: 0;
+      position: relative;
+      z-index: 1;
+    }
+
+    .progress-bar {
+      width: 100%;
+      height: 4px;
+      background: rgba(255,255,255,0.15);
+      border-radius: 2px;
+      position: relative;
+      cursor: pointer;
+    }
+
+    .progress-fill {
+      width: 44%;
+      height: 100%;
+      background: linear-gradient(90deg, #7C3AED, #A855F7);
+      border-radius: 2px;
+      position: relative;
+    }
+
+    .progress-thumb {
+      position: absolute;
+      right: -6px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 12px;
+      height: 12px;
+      background: #FFFFFF;
+      border-radius: 50%;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.4);
+    }
+
+    .time-row {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 8px;
+    }
+
+    .time-label {
+      font-size: 12px;
+      color: #6B7280;
+    }
+
+    /* Controls */
+    .controls {
+      padding: 20px 24px 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-shrink: 0;
+      position: relative;
+      z-index: 1;
+    }
+
+    .ctrl-btn {
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+    }
+
+    .ctrl-btn svg { fill: #9CA3AF; }
+
+    .play-btn {
+      width: 64px;
+      height: 64px;
+      background: #7C3AED;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 8px 24px rgba(124, 58, 237, 0.5);
+    }
+
+    .play-btn svg { fill: #FFFFFF; }
+
+    /* Extra controls row */
+    .extra-controls {
+      padding: 16px 24px 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-shrink: 0;
+      position: relative;
+      z-index: 1;
+    }
+
+    .extra-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+    }
+
+    /* Bottom tabs */
+    .player-tabs {
+      padding: 20px 24px 0;
+      display: flex;
+      gap: 24px;
+      flex-shrink: 0;
+      position: relative;
+      z-index: 1;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .player-tab {
+      font-size: 14px;
+      font-weight: 600;
+      color: #6B7280;
+      padding-bottom: 12px;
+      cursor: pointer;
+      position: relative;
+    }
+
+    .player-tab.active {
+      color: #FFFFFF;
+    }
+
+    .player-tab.active::after {
+      content: '';
+      position: absolute;
+      bottom: -1px;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: #FFFFFF;
+      border-radius: 1px;
+    }
+  </style>
+</head>
+<body>
+  <div class="phone" data-widget="Scaffold">
+    <!-- Status bar -->
+    <div class="status-bar" data-widget="SafeArea">
+      <span class="status-time">9:41</span>
+      <div class="status-icons">
+        <svg width="16" height="12" viewBox="0 0 16 12" fill="white">
+          <path d="M8 9.5a1.5 1.5 0 100 3 1.5 1.5 0 000-3zM1.5 4.5a9 9 0 0113 0l-1.5 1.5a7 7 0 00-10 0L1.5 4.5zM4.5 7.5a5 5 0 017 0l-1.5 1.5a3 3 0 00-4 0L4.5 7.5zM.5 1.5A12 12 0 0115.5 1.5L14 3A10 10 0 002 3L.5 1.5z" fill-rule="evenodd"/>
+        </svg>
+        <svg width="20" height="12" viewBox="0 0 20 12" fill="none">
+          <rect x="0.5" y="0.5" width="16" height="11" rx="2.5" stroke="white" stroke-opacity="0.35"/>
+          <rect x="2" y="2" width="11" height="8" rx="1.5" fill="white"/>
+          <path d="M17.5 4v4a1.5 1.5 0 000-4z" fill="white" fill-opacity="0.4"/>
+        </svg>
+      </div>
+    </div>
+
+    <!-- Top nav -->
+    <div class="top-nav" data-widget="Row">
+      <div class="nav-btn" data-widget="IconButton" data-icon="keyboard_arrow_down" data-on-tap="pop" onclick="history.back()" style="cursor:pointer;">
+        <!-- Chevron down -->
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+          <path d="M6 9l6 6 6-6" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <span class="nav-title" data-widget="Text" data-style="titleMedium">Now Playing</span>
+      <div class="nav-btn">
+        <!-- Three dots -->
+        <svg width="20" height="4" viewBox="0 0 20 4" fill="white">
+          <circle cx="2" cy="2" r="2"/>
+          <circle cx="10" cy="2" r="2"/>
+          <circle cx="18" cy="2" r="2"/>
+        </svg>
+      </div>
+    </div>
+
+    <!-- Album art -->
+    <div class="album-art-wrap" data-widget="Padding">
+      <div class="album-art" data-widget="ClipRRect" data-provider="playerProvider"></div>
+    </div>
+
+    <!-- Song info -->
+    <div class="song-info" data-widget="Row">
+      <div class="song-text" data-widget="Column">
+        <div class="song-title" data-widget="Text" data-style="headlineSmall">Blinding Lights</div>
+        <div class="song-artist" data-widget="Text" data-style="bodyMedium">The Weeknd</div>
+      </div>
+      <div class="heart-btn" data-widget="IconButton" data-icon="favorite_border" data-provider="likedSongsProvider">
+        <svg width="22" height="20" viewBox="0 0 22 20" fill="none">
+          <path d="M11 18S1 11.5 1 5.5A5 5 0 0111 3.07 5 5 0 0121 5.5c0 6-10 12.5-10 12.5z" stroke="#EF4444" stroke-width="1.8" fill="none"/>
+        </svg>
+      </div>
+    </div>
+
+    <!-- Progress -->
+    <div class="progress-section" data-widget="Column" data-provider="playerProvider">
+      <div class="progress-bar" data-widget="Slider" data-provider="playerProvider">
+        <div class="progress-fill">
+          <div class="progress-thumb"></div>
+        </div>
+      </div>
+      <div class="time-row" data-widget="Row">
+        <span class="time-label" data-widget="Text" data-style="labelSmall">1:42</span>
+        <span class="time-label" data-widget="Text" data-style="labelSmall">3:20</span>
+      </div>
+    </div>
+
+    <!-- Controls -->
+    <div class="controls" data-widget="Row" data-provider="playerProvider">
+      <!-- Shuffle -->
+      <div class="ctrl-btn" data-widget="IconButton" data-icon="shuffle">
+        <svg width="22" height="18" viewBox="0 0 22 18" fill="none">
+          <path d="M1 4h3.5a5 5 0 014 2l5 6a5 5 0 004 2H21M17 1l4 3-4 3M1 14h3.5a5 5 0 004-2l1-1.5M17 11l4 3-4 3" stroke="#9CA3AF" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+
+      <!-- Prev -->
+      <div class="ctrl-btn" data-widget="IconButton" data-icon="skip_previous">
+        <svg width="26" height="22" viewBox="0 0 26 22" fill="#FFFFFF">
+          <path d="M5 3v16M22 3L10 11l12 8V3z"/>
+        </svg>
+      </div>
+
+      <!-- Play/Pause -->
+      <div class="play-btn" data-widget="IconButton" data-icon="pause_circle_filled" data-on-tap="togglePlayPause">
+        <!-- Pause icon -->
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="white">
+          <rect x="6" y="4" width="4" height="16" rx="2"/>
+          <rect x="14" y="4" width="4" height="16" rx="2"/>
+        </svg>
+      </div>
+
+      <!-- Next -->
+      <div class="ctrl-btn" data-widget="IconButton" data-icon="skip_next">
+        <svg width="26" height="22" viewBox="0 0 26 22" fill="#FFFFFF">
+          <path d="M21 3v16M4 3l12 8-12 8V3z"/>
+        </svg>
+      </div>
+
+      <!-- Repeat -->
+      <div class="ctrl-btn" data-widget="IconButton" data-icon="repeat">
+        <svg width="22" height="18" viewBox="0 0 22 18" fill="none">
+          <path d="M17 1l4 3-4 3M1 5h16a4 4 0 014 4M5 17l-4-3 4-3M21 13H5a4 4 0 01-4-4" stroke="#9CA3AF" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+    </div>
+
+    <!-- Extra controls -->
+    <div class="extra-controls" data-widget="Row">
+      <!-- Queue / list -->
+      <div class="extra-btn">
+        <svg width="22" height="18" viewBox="0 0 22 18" fill="none">
+          <path d="M1 1h14M1 6h14M1 11h8" stroke="#9CA3AF" stroke-width="1.6" stroke-linecap="round"/>
+          <path d="M17 12l4 3-4 3V12z" fill="#9CA3AF"/>
+        </svg>
+      </div>
+
+      <!-- Mic / lyrics -->
+      <div class="extra-btn">
+        <svg width="18" height="22" viewBox="0 0 18 22" fill="none">
+          <rect x="5" y="1" width="8" height="12" rx="4" stroke="#9CA3AF" stroke-width="1.6"/>
+          <path d="M1 10a8 8 0 0016 0M9 18v4" stroke="#9CA3AF" stroke-width="1.6" stroke-linecap="round"/>
+        </svg>
+      </div>
+    </div>
+
+    <!-- Player tabs -->
+    <div class="player-tabs" data-widget="TabBar" data-tabs="Player,Lyrics,Queue">
+      <div class="player-tab active" data-widget="Tab">Player</div>
+      <div class="player-tab" data-widget="Tab" onclick="location.href='player-lyrics.html'" style="cursor:pointer;">Lyrics</div>
+      <div class="player-tab" data-widget="Tab" onclick="location.href='player-queue.html'" style="cursor:pointer;">Queue</div>
+    </div>
+  </div>
+</body>
+</html>
