@@ -3,11 +3,11 @@
 ## 1. Tổng quan
 
 **Tên app:** Ymusic
-**Nền tảng:** Android & iOS (Flutter)  
-**Mục đích:** App nghe nhạc cá nhân, stream audio từ YouTube, không quảng cáo  
-**Người dùng:** Cá nhân, không publish store  
+**Nền tảng:** iOS (Flutter)
+**Mục đích:** App nghe nhạc cá nhân, stream audio từ YouTube, không quảng cáo
+**Người dùng:** Cá nhân, không publish store
 **Thiết bị:** iPhone + iPad (sync đa thiết bị)
-Ngôn ngữ: hỗ trợ tiếng Anh / tiếng Việt 
+Ngôn ngữ: hỗ trợ tiếng Anh / tiếng Việt
 
 ---
 
@@ -22,6 +22,7 @@ Ngôn ngữ: hỗ trợ tiếng Anh / tiếng Việt
 - Nghe offline (tải về)
 - Xem lyrics real-time
 - Xem video và nghe podcast
+- Deep link support (`ymusic://`) để share bài hát / podcast
 
 ---
 
@@ -69,10 +70,12 @@ Ngôn ngữ: hỗ trợ tiếng Anh / tiếng Việt
 - [ ] Sync data tự động khi đăng nhập cùng account trên iPad/iPhone
 - [ ] Đăng xuất
 
-### 4.2 Tìm kiếm
+### 4.2 Tìm kiếm & Deep Link
 - [ ] Thanh tìm kiếm bài hát / nghệ sĩ / album
 - [ ] Hiển thị kết quả: thumbnail, tên bài, tên kênh, thời lượng
 - [ ] Tìm kiếm gợi ý (autocomplete)
+- [ ] Deep link `ymusic://player?videoId=xxx` → phát trực tiếp
+- [ ] Deep link `ymusic://podcast/:encodedFeedUrl` → mở podcast
 
 ### 4.3 Phát nhạc
 - [ ] Stream audio (không video) từ YouTube
@@ -125,35 +128,29 @@ Ngôn ngữ: hỗ trợ tiếng Anh / tiếng Việt
 - [ ] Full screen player với lyrics tab
 - [ ] Dark mode mặc định
 - [ ] Hiệu ứng blur / glassmorphism cho player
-- [ ] Adaptive layout cho iPad (split view)
+- [ ] **Adaptive layout cho iPad:** Split-view (Library sidebar persistent + Player panel) để tận dụng screen size lớn
 
 ---
 
-## 5. Màn hình chính
+## 5. Routing Map
 
 ```
-├── Splash Screen
-├── Login Screen (Google Sign In)
-├── Home Screen
-│   ├── Recently played
-│   └── Recommended (dựa theo lịch sử)
-├── Search Screen
-│   ├── Search bar
-│   └── Search results list
-├── Library Screen
-│   ├── Liked songs
-│   ├── Recent history
-│   ├── My playlists
-│   ├── Downloaded songs
-│   └── Podcasts
-├── Playlist Detail Screen
-├── Now Playing Screen (Full player)
-│   ├── Tab: Player
-│   ├── Tab: Lyrics
-│   └── Tab: Queue
-├── Video Player Screen
-├── Podcast Screen
-└── Settings Screen
+Routes theo go_router:
+/                          → SplashScreen (check auth, redirect)
+/login                     → LoginScreen (public)
+/home (ShellRoute)         → AppShell (BottomNav persistent)
+  ├── /home               → HomeScreen (tab 0)
+  ├── /search             → SearchScreen (tab 1)
+  └── /library            → LibraryScreen (tab 2)
+/player                    → FullPlayerScreen (push over shell)
+/video/:videoId            → VideoPlayerScreen (push)
+/playlist/:playlistId      → PlaylistDetailScreen (push)
+/podcast/:encodedFeedUrl   → PodcastDetailScreen (push)
+/settings                  → SettingsScreen (push)
+
+Deep Link Routes:
+ymusic://player?videoId=xxx        → /player?videoId=xxx
+ymusic://podcast/:encodedFeedUrl   → /podcast/:encodedFeedUrl
 ```
 
 ---
@@ -169,6 +166,7 @@ Tất cả services phải wrap logic trong try-catch và trả về kết quả
 | Firestore offline | Đọc từ Isar local, sync lại khi có mạng |
 | Download thất bại | Xóa file partial, hiện thông báo lỗi |
 | Lyrics không tìm thấy | Ẩn tab lyrics, không crash |
+| Deep link invalid | Validate route tồn tại + validate params (videoId, playlistId) trước load data |
 
 ---
 
@@ -214,44 +212,24 @@ lib/
 ├── app.dart
 ├── core/
 │   ├── constants/
+│   ├── router/
 │   ├── theme/
 │   └── utils/
-├── data/
-│   ├── models/
-│   │   ├── song.dart
-│   │   ├── playlist.dart
-│   │   ├── podcast.dart
-│   │   └── lyrics.dart
-│   ├── repositories/
-│   │   ├── music_repository.dart
-│   │   ├── playlist_repository.dart
-│   │   └── podcast_repository.dart
-│   └── services/
-│       ├── auth_service.dart
-│       ├── youtube_service.dart
-│       ├── audio_service.dart
-│       ├── firestore_service.dart
-│       ├── lyrics_service.dart
-│       ├── download_service.dart
-│       └── podcast_service.dart
-├── presentation/
-│   ├── screens/
-│   │   ├── home/
-│   │   ├── search/
-│   │   ├── library/
-│   │   ├── player/
-│   │   ├── video/
-│   │   ├── podcast/
-│   │   └── auth/
+├── features/
+│   ├── auth/
+│   │   ├── data/
+│   │   ├── domain/
+│   │   └── presentation/
+│   ├── search/
+│   ├── player/
+│   ├── library/
+│   └── ...
+├── shared/
 │   ├── widgets/
-│   │   ├── mini_player.dart
-│   │   ├── song_tile.dart
-│   │   ├── playlist_card.dart
-│   │   ├── lyrics_view.dart
-│   │   └── download_button.dart
-│   └── providers/
-└── router/
-    └── app_router.dart  ← dùng go_router
+│   ├── models/
+│   └── services/
+└── config/
+    └── firebase/
 ```
 
 ---
@@ -271,8 +249,9 @@ lib/
 11. **Download offline** — tải + phát local
 12. **Video playback**
 13. **Podcast**
-14. **iPad adaptive layout**
-15. **Polish** — animation, dark mode, UX
+14. **iPad adaptive layout** — split-view UI, responsive components
+15. **Deep Link setup** — ymusic:// scheme, URL validation
+16. **Polish** — animation, dark mode, UX
 
 ---
 
@@ -285,6 +264,8 @@ lib/
 - Firebase Firestore free tier (Spark plan) đủ dùng cá nhân: 50,000 reads / 20,000 writes mỗi ngày
 - `lrclib.net` hoàn toàn miễn phí, không cần API key
 - **iOS Background Audio:** Cần bật entitlement `Audio, AirPlay, and Picture in Picture` trong Xcode → Signing & Capabilities, và set `UIBackgroundModes: audio` trong Info.plist
+- **Deep Link Setup (iOS):** Thêm URL scheme `ymusic` vào `ios/Runner/Info.plist` (AppDelegate)
+- **Deep Link Security:** GoRouter validate route tồn tại, nhưng app layer PHẢI validate params (`videoId`, `playlistId`, `encodedFeedUrl`) trước khi fetch data
 - **Firebase Security Rules:** Chỉ cho phép user đọc/ghi data của chính mình. Rule cơ bản:
 ```
 rules_version = '2';
