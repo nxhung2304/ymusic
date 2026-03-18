@@ -36,7 +36,7 @@ features/[feature]/presentation/providers/
 class AuthState with _$AuthState {
   const factory AuthState.initial()                   = _Initial;
   const factory AuthState.loading()                   = _Loading;
-  const factory AuthState.success(UserEntity user)    = _Success;
+  const factory AuthState.success(User user)    = _Success;
   const factory AuthState.error(String message)       = _Error;
 }
 ```
@@ -66,7 +66,7 @@ class AuthNotifier extends _$AuthNotifier {
 
 ## DI Providers (in same file as Notifier)
 
-Wire from datasource → repository → usecase in the same `_provider.dart` file.
+Wire from datasource → repository in the same `_provider.dart` file. Add a usecase provider only when business logic exists.
 
 ```dart
 @riverpod
@@ -136,7 +136,7 @@ return state.when(
 ## Rules
 
 1. **State is always immutable** — use `freezed`, never mutate fields directly
-2. **Notifier only calls usecases** — never calls repository or datasource directly
+2. **Notifier calls usecases when business logic exists** — if the action is a simple pass-through (no validation, transformation, or orchestration), the notifier may call the repository directly; a usecase is not required in that case
 3. **DI providers stay in `[feature]_provider.dart`** — co-locate with the notifier
 4. **One notifier per feature screen/flow** — don't share notifier across unrelated screens
 5. **Never use `ref.watch` outside `build()`** — use `ref.read` in event handlers

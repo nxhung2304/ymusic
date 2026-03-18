@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -31,13 +32,25 @@ class AppRoutes {
   static const settings = '/settings';
 }
 
+/// Simple ChangeNotifier used as a Listenable bridge for GoRouter
+class _AuthRouterNotifier extends ChangeNotifier {
+  void notify() => notifyListeners();
+}
+
 /// Router provider using Riverpod
-@riverpod
+@Riverpod(keepAlive: true)
 GoRouter router(Ref ref) {
-  final authState = ref.watch(authStateProvider);
+  final notifier = _AuthRouterNotifier();
+  ref.onDispose(notifier.dispose);
+
+  // ref.listen must be called in the provider body, not inside a class constructor
+  ref.listen(authStateProvider, (_, __) => notifier.notify());
 
   return GoRouter(
+    refreshListenable: notifier,
     redirect: (context, state) {
+      final authState = ref.read(authStateProvider);
+
       // If still loading → no redirect
       if (authState.isLoading) return null;
 
@@ -141,8 +154,13 @@ String? _handleRedirect(User? user, String currentPath) {
   final isAuthRoute = _isAuthRoute(currentPath);
   final isPublicRoute = _isPublicRoute(currentPath);
 
-  // If user is logged in but at login/splash → redirect to home
-  if (isLoggedIn && (currentPath == AppRoutes.root || currentPath == AppRoutes.login)) {
+  // Always leave splash once auth state is known
+  if (currentPath == AppRoutes.root) {
+    return isLoggedIn ? AppRoutes.home : AppRoutes.login;
+  }
+
+  // If user is logged in but still at login → redirect to home
+  if (isLoggedIn && currentPath == AppRoutes.login) {
     return AppRoutes.home;
   }
 

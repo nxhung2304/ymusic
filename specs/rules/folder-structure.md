@@ -64,10 +64,10 @@ lib/
 - Immutable by convention
 
 ```dart
-class UserEntity {
+class User {
   final String id;
   final String email;
-  const UserEntity({required this.id, required this.email});
+  const User({required this.id, required this.email});
 }
 ```
 
@@ -76,7 +76,7 @@ class UserEntity {
 
 ```dart
 abstract class AuthRepository {
-  Future<Either<Failure, UserEntity>> login(String email, String password);
+  Future<Either<Failure, User>> login(String email, String password);
 }
 ```
 
@@ -89,7 +89,7 @@ class LoginUsecase {
   final AuthRepository repository;
   const LoginUsecase(this.repository);
 
-  Future<Either<Failure, UserEntity>> call(String email, String password) {
+  Future<Either<Failure, User>> call(String email, String password) {
     return repository.login(email, password);
   }
 }
@@ -100,7 +100,7 @@ class LoginUsecase {
 - Contains serialization logic (`fromJson`, `toJson`)
 
 ```dart
-class UserModel extends UserEntity {
+class UserModel extends User {
   const UserModel({required super.id, required super.email});
 
   factory UserModel.fromJson(Map<String, dynamic> json) =>
@@ -118,7 +118,7 @@ class AuthRepositoryImpl implements AuthRepository {
   const AuthRepositoryImpl(this.remote);
 
   @override
-  Future<Either<Failure, UserEntity>> login(String email, String password) async {
+  Future<Either<Failure, User>> login(String email, String password) async {
     try {
       return Right(await remote.login(email, password));
     } on ServerException catch (e) {
@@ -129,7 +129,7 @@ class AuthRepositoryImpl implements AuthRepository {
 ```
 
 ### presentation/[state_management]
-- Calls usecases only — no direct repository or datasource access
+- Calls usecases when business logic exists — may call repository directly if the action is a simple pass-through with no business logic
 - Folder name matches your chosen library:
 
 | Library | Folder name |
@@ -145,7 +145,7 @@ class AuthRepositoryImpl implements AuthRepository {
 
 | Type | Pattern | Example |
 |---|---|---|
-| Entity | `[Name]Entity` | `UserEntity` |
+| Entity | `[Name]Entity` | `User` |
 | Model | `[Name]Model` | `UserModel` |
 | Repository (abstract) | `[Feature]Repository` | `AuthRepository` |
 | Repository (impl) | `[Feature]RepositoryImpl` | `AuthRepositoryImpl` |
@@ -163,4 +163,4 @@ class AuthRepositoryImpl implements AuthRepository {
 4. **All exceptions are caught in `repository_impl`** — never leak into usecase or presentation
 5. **Models live in `data/`, entities live in `domain/`** — never mix
 6. **No cross-feature imports** — shared code goes into `core/`
-7. **Presentation calls usecases only** — never repositories or datasources directly
+7. **Presentation calls usecases when business logic exists** — if an action is a simple pass-through (no validation, transformation, or orchestration), presentation may call the repository directly; skip the usecase file entirely in that case

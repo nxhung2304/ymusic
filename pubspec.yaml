@@ -59,6 +59,9 @@ dependencies:
   # SVG
   flutter_svg: ^2.0.0
 
+  fpdart: ^1.2.0
+  freezed_annotation: ^3.1.0
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -74,6 +77,8 @@ dev_dependencies:
   # Code generation
   build_runner: ^2.4.12
   riverpod_generator: ^2.4.1
+  freezed: 3.1.0
+
   # isar_generator: incompatible with riverpod_generator (analyzer version conflict).
   # Add when isar_generator publishes support for analyzer ^6.x, or when migrating to Isar 4.x.
 
