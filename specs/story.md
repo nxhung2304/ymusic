@@ -31,7 +31,7 @@ Packages: google_sign_in, firebase_auth, firebase_core, flutter_riverpod, riverp
 - [x] 1.4 – SplashScreen (session check → redirect router). `[🤖]`
 - [x] 1.5 – Setup go_router (shell + protected routes). `[🤖]`
 - [x] 1.6 – Register deep link scheme `ymusic://` trong `ios/Runner/Info.plist` + khai báo route placeholder trong go_router (handler logic implement dần theo phase). `[👤+🤖]` *(🤖 sửa Info.plist + khai báo routes | 👤 verify scheme hoạt động trên Xcode)*
-- [ ] 1.7 – Refactor LoginScreen: AuthNotifier (freezed) + SignInWithGoogleUsecase, fix architecture violations. `[🤖]`
+- [x] 1.7 – Refactor LoginScreen: AuthNotifier (freezed) + SignInWithGoogleUsecase, fix architecture violations. `[🤖]`
     > ref: specs/comments/login-screen-code-review.md
 
 ---
@@ -53,8 +53,8 @@ Packages: cloud_firestore, isar, isar_flutter_libs, dio | dev: isar_generator
 > Mục tiêu: search nhạc → phát được. Background audio chưa cần ở phase này.
 
 Packages: youtube_explode_dart, just_audio, cached_network_image
-- [ ] 3.1 – Song model (videoId, title, artist, thumbnailUrl, duration) + fromJson/toJson. `[🤖]`
-- [ ] 3.2 – YouTubeService: search(query) → List<Song> (parse từ youtube_explode_dart). `[🤖]`
+- [x] 3.1 – Song model (videoId, title, artist, thumbnailUrl, duration) + fromJson/toJson. `[🤖]`
+- [x] 3.2 – YouTubeService: search(query) → List<Song> (parse từ youtube_explode_dart). `[🤖]`
 - [ ] 3.3 – extractAudioUrl(videoId) + fallback + rate limiting (queue + throttle 1 req/s). `[👤]` *(stream handling + rate limiting logic)*
 - [ ] 3.4 – Cache search results Isar (TTL 24h) — đăng ký schema Song vào IsarService. `[🤖]`
 - [ ] 3.5 – AudioPlayerService: just_audio instance + play/pause/seek/next/prev. `[👤]` *(stream handling)*
