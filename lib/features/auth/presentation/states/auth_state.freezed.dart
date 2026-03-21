@@ -188,7 +188,7 @@ return error(_that.failure);case _:
 
 class _Initial implements AuthState {
   const _Initial();
-
+  
 
 
 
@@ -220,7 +220,7 @@ String toString() {
 
 class _Loading implements AuthState {
   const _Loading();
-
+  
 
 
 
@@ -252,7 +252,7 @@ String toString() {
 
 class _Success implements AuthState {
   const _Success(this.user);
-
+  
 
  final  User user;
 
@@ -318,7 +318,7 @@ as User,
 
 class _Error implements AuthState {
   const _Error(this.failure);
-
+  
 
  final  Failure failure;
 
