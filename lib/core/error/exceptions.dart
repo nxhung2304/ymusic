@@ -60,3 +60,13 @@ final class CacheException extends AppException {
 final class UnknownException extends AppException {
   const UnknownException([super.message = 'An unknown error occurred']);
 }
+
+final class YouTubeException extends AppException {
+  const YouTubeException(super.message, {this.cause});
+
+  final Object? cause;
+
+  @override
+  String toString() =>
+      'YouTubeException: $message${cause != null ? ' (cause: $cause)' : ''}';
+}

@@ -50,6 +50,10 @@ final class CancelledFailure extends Failure {
 final class AuthFailure extends Failure {
   const AuthFailure([super.message = 'Authentication failed']);
 }
+
+final class YouTubeFailure extends Failure {
+  const YouTubeFailure([super.message = 'YouTube error occurred']);
+}
 // ─── Mapper ──────────────────────────────────────────────────────────────────
 
 extension AppExceptionMapper on AppException {
@@ -61,5 +65,6 @@ extension AppExceptionMapper on AppException {
         TimeoutException e => TimeoutFailure(e.message),
         CacheException e => CacheFailure(e.message),
         UnknownException e => UnknownFailure(e.message),
+        YouTubeException e => YouTubeFailure(e.message),
       };
 }
