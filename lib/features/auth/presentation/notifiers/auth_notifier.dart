@@ -1,4 +1,7 @@
+import 'package:flutter/material.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
+import 'package:ymusic/core/providers/youtube_service_provider.dart';
+import 'package:ymusic/core/services/youtube_service.dart';
 import 'package:ymusic/features/auth/presentation/providers/auth_provider.dart';
 import 'package:ymusic/features/auth/presentation/states/auth_state.dart';
 
@@ -31,5 +34,13 @@ class AuthNotifier extends _$AuthNotifier {
       (failure) => state = AuthState.error(failure),
       (_) => state = const AuthState.initial(),
     );
+  }
+
+  Future<void> foo() async {
+    final youtubeService = ref.read(youTubeServiceProvider);
+
+    final audioUrl = await youtubeService.extractAudioUrl("85N9vgmGqro");
+
+    debugPrint("audioUrl = $audioUrl");
   }
 }

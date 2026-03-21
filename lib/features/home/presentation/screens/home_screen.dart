@@ -17,8 +17,8 @@ class HomeScreen extends ConsumerWidget {
             children: [
               const Text("Home"),
               ElevatedButton(
-                onPressed: () => authNotifier.signOutWithGoogle(),
-                child: const Text("Sign out"),
+                onPressed: () async => await authNotifier.foo(),
+                child: const Text("Get stream"),
               ),
             ],
           ),
