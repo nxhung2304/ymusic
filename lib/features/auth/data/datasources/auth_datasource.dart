@@ -45,8 +45,8 @@ class AuthDatasource {
       return user;
     } on AuthException {
       rethrow;
-    } on FirebaseAuthException catch (e) {
-      throw AuthException(e.message ?? 'Firebase authentication error');
+    } on FirebaseAuthException {
+      rethrow;
     } catch (e) {
       throw AuthException(e.toString());
     }

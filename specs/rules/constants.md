@@ -45,7 +45,7 @@ if (otherList.length > maxItemsPerPage) { }
 **Why:** Single source of truth, easier to update
 
 ### 3. User-facing Strings
-Always use `AppStrings` for internationalization (i18n)
+Always use `AppStrings` 
 
 ```dart
 // ❌ BAD

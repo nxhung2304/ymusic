@@ -30,19 +30,20 @@ Packages: google_sign_in, firebase_auth, firebase_core, flutter_riverpod, riverp
 - [x] 1.3 – LoginScreen + Google button + error handling. `[🤖]`
 - [x] 1.4 – SplashScreen (session check → redirect router). `[🤖]`
 - [x] 1.5 – Setup go_router (shell + protected routes). `[🤖]`
-- [ ] 1.6 – Register deep link scheme `ymusic://` trong `ios/Runner/Info.plist` + khai báo route placeholder trong go_router (handler logic implement dần theo phase). `[👤+🤖]` *(🤖 sửa Info.plist + khai báo routes | 👤 verify scheme hoạt động trên Xcode)*
+- [x] 1.6 – Register deep link scheme `ymusic://` trong `ios/Runner/Info.plist` + khai báo route placeholder trong go_router (handler logic implement dần theo phase). `[👤+🤖]` *(🤖 sửa Info.plist + khai báo routes | 👤 verify scheme hoạt động trên Xcode)*
+- [ ] 1.7 – Refactor LoginScreen: AuthNotifier (freezed) + SignInWithGoogleUsecase, fix architecture violations. `[🤖]`
+    > ref: specs/comments/login-screen-code-review.md
 
 ---
 
-## Phase 2: Core Infrastructure (Shared, Minimal)
+## Phase 2: Core Infrastructure (Shared, Minimal) ✅
 > Chỉ setup skeleton — không tạo models hay repos cụ thể ở đây.
 
 Packages: cloud_firestore, isar, isar_flutter_libs, dio | dev: isar_generator
 - [x] 2.1 – FirestoreService: set/get/delete/collection helpers + unit tests (16 cases). `[🤖]`
-- [ ] 2.2 – IsarService: khởi tạo instance, open DB, registerSchemas pattern (schema đăng ký dần theo feature). `[🤖]`
-- [ ] 2.3 – Firestore Security Rules: `/users/{uid}/**` read/write chỉ cho authenticated owner. `[👤+🤖]` *(🤖 viết rules file | 👤 deploy lên Firebase Console)*
-- [ ] 2.4 – Global error handling: AppException types + dio interceptor (retry 3 lần, exponential backoff) + error snackbar provider. `[🤖]`
-- [ ] 2.5 – i18n infrastructure: setup intl package + AppLocalizations + 2 file `l10n/en.arb` / `l10n/vi.arb` + MaterialApp `localizationsDelegates`. Các phase sau chỉ thêm key, không refactor lại. `[🤖]`
+- [x] 2.2 – IsarService: khởi tạo instance, open DB, registerSchemas pattern (schema đăng ký dần theo feature). `[🤖]`
+- [x] 2.3 – Firestore Security Rules: `/users/{uid}/**` read/write chỉ cho authenticated owner. `[👤+🤖]` *(🤖 viết rules file | 👤 deploy lên Firebase Console)*
+- [x] 2.4 – Global error handling: AppException types + dio interceptor (retry 3 lần, exponential backoff) + error snackbar provider. `[🤖]`
 
 **Deliverable:** infrastructure sẵn sàng để các feature slice dùng.
 

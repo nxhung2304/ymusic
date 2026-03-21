@@ -1,27 +1,23 @@
-// ignore_for_file: deprecated_member_use_from_same_package
-
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:ymusic/features/auth/data/datasources/auth_datasource.dart';
+import 'package:ymusic/features/auth/data/repositories/auth_repository_impl.dart';
+import 'package:ymusic/features/auth/domain/repositories/auth_repository.dart';
 
 part 'auth_provider.g.dart';
 
-/// Provides a singleton instance of [AuthDatasource]
 @riverpod
-AuthDatasource authDatasource(AuthDatasourceRef ref) {
+AuthDatasource authDatasource(Ref ref) {
   return AuthDatasource();
 }
 
-/// Provides a stream of auth state changes
-/// Emits [User?] whenever authentication state changes (login/logout)
 @riverpod
-Stream<User?> authState(AuthStateRef ref) {
-  return ref.watch(authDatasourceProvider).authStateChanges;
+AuthRepository authRepository(Ref ref) {
+  return AuthRepositoryImpl(ref.watch(authDatasourceProvider));
 }
 
-/// Provides the current authenticated user
-/// Returns null if user is not logged in, otherwise returns the [User] object
-@riverpod
-User? currentUser(CurrentUserRef ref) {
-  return ref.watch(authStateProvider).value;
+@Riverpod(keepAlive: true)
+Stream<User?> authState(Ref ref) {
+  return ref.watch(authDatasourceProvider).authStateChanges;
 }
