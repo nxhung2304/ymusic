@@ -4,6 +4,9 @@
 > Model chỉ tạo khi feature cần đến — tránh over-engineering upfront.
 > Riverpod cho state, go_router cho navigation, clean layers (data/domain/presentation).
 >
+> **Development order (UI-first):** UI skeleton (hardcoded data) → Model → Service/Logic → Wire UI vào real data.
+> Lý do: thấy UI trước để biết data cần gì, tránh build service cho thứ UI chưa dùng.
+>
 > **Chú thích:** `[🤖]` = Claude Code | `[👤]` = User | `[👤+🤖]` = cả hai *(ghi rõ phần ai làm)*
 >
 > **Testing Convention:**
@@ -55,15 +58,16 @@ Packages: cloud_firestore, isar, isar_flutter_libs, dio | dev: isar_generator
 Packages: youtube_explode_dart, just_audio, cached_network_image
 - [x] 3.1 – Song model (videoId, title, artist, thumbnailUrl, duration) + fromJson/toJson. `[🤖]`
 - [x] 3.2 – YouTubeService: search(query) → List<Song> (parse từ youtube_explode_dart). `[🤖]`
-- [ ] 3.3 – extractAudioUrl(videoId) + fallback + rate limiting (queue + throttle 1 req/s). `[👤]` *(stream handling + rate limiting logic)*
-- [ ] 3.4 – Cache search results Isar (TTL 24h) — đăng ký schema Song vào IsarService. `[🤖]`
-- [ ] 3.5 – AudioPlayerService: just_audio instance + play/pause/seek/next/prev. `[👤]` *(stream handling)*
-  > ⚠️ 3.5 sẽ được refactor ở Phase 4.1 để tích hợp audio_service background handler — thiết kế interface đủ abstract để dễ wrap sau.
-- [ ] 3.6 – playerStateProvider (currentSong, playback state, position, queue). `[👤]` *(state management)*
-- [ ] 3.7 – AppShell + BottomNav (Home/Search/Library) + SongTile widget. `[🤖]`
-- [ ] 3.8 – SearchScreen: debounce 500ms + autocomplete suggestions + results list + play trực tiếp. `[🤖]`
-- [ ] 3.9 – MiniPlayerBar + FullPlayerScreen (art, seek slider, controls, blur bg). `[🤖]`
-- [ ] 3.10 – Unit test: YouTubeService (mock), AudioPlayerService, playerStateProvider. `[👤+🤖]` *(👤 test AudioPlayerService + playerStateProvider | 🤖 test YouTubeService mock)*
+- [x] 3.3 – extractAudioUrl(videoId) + fallback + rate limiting (queue + throttle 1 req/s). `[👤]` *(stream handling + rate limiting logic)*
+- [ ] 3.4 – AppShell + BottomNav (Home/Search/Library) + SongTile widget (hardcoded Song data). `[🤖]`
+- [ ] 3.5 – SearchScreen: debounce 500ms + autocomplete suggestions + results list (wire tới YouTubeService 3.2); play action là no-op tạm. `[🤖]`
+- [ ] 3.6 – MiniPlayerBar + FullPlayerScreen (art, seek slider, controls, blur bg — hardcoded state trước). `[🤖]`
+- [ ] 3.7 – AudioPlayerService: just_audio instance + play/pause/seek/next/prev. `[👤]` *(stream handling)*
+  > ⚠️ 3.7 sẽ được refactor ở Phase 4.1 để tích hợp audio_service background handler — thiết kế interface đủ abstract để dễ wrap sau.
+- [ ] 3.8 – playerStateProvider (currentSong, playback state, position, queue) + wire vào Player UI (3.6). `[👤]` *(state management)*
+- [ ] 3.9 – Wire SearchScreen play action → AudioPlayerService + wire MiniPlayer/FullPlayer vào real state. `[🤖]`
+- [ ] 3.10 – Cache search results Isar (TTL 24h) — đăng ký schema Song vào IsarService. `[🤖]`
+- [ ] 3.11 – Unit test: YouTubeService (mock), AudioPlayerService, playerStateProvider. `[👤+🤖]` *(👤 test AudioPlayerService + playerStateProvider | 🤖 test YouTubeService mock)*
 
 **Deliverable:** search bài → tap → nhạc phát trong foreground, mini/full player chuyển đổi được.
 
@@ -73,10 +77,10 @@ Packages: youtube_explode_dart, just_audio, cached_network_image
 > Mục tiêu: background audio hoạt động, animation mini → full.
 
 Packages: audio_service
-- [ ] 4.1 – audio_service background session (handler + AudioTask). `[👤]` *(stream handling + background session logic)*
+- [ ] 4.1 – Animation mini → full (Hero / DraggableScrollableSheet) + swipe-down dismiss. `[🤖]`
 - [ ] 4.2 – Lock screen controls + MediaNotification UI. `[🤖]`
 - [ ] 4.3 – iOS: UIBackgroundModes audio + Xcode capability. `[👤+🤖]` *(🤖 sửa Info.plist (UIBackgroundModes) | 👤 bật Audio capability trong Xcode → Signing & Capabilities)*
-- [ ] 4.4 – Animation mini → full (Hero / DraggableScrollableSheet) + swipe-down dismiss. `[🤖]`
+- [ ] 4.4 – audio_service background session (handler + AudioTask) + wire vào AudioPlayerService (3.7). `[👤]` *(stream handling + background session logic)*
 - [ ] 4.5 – Implement deep link handlers: `ymusic://song/{videoId}` → play + `ymusic://podcast/{encodedFeedUrl}` → open podcast. *(scheme đã register ở Phase 1.6)* `[🤖]`
 - [ ] 4.6 – Unit test: background handler, lock screen controls, deep link routing. `[👤+🤖]` *(👤 test background handler | 🤖 test lock screen UI + deep link routing)*
 
@@ -87,13 +91,13 @@ Packages: audio_service
 ## Phase 5: Slice — Queue & Home
 > Mục tiêu: queue hoạt động, Home có nội dung.
 
-- [ ] 5.1 – History model (videoId, title, artist, thumbnailUrl, duration, playedAt, updatedAt) + HistoryRepository (Firestore + Isar schema, overwrite theo videoId, cap 200 entries). *(moved từ Phase 6 — HomeScreen cần RecentlyPlayed)* `[👤+🤖]` *(👤 viết overwrite + cap logic | 🤖 viết model boilerplate + Isar schema)*
-- [ ] 5.2 – Ghi history tự động khi play (write Firestore + Isar). `[👤]` *(data sync logic)*
-- [ ] 5.3 – QueueProvider: add/remove/reorder + shuffle/repeat modes. `[👤]` *(state management)*
-- [ ] 5.4 – SearchScreen: add to queue action. `[🤖]`
-- [ ] 5.5 – Queue tab trong FullPlayerScreen: danh sách + drag-to-reorder. `[🤖]`
-- [ ] 5.6 – HomeScreen: RecentlyPlayed horizontal scroll + Recommended section (related videos từ last played song via `getRelatedVideos` — label "Because you listened to..."; fallback YouTube trending nếu chưa có history). `[🤖]`
-- [ ] 5.7 – Pull-to-refresh trên HomeScreen. `[🤖]`
+- [ ] 5.1 – HomeScreen: RecentlyPlayed horizontal scroll + Recommended section (hardcoded data trước). `[🤖]`
+- [ ] 5.2 – Pull-to-refresh trên HomeScreen. `[🤖]`
+- [ ] 5.3 – Queue tab trong FullPlayerScreen: danh sách + drag-to-reorder (hardcoded queue trước). `[🤖]`
+- [ ] 5.4 – SearchScreen: add to queue action (UI). `[🤖]`
+- [ ] 5.5 – History model (videoId, title, artist, thumbnailUrl, duration, playedAt, updatedAt) + HistoryRepository (Firestore + Isar schema, overwrite theo videoId, cap 200 entries). `[👤+🤖]` *(👤 viết overwrite + cap logic | 🤖 viết model boilerplate + Isar schema)*
+- [ ] 5.6 – Ghi history tự động khi play + wire HomeScreen RecentlyPlayed vào real data. `[👤]` *(data sync logic)*
+- [ ] 5.7 – QueueProvider: add/remove/reorder + shuffle/repeat modes + wire Queue UI (5.3, 5.4). `[👤]` *(state management)*
 - [ ] 5.8 – Unit test: QueueProvider (add/remove/shuffle/repeat) + HistoryRepository (cap logic, overwrite logic). `[👤]` *(test business logic tự viết)*
 
 **Deliverable:** queue đầy đủ, Home có nội dung hiển thị.
@@ -105,11 +109,11 @@ Packages: audio_service
 
 > ⚠️ Convention từ phase này trở đi: Mọi Firestore document model PHẢI có field `updatedAt: Timestamp` để tương thích với conflict resolution ở Phase 10.
 
-- [ ] 6.1 – LikedSong model (videoId, title, artist, thumbnailUrl, duration, addedAt, updatedAt) + LikedSongsRepository (Firestore + Isar schema). `[🤖]`
-- [ ] 6.2 – Like/unlike action từ Player + SongTile (optimistic update). `[🤖]`
-- [ ] 6.3 – LibraryScreen shell + TabBar (Liked / History / Playlists / Downloads / Podcasts). `[🤖]`
-- [ ] 6.4 – Liked Songs tab: danh sách + unlike action. `[🤖]`
-- [ ] 6.5 – History tab: danh sách gần đây + clear history action. *(HistoryRepository đã có từ Phase 5.1)* `[🤖]`
+- [ ] 6.1 – LibraryScreen shell + TabBar (Liked / History / Playlists / Downloads / Podcasts). `[🤖]`
+- [ ] 6.2 – Liked Songs tab: danh sách + unlike action (hardcoded data trước). `[🤖]`
+- [ ] 6.3 – History tab: danh sách gần đây + clear history action (wire tới HistoryRepository từ Phase 5.5). `[🤖]`
+- [ ] 6.4 – Like/unlike action từ Player + SongTile (optimistic update — UI trước, no-op). `[🤖]`
+- [ ] 6.5 – LikedSong model + LikedSongsRepository (Firestore + Isar schema) + wire Liked Songs tab + like action. `[🤖]`
 - [ ] 6.6 – Unit test: LikedSongsRepository (like/unlike, Firestore sync). `[🤖]`
 
 **Deliverable:** like bài → xuất hiện trong Library, lịch sử nghe tự cập nhật.
