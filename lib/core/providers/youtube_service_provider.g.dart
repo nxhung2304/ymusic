@@ -1,12 +1,12 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'youtube_service.dart';
+part of 'youtube_service_provider.dart';
 
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$youTubeServiceHash() => r'a64fbe6fae5938f5291cfd1d92c8805fa7101cc5';
+String _$youTubeServiceHash() => r'a4b5cc6d9c9c6c10b509ba0cef3f82f168527ebd';
 
 /// See also [youTubeService].
 @ProviderFor(youTubeService)

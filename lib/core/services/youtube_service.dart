@@ -1,33 +1,43 @@
 import 'dart:developer' as dev;
 
-import 'package:flutter/foundation.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:youtube_explode_dart/youtube_explode_dart.dart';
-
 import 'package:ymusic/core/error/exceptions.dart';
 import 'package:ymusic/features/search/data/models/song_model.dart';
 
-part 'youtube_service.g.dart';
-
 class YouTubeService {
-  YouTubeService({YoutubeExplode? yt})
-      : _client = _YoutubeExplodeClient(yt ?? YoutubeExplode());
+  YouTubeService(this._yt);
 
-  @visibleForTesting
-  YouTubeService.withClient(YouTubeSearchClient client) : _client = client;
-
-  final YouTubeSearchClient _client;
+  final YoutubeExplode _yt;
 
   Future<List<SongModel>> search(String query) async {
     try {
-      final videos = await _client.searchVideos(query);
+      final results = await _yt.search.search(query);
 
-      return videos.map(_toSongModel).toList();
-    } on YouTubeException {
-      rethrow;
+      return results.map(_toSongModel).toList();
     } catch (e) {
       throw YouTubeException('Search failed for query: "$query"', cause: e);
+    }
+  }
+
+  Future<String> extractAudioUrl(String videoId) async {
+    try {
+      final manifest = await _yt.videos.streams.getManifest(videoId);
+      final sortedStreams =
+          manifest.audioOnly.toList()
+            ..sort((a, b) => b.bitrate.compareTo(a.bitrate));
+
+      for (var stream in sortedStreams) {
+        if (stream.url.toString().isNotEmpty) {
+          return stream.url.toString();
+        }
+      }
+
+      throw const YouTubeException("No audio available");
+    } catch (e) {
+      throw YouTubeException(
+        'Failed to get audio URLs for: "$videoId"',
+        cause: e,
+      );
     }
   }
 
@@ -46,31 +56,5 @@ class YouTubeService {
       thumbnailUrl: video.thumbnails.highResUrl,
       duration: video.duration ?? Duration.zero,
     );
-  }
-}
-
-@riverpod
-YouTubeService youTubeService(Ref ref) => YouTubeService();
-
-// ─── Internal client abstraction ─────────────────────────────────────────────
-
-/// Minimal interface over YouTube search operations.
-///
-/// Exists to decouple [YouTubeService] from [YoutubeExplode] so that tests
-/// can inject hand-written fakes without requiring a live network call.
-abstract interface class YouTubeSearchClient {
-  Future<List<Video>> searchVideos(String query);
-}
-
-class _YoutubeExplodeClient implements YouTubeSearchClient {
-  _YoutubeExplodeClient(this._yt);
-
-  final YoutubeExplode _yt;
-
-  @override
-  Future<List<Video>> searchVideos(String query) async {
-    final results = await _yt.search.search(query);
-
-    return results.toList();
   }
 }
