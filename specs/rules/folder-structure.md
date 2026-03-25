@@ -45,7 +45,7 @@ lib/
 │       │   ├── repositories/
 │       │   │   └── [feature]_repository.dart    # abstract
 │       │   └── usecases/
-│       │       └── [action]_usecase.dart
+│       │       └── [action]_usecase.dart # Option
 │       │
 │       └── presentation/
 │           ├── [state_management]/             # bloc/ | providers/ | notifiers/ | controllers/

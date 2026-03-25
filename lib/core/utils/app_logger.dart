@@ -17,32 +17,32 @@ class AppLogger {
   static void d(String message) {
     if (!kDebugMode) return;
 
-    debugPrint('🐛 [${_caller()}] $message');
+    debugPrint('[${_caller()}] $message');
   }
 
   static void i(String message) {
     if (!kDebugMode) return;
 
-    debugPrint('ℹ️ [${_caller()}] $message');
+    debugPrint('[${_caller()}] $message');
   }
 
   static void w(String message) {
     if (!kDebugMode) return;
 
-    debugPrint('⚠️ [${_caller()}] $message');
+    debugPrint('[${_caller()}] $message');
   }
 
   static void e(String message, [Object? error, StackTrace? stackTrace]) {
     if (!kDebugMode) return;
 
-    debugPrint('❌ [${_caller()}] $message');
+    debugPrint('[${_caller()}] $message');
 
     if (error != null) {
-      debugPrint('   error: $error');
+      debugPrint('error: $error');
     }
 
     if (stackTrace != null) {
-      debugPrint('   stackTrace: $stackTrace');
+      debugPrint('stackTrace: $stackTrace');
     }
   }
 

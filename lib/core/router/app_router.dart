@@ -83,7 +83,7 @@ GoRouter router(Ref ref) {
           /// Home Screen (tab 0)
           GoRoute(
             path: AppRoutes.home,
-            builder: (context, state) => const HomeScreen(),
+            builder: (context, state) => HomeScreen(),
           ),
 
           /// Search Screen (tab 1)
