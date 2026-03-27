@@ -6,6 +6,9 @@ import 'package:ymusic/features/search/domain/entities/song.dart';
 class SongTile extends StatelessWidget {
   static const double _thumbnailSize = 48;
   static const double _thumbnailBorderRadius = 4;
+  static const int _secondsPerMinute = 60;
+  static const int _titleMaxLines = 2;
+  static const int _subtitleMaxLines = 1;
 
   final Song song;
   final VoidCallback? onTap;
@@ -15,7 +18,8 @@ class SongTile extends StatelessWidget {
 
   String _formatDuration(Duration duration) {
     final minutes = duration.inMinutes;
-    final seconds = duration.inSeconds % 60;
+    final seconds = duration.inSeconds % _secondsPerMinute;
+
     return '${minutes.toString().padLeft(2, '0')}:${seconds.toString().padLeft(2, '0')}';
   }
 
@@ -29,25 +33,26 @@ class SongTile extends StatelessWidget {
           width: _thumbnailSize,
           height: _thumbnailSize,
           fit: BoxFit.cover,
-          errorBuilder: (_, __, ___) => Container(
-            width: _thumbnailSize,
-            height: _thumbnailSize,
-            color: AppColors.surface,
-            child: const Icon(Icons.music_note),
-          ),
+          errorBuilder:
+              (_, __, ___) => Container(
+                width: _thumbnailSize,
+                height: _thumbnailSize,
+                color: AppColors.surface,
+                child: const Icon(Icons.music_note),
+              ),
         ),
       ),
       onTap: onTap,
       title: Text(
         song.title,
-        style: AppTypography.body.copyWith(color: Colors.white),
-        maxLines: 1,
+        style: AppTypography.body.copyWith(color: AppColors.text),
+        maxLines: _titleMaxLines,
         overflow: TextOverflow.ellipsis,
       ),
       subtitle: Text(
         song.artist,
         style: AppTypography.caption.copyWith(color: AppColors.textSecondary),
-        maxLines: 1,
+        maxLines: _subtitleMaxLines,
         overflow: TextOverflow.ellipsis,
       ),
       trailing: Row(

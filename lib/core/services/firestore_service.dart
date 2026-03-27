@@ -1,9 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:ymusic/core/error/exceptions.dart';
-
-part 'firestore_service.g.dart';
 
 /// Shared Firestore CRUD wrapper used by all feature repositories.
 ///
@@ -101,6 +97,3 @@ class FirestoreService {
     }
   }
 }
-
-@riverpod
-FirestoreService firestoreService(Ref ref) => FirestoreService();

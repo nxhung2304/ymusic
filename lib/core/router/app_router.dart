@@ -7,7 +7,7 @@ import 'package:ymusic/features/auth/presentation/providers/auth_provider.dart';
 import 'package:ymusic/features/auth/presentation/screens/login_screen.dart';
 import 'package:ymusic/features/home/presentation/screens/home_screen.dart';
 import 'package:ymusic/features/home/presentation/screens/app_shell.dart';
-import 'package:ymusic/features/home/presentation/screens/search_screen.dart';
+import 'package:ymusic/features/search/presentation/screens/search_screen.dart';
 import 'package:ymusic/features/home/presentation/screens/library_screen.dart';
 import 'package:ymusic/features/player/presentation/screens/full_player_screen.dart';
 import 'package:ymusic/features/video/presentation/screens/video_player_screen.dart';
@@ -83,7 +83,7 @@ GoRouter router(Ref ref) {
           /// Home Screen (tab 0)
           GoRoute(
             path: AppRoutes.home,
-            builder: (context, state) => HomeScreen(),
+            builder: (context, state) => const HomeScreen(),
           ),
 
           /// Search Screen (tab 1)
