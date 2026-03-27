@@ -25,7 +25,8 @@
 ### File location
 ```
 features/[feature]/presentation/providers/
-├── [feature]_provider.dart     # Notifier + DI providers
+├── [feature]_notifier.dart     # Notifier class
+├── [feature]_provider.dart     # DI providers
 └── [feature]_state.dart        # State class (freezed)
 ```
 
@@ -43,7 +44,7 @@ class AuthState with _$AuthState {
 
 ### Notifier
 ```dart
-// [feature]_provider.dart
+// [feature]_notifier.dart
 @riverpod
 class AuthNotifier extends _$AuthNotifier {
   @override
@@ -64,9 +65,9 @@ class AuthNotifier extends _$AuthNotifier {
 
 ---
 
-## DI Providers (in same file as Notifier)
+## DI Providers
 
-Wire from datasource → repository in the same `_provider.dart` file. Add a usecase provider only when business logic exists.
+Wire from datasource → repository in `[feature]_provider.dart`. Add a usecase provider only when business logic exists.
 
 ```dart
 @riverpod
@@ -137,7 +138,7 @@ return state.when(
 
 1. **State is always immutable** — use `freezed`, never mutate fields directly
 2. **Notifier calls usecases when business logic exists** — if the action is a simple pass-through (no validation, transformation, or orchestration), the notifier may call the repository directly; a usecase is not required in that case
-3. **DI providers stay in `[feature]_provider.dart`** — co-locate with the notifier
+3. **Notifier in `[feature]_notifier.dart`**, DI providers in `[feature]_provider.dart`
 4. **One notifier per feature screen/flow** — don't share notifier across unrelated screens
 5. **Never use `ref.watch` outside `build()`** — use `ref.read` in event handlers
 6. **Loading/error/success states are explicit** — never use nullable fields to represent state

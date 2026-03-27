@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:ymusic/core/error/exceptions.dart';
+import 'package:ymusic/core/utils/app_logger.dart';
 
 class RetryInterceptor extends Interceptor {
   RetryInterceptor({
@@ -8,10 +9,10 @@ class RetryInterceptor extends Interceptor {
     int maxRetries = _kMaxRetries,
     int baseDelayMs = _kBaseDelayMs,
     @visibleForTesting Future<void> Function(Duration)? delayOverride,
-  })  : _dio = dio,
-        _maxRetries = maxRetries,
-        _baseDelayMs = baseDelayMs,
-        _delay = delayOverride ?? _defaultDelay;
+  }) : _dio = dio,
+       _maxRetries = maxRetries,
+       _baseDelayMs = baseDelayMs,
+       _delay = delayOverride ?? _defaultDelay;
 
   final Dio _dio;
   final int _maxRetries;
@@ -22,10 +23,14 @@ class RetryInterceptor extends Interceptor {
   static const int _kBaseDelayMs = 1000;
   static const String _kIsRetryKey = 'isRetry';
 
-  static Future<void> _defaultDelay(Duration duration) => Future<void>.delayed(duration);
+  static Future<void> _defaultDelay(Duration duration) =>
+      Future<void>.delayed(duration);
 
   @override
-  Future<void> onError(DioException err, ErrorInterceptorHandler handler) async {
+  Future<void> onError(
+    DioException err,
+    ErrorInterceptorHandler handler,
+  ) async {
     // Prevent re-entry for requests already being retried
     if (err.requestOptions.extra[_kIsRetryKey] == true) {
       handler.next(err);
@@ -45,9 +50,7 @@ class RetryInterceptor extends Interceptor {
     for (int attempt = 0; attempt < _maxRetries; attempt++) {
       final delayMs = _baseDelayMs * (1 << attempt); // 1000 → 2000 → 4000
 
-      debugPrint(
-        'RetryInterceptor: attempt ${attempt + 1}/$_maxRetries after ${delayMs}ms',
-      );
+      AppLogger.i('attempt ${attempt + 1}/$_maxRetries after ${delayMs}ms');
 
       await _delay(Duration(milliseconds: delayMs));
 

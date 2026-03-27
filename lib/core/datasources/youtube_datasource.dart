@@ -4,14 +4,31 @@ import 'package:youtube_explode_dart/youtube_explode_dart.dart';
 import 'package:ymusic/core/error/exceptions.dart';
 import 'package:ymusic/features/search/data/models/song_model.dart';
 
-class YouTubeService {
-  YouTubeService(this._yt);
+abstract class YouTubeSearchClient {
+  Future<List<Video>> searchVideos(String query);
+}
+
+class _YoutubeExplodeSearchClient implements YouTubeSearchClient {
+  _YoutubeExplodeSearchClient(this._yt);
 
   final YoutubeExplode _yt;
 
+  @override
+  Future<List<Video>> searchVideos(String query) async =>
+      (await _yt.search.search(query)).toList();
+}
+
+class YouTubeDatasource {
+  YouTubeDatasource(YoutubeExplode yt) : _searchClient = _YoutubeExplodeSearchClient(yt), _yt = yt;
+
+  YouTubeDatasource.withClient(YouTubeSearchClient client) : _searchClient = client, _yt = null;
+
+  final YouTubeSearchClient _searchClient;
+  final YoutubeExplode? _yt;
+
   Future<List<SongModel>> search(String query) async {
     try {
-      final results = await _yt.search.search(query);
+      final results = await _searchClient.searchVideos(query);
 
       return results.map(_toSongModel).toList();
     } catch (e) {
@@ -21,7 +38,7 @@ class YouTubeService {
 
   Future<String> extractAudioUrl(String videoId) async {
     try {
-      final manifest = await _yt.videos.streams.getManifest(videoId);
+      final manifest = await _yt!.videos.streams.getManifest(videoId);
       final sortedStreams =
           manifest.audioOnly.toList()
             ..sort((a, b) => b.bitrate.compareTo(a.bitrate));
@@ -45,7 +62,7 @@ class YouTubeService {
     if (video.duration == null) {
       dev.log(
         'duration is null for video ${video.id.value}',
-        name: 'YouTubeService',
+        name: 'YouTubeDatasource',
       );
     }
 

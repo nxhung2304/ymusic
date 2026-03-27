@@ -28,4 +28,9 @@ class SongModel extends Song {
       'durationSeconds': duration.inSeconds,
     };
   }
+
+  @override
+  String toString() {
+    return "[SongModel] title=$title";
+  }
 }

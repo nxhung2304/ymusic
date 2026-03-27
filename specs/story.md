@@ -57,17 +57,18 @@ Packages: cloud_firestore, isar, isar_flutter_libs, dio | dev: isar_generator
 
 Packages: youtube_explode_dart, just_audio, cached_network_image
 - [x] 3.1 – Song model (videoId, title, artist, thumbnailUrl, duration) + fromJson/toJson. `[🤖]`
-- [x] 3.2 – YouTubeService: search(query) → List<Song> (parse từ youtube_explode_dart). `[🤖]`
+- [x] 3.2 – YouTubeDatasource: search(query) → List<Song> (parse từ youtube_explode_dart). `[🤖]`
 - [x] 3.3 – extractAudioUrl(videoId) + fallback + rate limiting (queue + throttle 1 req/s). `[👤]` *(stream handling + rate limiting logic)*
-- [ ] 3.4 – AppShell + BottomNav (Home/Search/Library) + SongTile widget (hardcoded Song data). `[🤖]`
-- [ ] 3.5 – SearchScreen: debounce 500ms + autocomplete suggestions + results list (wire tới YouTubeService 3.2); play action là no-op tạm. `[🤖]`
+- [x] 3.4 – AppShell + BottomNav (Home/Search/Library) + SongTile widget (hardcoded Song data). `[🤖]`
+- [ ] 3.5 – SearchScreen: debounce 500ms + autocomplete suggestions + results list (wire tới YouTubeDatasource 3.2); play action là no-op tạm. `[🤖]`
+- [ ] 3.5.1 – SearchScreen browse view (initial state, Spotify-style): "Picked for you" horizontal shelf + "Discover something new" horizontal shelf (cả hai fetch từ YouTube) + "Browse by category" 2-col grid (Pop, Rock, Hip-Hop, K-Pop, Electronic, R&B, Jazz, Classical, Latin, Indie); tap category → trigger search. `[🤖]`
 - [ ] 3.6 – MiniPlayerBar + FullPlayerScreen (art, seek slider, controls, blur bg — hardcoded state trước). `[🤖]`
 - [ ] 3.7 – AudioPlayerService: just_audio instance + play/pause/seek/next/prev. `[👤]` *(stream handling)*
   > ⚠️ 3.7 sẽ được refactor ở Phase 4.1 để tích hợp audio_service background handler — thiết kế interface đủ abstract để dễ wrap sau.
 - [ ] 3.8 – playerStateProvider (currentSong, playback state, position, queue) + wire vào Player UI (3.6). `[👤]` *(state management)*
 - [ ] 3.9 – Wire SearchScreen play action → AudioPlayerService + wire MiniPlayer/FullPlayer vào real state. `[🤖]`
 - [ ] 3.10 – Cache search results Isar (TTL 24h) — đăng ký schema Song vào IsarService. `[🤖]`
-- [ ] 3.11 – Unit test: YouTubeService (mock), AudioPlayerService, playerStateProvider. `[👤+🤖]` *(👤 test AudioPlayerService + playerStateProvider | 🤖 test YouTubeService mock)*
+- [ ] 3.11 – Unit test: YouTubeDatasource (mock), AudioPlayerService, playerStateProvider. `[👤+🤖]` *(👤 test AudioPlayerService + playerStateProvider | 🤖 test YouTubeDatasource mock)*
 
 **Deliverable:** search bài → tap → nhạc phát trong foreground, mini/full player chuyển đổi được.
 

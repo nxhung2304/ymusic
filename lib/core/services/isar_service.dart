@@ -1,11 +1,7 @@
 import 'package:flutter/foundation.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:isar/isar.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:ymusic/core/error/exceptions.dart';
-
-part 'isar_service.g.dart';
 
 /// Shared singleton wrapper for the local Isar database.
 ///
@@ -66,6 +62,3 @@ class IsarService {
     }
   }
 }
-
-@riverpod
-Isar isarService(Ref ref) => IsarService.instance;

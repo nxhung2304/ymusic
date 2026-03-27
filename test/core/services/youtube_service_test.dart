@@ -2,7 +2,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:youtube_explode_dart/youtube_explode_dart.dart';
 
 import 'package:ymusic/core/error/exceptions.dart';
-import 'package:ymusic/core/services/youtube_service.dart';
+import 'package:ymusic/core/datasources/youtube_datasource.dart';
 
 // ─── Fixtures ─────────────────────────────────────────────────────────────────
 
@@ -55,10 +55,10 @@ class _ThrowingClient implements YouTubeSearchClient {
 // ─── Tests ────────────────────────────────────────────────────────────────────
 
 void main() {
-  group('YouTubeService.search', () {
+  group('YouTubeDatasource.search', () {
     test('returns parsed SongModels when results are found', () async {
       final video = _makeVideo();
-      final service = YouTubeService.withClient(_FakeClient([video]));
+      final service = YouTubeDatasource.withClient(_FakeClient([video]));
 
       final result = await service.search(_query);
 
@@ -71,7 +71,7 @@ void main() {
     });
 
     test('returns empty list when no results', () async {
-      final service = YouTubeService.withClient(_FakeClient([]));
+      final service = YouTubeDatasource.withClient(_FakeClient([]));
 
       final result = await service.search(_query);
 
@@ -80,7 +80,7 @@ void main() {
 
     test('sets duration to Duration.zero when video duration is null', () async {
       final video = _makeVideo(duration: null);
-      final service = YouTubeService.withClient(_FakeClient([video]));
+      final service = YouTubeDatasource.withClient(_FakeClient([video]));
 
       final result = await service.search(_query);
 
@@ -88,7 +88,7 @@ void main() {
     });
 
     test('throws YouTubeException on network error', () async {
-      final service = YouTubeService.withClient(_ThrowingClient());
+      final service = YouTubeDatasource.withClient(_ThrowingClient());
 
       await expectLater(
         service.search(_query),
