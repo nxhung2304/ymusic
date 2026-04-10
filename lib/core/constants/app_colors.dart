@@ -16,6 +16,7 @@ class AppColors {
   static const Color text = Color(0xFFFFFFFF);
   static const Color textSecondary = Color(0xFFAAAAAA);
   static const Color subtext = Color(0xFF717171);
+  static const Color dark = Color(0XFF1C1C1E);
 
   // Dark — Utility
   static const Color divider = Color(0xFF2A2A2A);

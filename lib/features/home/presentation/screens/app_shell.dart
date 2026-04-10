@@ -5,20 +5,14 @@ import 'package:ymusic/core/constants/app_spacing.dart';
 import 'package:ymusic/core/constants/app_strings.dart';
 import 'package:ymusic/core/constants/app_typography.dart';
 import 'package:ymusic/core/router/app_router.dart';
+import 'package:ymusic/features/player/presentation/widgets/mini_player_bar.dart';
 
-enum _NavTab {
-  home,
-  search,
-  library,
-}
+enum _NavTab { home, search, library }
 
 class AppShell extends StatefulWidget {
   final Widget child;
 
-  const AppShell({
-    required this.child,
-    super.key,
-  });
+  const AppShell({required this.child, super.key});
 
   @override
   State<AppShell> createState() => _AppShellState();
@@ -68,30 +62,38 @@ class _AppShellState extends State<AppShell> {
             ),
           ),
         ),
-        padding: const EdgeInsets.only(
-          bottom: _navBarPaddingBottom,
-          top: _navBarPaddingTop,
-        ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
           children: [
-            _buildTabItem(
-              icon: Icons.home,
-              label: AppStrings.navHome,
-              isActive: selectedTab == _NavTab.home,
-              onTap: () => _onTabTapped(_NavTab.home),
+            const MiniPlayerBar(),
+            Padding(
+              padding: const EdgeInsets.only(
+                top: _navBarPaddingTop,
+                bottom: _navBarPaddingBottom,
+              ),
+              child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                _buildTabItem(
+                  icon: Icons.home,
+                  label: AppStrings.navHome,
+                  isActive: selectedTab == _NavTab.home,
+                  onTap: () => _onTabTapped(_NavTab.home),
+                ),
+                _buildTabItem(
+                  icon: Icons.search,
+                  label: AppStrings.navSearch,
+                  isActive: selectedTab == _NavTab.search,
+                  onTap: () => _onTabTapped(_NavTab.search),
+                ),
+                _buildTabItem(
+                  icon: Icons.library_music,
+                  label: AppStrings.navLibrary,
+                  isActive: selectedTab == _NavTab.library,
+                  onTap: () => _onTabTapped(_NavTab.library),
+                ),
+              ],
             ),
-            _buildTabItem(
-              icon: Icons.search,
-              label: AppStrings.navSearch,
-              isActive: selectedTab == _NavTab.search,
-              onTap: () => _onTabTapped(_NavTab.search),
-            ),
-            _buildTabItem(
-              icon: Icons.library_music,
-              label: AppStrings.navLibrary,
-              isActive: selectedTab == _NavTab.library,
-              onTap: () => _onTabTapped(_NavTab.library),
             ),
           ],
         ),
