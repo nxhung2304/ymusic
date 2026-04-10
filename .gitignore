@@ -66,3 +66,6 @@ android/app/google-services.json
 # Generation files
 *.g.dart
 *.freezed.dart
+
+# AI
+specs/comments/*
