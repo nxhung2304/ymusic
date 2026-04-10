@@ -100,9 +100,10 @@ GoRouter router(Ref ref) {
         ],
       ),
 
-      /// Full Player Screen (push over shell)
+      /// Full Player Screen (push over shell — covers BottomNav)
       GoRoute(
         path: AppRoutes.player,
+        name: AppRoutes.player,
         builder: (context, state) {
           final videoId = state.uri.queryParameters['videoId'];
           return FullPlayerScreen(videoId: videoId);
