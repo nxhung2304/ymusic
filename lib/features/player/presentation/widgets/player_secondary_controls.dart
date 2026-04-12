@@ -14,7 +14,6 @@ class PlayerSecondaryControls extends StatefulWidget {
 }
 
 class _PlayerSecondaryControlsState extends State<PlayerSecondaryControls> {
-  // TODO(3.8): Replace with playerStateProvider
   bool _shuffleActive = false;
   _RepeatMode _repeatMode = _RepeatMode.off;
   bool _liked = false;

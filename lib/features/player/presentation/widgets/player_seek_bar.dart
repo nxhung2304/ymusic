@@ -27,16 +27,13 @@ class PlayerSeekBar extends StatefulWidget {
 }
 
 class _PlayerSeekBarState extends State<PlayerSeekBar> {
-  late double _current;
-
-  @override
-  void initState() {
-    super.initState();
-    _current = widget.value;
-  }
+  double? _draggingValue;
 
   @override
   Widget build(BuildContext context) {
+    // Use dragging value while user is interacting, otherwise use widget value
+    final effectiveValue = _draggingValue ?? widget.value;
+
     return Column(
       children: [
         SliderTheme(
@@ -49,12 +46,16 @@ class _PlayerSeekBarState extends State<PlayerSeekBar> {
             thumbShape: const RoundSliderThumbShape(enabledThumbRadius: _thumbRadius),
           ),
           child: Slider(
-            value: _current,
+            value: effectiveValue.clamp(0.0, 1.0),
             min: 0,
             max: 1,
             onChanged: (v) {
-              setState(() => _current = v);
-              widget.onChanged?.call(v); // TODO(3.8): Wire to AudioPlayerService
+              setState(() => _draggingValue = v);
+              widget.onChanged?.call(v);
+            },
+            onChangeEnd: (_) {
+              // Clear drag state to sync back with widget value
+              setState(() => _draggingValue = null);
             },
           ),
         ),

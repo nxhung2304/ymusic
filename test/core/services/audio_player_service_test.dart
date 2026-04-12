@@ -1,10 +1,10 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:mocktail/mocktail.dart';
-import 'package:ymusic/core/datasources/youtube_datasource.dart';
+import 'package:ymusic/core/data/models/song_model.dart';
+import 'package:ymusic/core/data/datasources/youtube_datasource.dart';
 import 'package:ymusic/core/error/exceptions.dart';
 import 'package:ymusic/core/services/audio_player_service.dart';
-import 'package:ymusic/features/search/data/models/song_model.dart';
 
 // ─── Fixtures ──────────────────────────────────────────────────────────────────
 

@@ -1,58 +1,64 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ymusic/core/constants/app_colors.dart';
 import 'package:ymusic/core/constants/app_spacing.dart';
 import 'package:ymusic/core/constants/app_typography.dart';
+import 'package:ymusic/core/utils/duration_formatter.dart';
+import 'package:ymusic/features/player/presentation/providers/player_notifier.dart';
+import 'package:ymusic/features/player/presentation/providers/player_provider.dart';
 import 'package:ymusic/features/player/presentation/strings/player_strings.dart';
 import 'package:ymusic/features/player/presentation/widgets/player_artwork.dart';
 import 'package:ymusic/features/player/presentation/widgets/player_controls.dart';
 import 'package:ymusic/features/player/presentation/widgets/player_secondary_controls.dart';
 import 'package:ymusic/features/player/presentation/widgets/player_seek_bar.dart';
-import 'package:ymusic/features/search/data/models/song_model.dart';
+import 'package:ymusic/features/search/domain/entities/song.dart';
 
-// TODO(3.8): Replace with playerStateProvider
-const _mockSong = SongModel(
-  videoId: 'dQw4w9WgXcQ',
-  title: 'Never Gonna Give You Up',
-  artist: 'Rick Astley',
-  thumbnailUrl: 'https://img.youtube.com/vi/dQw4w9WgXcQ/maxresdefault.jpg',
-  duration: Duration(minutes: 3, seconds: 33),
-);
-
-const _mockProgress = 0.3;
-const _mockCurrentTime = '1:00';
-const _mockTotalTime = '3:33';
-
-class FullPlayerScreen extends StatelessWidget {
+class FullPlayerScreen extends ConsumerWidget {
   final String? videoId;
 
   const FullPlayerScreen({this.videoId, super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final playerState = ref.watch(playerStateProvider);
+    final currentSong = playerState.currentSong;
+
+    if (currentSong == null) {
+      return const Scaffold(
+        backgroundColor: AppColors.background,
+        body: Center(
+          child: Text('No song currently playing'),
+        ),
+      );
+    }
+
     return Scaffold(
       backgroundColor: AppColors.background,
       body: Stack(
         children: [
           // Full-screen blur background with centered artwork
-          PlayerArtwork(thumbnailUrl: _mockSong.thumbnailUrl),
+          PlayerArtwork(thumbnailUrl: currentSong.thumbnailUrl),
 
           // Content overlay
-          const SafeArea(
+          SafeArea(
             child: Column(
               children: [
-                _TopNav(),
-                Spacer(),
-                _SongInfo(),
+                const _TopNav(),
+                const Spacer(),
+                _SongInfo(currentSong: currentSong),
                 PlayerSeekBar(
-                  value: _mockProgress,
-                  currentTime: _mockCurrentTime,
-                  totalTime: _mockTotalTime,
+                  value: playerState.progress,
+                  currentTime: DurationFormatter.format(playerState.position),
+                  totalTime: DurationFormatter.format(playerState.duration),
+                  onChanged: (progress) {
+                    ref.read(playerNotifierProvider.notifier).seekToPosition(progress);
+                  },
                 ),
-                SizedBox(height: AppSpacing.sm),
-                PlayerControls(),
-                SizedBox(height: AppSpacing.sm),
-                PlayerSecondaryControls(),
-                SizedBox(height: AppSpacing.md),
+                const SizedBox(height: AppSpacing.sm),
+                const PlayerControls(),
+                const SizedBox(height: AppSpacing.sm),
+                const PlayerSecondaryControls(),
+                const SizedBox(height: AppSpacing.md),
               ],
             ),
           ),
@@ -91,7 +97,10 @@ class _TopNav extends StatelessWidget {
 }
 
 class _SongInfo extends StatelessWidget {
-  const _SongInfo();
+  final Song currentSong;
+
+  const _SongInfo({required this.currentSong});
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -106,14 +115,14 @@ class _SongInfo extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  _mockSong.title,
+                  currentSong.title,
                   style: AppTypography.h2,
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                 ),
                 const SizedBox(height: AppSpacing.xs),
                 Text(
-                  _mockSong.artist,
+                  currentSong.artist,
                   style: AppTypography.body.copyWith(
                     color: AppColors.textSecondary,
                   ),

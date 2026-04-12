@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ymusic/core/network/retry_interceptor.dart';
+import 'package:ymusic/core/utils/app_logger.dart';
 
 final dioClientProvider = Provider<Dio>((ref) {
   final dio = Dio(
@@ -18,7 +19,7 @@ final dioClientProvider = Provider<Dio>((ref) {
       LogInterceptor(
         requestBody: false,
         responseBody: false,
-        logPrint: (o) => debugPrint(o.toString()),
+        logPrint: (o) => AppLogger.d(o.toString()),
       ),
     );
   }
