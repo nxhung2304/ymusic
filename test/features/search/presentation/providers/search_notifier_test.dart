@@ -1,9 +1,9 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:ymusic/core/data/models/song_model.dart';
+import 'package:ymusic/core/data/datasources/youtube_datasource.dart';
 import 'package:ymusic/core/error/exceptions.dart';
-import 'package:ymusic/core/datasources/youtube_datasource.dart';
 import 'package:ymusic/core/providers/app_providers.dart';
-import 'package:ymusic/features/search/data/models/song_model.dart';
 import 'package:ymusic/features/search/presentation/providers/search_notifier.dart';
 import 'package:ymusic/features/search/presentation/providers/search_state.dart';
 import 'package:youtube_explode_dart/youtube_explode_dart.dart';

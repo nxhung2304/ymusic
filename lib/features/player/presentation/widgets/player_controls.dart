@@ -1,27 +1,26 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ymusic/core/constants/app_colors.dart';
+import 'package:ymusic/features/player/presentation/providers/player_notifier.dart';
+import 'package:ymusic/features/player/presentation/providers/player_provider.dart';
 
 const double _playButtonSize = 64;
 const double _controlIconSize = 32;
 
-class PlayerControls extends StatefulWidget {
+class PlayerControls extends ConsumerWidget {
   const PlayerControls({super.key});
 
   @override
-  State<PlayerControls> createState() => _PlayerControlsState();
-}
+  Widget build(BuildContext context, WidgetRef ref) {
+    final playerState = ref.watch(playerStateProvider);
 
-class _PlayerControlsState extends State<PlayerControls> {
-  // TODO(3.8): Replace with playerStateProvider
-  bool _isPlaying = true;
-
-  @override
-  Widget build(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
         IconButton(
-          onPressed: () {}, // TODO(3.8): Wire prev to AudioPlayerService
+          onPressed: () {
+            ref.read(playerNotifierProvider.notifier).previous();
+          },
           icon: const Icon(
             Icons.skip_previous,
             size: _controlIconSize,
@@ -29,7 +28,9 @@ class _PlayerControlsState extends State<PlayerControls> {
           ),
         ),
         GestureDetector(
-          onTap: () => setState(() => _isPlaying = !_isPlaying),
+          onTap: () {
+            ref.read(playerNotifierProvider.notifier).togglePlayback();
+          },
           child: Container(
             width: _playButtonSize,
             height: _playButtonSize,
@@ -45,14 +46,16 @@ class _PlayerControlsState extends State<PlayerControls> {
               ],
             ),
             child: Icon(
-              _isPlaying ? Icons.pause : Icons.play_arrow,
+              playerState.isPlaying ? Icons.pause : Icons.play_arrow,
               size: _controlIconSize,
               color: AppColors.onPrimary,
             ),
           ),
         ),
         IconButton(
-          onPressed: () {}, // TODO(3.8): Wire next to AudioPlayerService
+          onPressed: () {
+            ref.read(playerNotifierProvider.notifier).next();
+          },
           icon: const Icon(
             Icons.skip_next,
             size: _controlIconSize,

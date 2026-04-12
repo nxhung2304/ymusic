@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ymusic/core/constants/app_strings.dart';
+import 'package:ymusic/features/player/presentation/providers/player_notifier.dart';
 import 'package:ymusic/features/search/domain/entities/song.dart';
 import 'package:ymusic/features/search/presentation/widgets/song_tile.dart';
 
@@ -45,10 +46,9 @@ class HomeScreen extends ConsumerWidget {
     ),
   ];
 
-  void _onTapSong(BuildContext context, Song song) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text('Playing: ${song.title}')),
-    );
+  void _onTapSong(WidgetRef ref, Song song) {
+    final playerNotifier = ref.read(playerNotifierProvider.notifier);
+    playerNotifier.setCurrentSong(song);
   }
 
   void _onTapMore(BuildContext context, Song song) {
@@ -69,7 +69,7 @@ class HomeScreen extends ConsumerWidget {
 
             return SongTile(
               song: song,
-              onTap: () => _onTapSong(context, song),
+              onTap: () => _onTapSong(ref, song),
               onMoreTap: () => _onTapMore(context, song),
             );
           },

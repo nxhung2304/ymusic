@@ -1,8 +1,8 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:youtube_explode_dart/youtube_explode_dart.dart';
 
+import 'package:ymusic/core/data/datasources/youtube_datasource.dart';
 import 'package:ymusic/core/error/exceptions.dart';
-import 'package:ymusic/core/datasources/youtube_datasource.dart';
 
 // ─── Fixtures ─────────────────────────────────────────────────────────────────
 
